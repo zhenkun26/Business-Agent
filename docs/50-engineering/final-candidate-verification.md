@@ -432,3 +432,39 @@ write. The precommit aggregate at 2026-11-07T23:29:21Z passed all eight checks:
 coverage and stable sources. Dirty candidate binding remains BLOCKED by design.
 Receipt: `enterprise-agent/eval/results/offline/cleanup-progress-png-precommit-20261107.json`.
 Exact clean-commit verification and remote CI remain separate required evidence.
+
+
+## Fourth reversible asset cleanup — 2026-11-07 UTC
+
+Only `interview/产品介绍网页/screenshots/04-zhaoliu-pending.png` is
+re-encoded: 457,946 to 287,798 bytes, saving 170,148 bytes (37.1546%).
+The standard PNG preserves 3200 x 1730, 8-bit RGBA, 192 DPI, all original
+IHDR/pHYs/IEND bytes and all 22,145,730 scanline bytes. Only the identified
+17-byte fpng fdEC marker (payload 522493e300) is removed; ordinary zlib level 9
+compression does not claim compatibility with the specialized fpng fast decoder.
+No author/license or source-permission metadata is removed.
+
+Original SHA256: `37f47171c1133f298500b7888e0f5d542722aee0f8323455306c8874d104f7cd`.
+Current SHA256: `740fd3b1d9e2160ed7175f66e0c2c487b874644ab26cf0694993e2068487b082`.
+Decoded pixel SHA256: `4cf13a6b479ac442eb8694fcb38aebfd89692c7032ec4c304b699a9bd30922d6`.
+Strict CRC/EOF, identical scanlines and native ImageIO pixel/property checks
+passed for this image; independent review passed before application. Originals
+are recoverable byte-for-byte from `24b40a1d6a0b8d79e7767011a647399ca2f279ce`
+and retained original/Git-restored copies in
+`eval/results/pending-png-diagnostic-24b40a1d/`.
+
+Actual Edge InPrivate opened baseline and candidate sequentially; AX dimensions
+were 3200 x 1730 and screenshots displayed complete, normal, visually consistent
+pending and historical approval lists. Both image GETs returned 200; fixture
+hashes were verified.
+Receipt: `eval/results/pending-png-browser-24b40a1d/browser-receipt.json`.
+This is not an automated screenshot pixel diff or cross-browser certification.
+The page uses unchanged WebP: no page-transfer or production-image saving is
+claimed. Only this PNG current inventory SHA and the dependent inventory binding
+are refreshed. All 465 source items remain pending; the historical 457-item CSV
+and all prior evidence remain unchanged. Compression does not clear source rights.
+The precommit aggregate at 2026-11-07T23:40:04Z passed all eight checks:
+2137 Python tests plus 640 subtests, Node 80/14, seven assets, 81.8543%
+coverage and stable sources. Dirty binding remains BLOCKED by design.
+Receipt: `enterprise-agent/eval/results/offline/cleanup-pending-png-precommit-20261107.json`.
+Exact clean-commit verification and remote CI remain separate required evidence.
