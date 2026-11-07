@@ -393,3 +393,42 @@ or authorize publication. The precommit aggregate at 2026-11-07T14:32:00Z passed
 coverage. Sources stayed stable; dirty binding remained BLOCKED as designed.
 Receipt: `enterprise-agent/eval/results/offline/cleanup-tracked-png-precommit-20261107.json`.
 Exact clean-commit verification and remote CI remain separate required evidence.
+
+
+## Third reversible asset cleanup — 2026-11-07
+
+Only `interview/产品介绍网页/screenshots/07-zhangsan-ask-progress.png` is
+re-encoded: 561,505 to 383,218 bytes, saving 178,287 bytes (31.75163%).
+The standard PNG preserves 3200 x 1730, 8-bit RGBA, 192 DPI, all original
+IHDR/pHYs/IEND bytes and 22,145,730 scanline bytes. The only removed chunk is
+the identified 17-byte fpng fdEC marker (payload 522493e300); the new zlib
+stream does not claim specialized fpng fast decoding. No author/license or
+source-permission metadata is removed.
+
+Original SHA256: `b4540248fa8763384e96e61da3809f1a3575d1c8b604467521f67af70d53550f`.
+Current SHA256: `7536c712af90cc4cc6a299156a04928145fc54cd9951ee217d849aaa7c7da9a7`.
+Decoded pixel SHA256: `3654a5fa0c5f464569004a57fc88e8fe0cad616c6e409f2c4a9c2ba7505dca12`.
+Strict CRC/EOF and identical scanlines passed; independent filter-0/2 RGBA
+reconstruction agrees with native ImageIO pixels and properties. All pixels
+remain opaque. Exact originals remain recoverable from commit
+`8848eecb5d39e7ca639f8040c3dfddec130624dd` and retained byte-identical copies
+under `eval/results/progress-png-diagnostic-3abde10d0f54/`.
+
+Actual Edge InPrivate directly displayed both files at 3200 x 1730, with
+normal, visually consistent historical approval-progress content. Both GETs
+returned 200 and actual fixture hashes matched. Browser receipt:
+`eval/results/progress-png-browser-197c3be78c7e/browser-receipt-20b0541eac29.json`.
+This is not automatic screenshot pixel-diff or cross-browser certification.
+The page still uses the unchanged WebP: no page-transfer or production-image
+saving is claimed. Only this PNG current inventory hash and its dependent
+source-map binding change; all 465 items remain pending. Historical 457-item
+CSV and prior evidence remain unchanged. Compression does not clear rights.
+
+The first write attempt lost its execution connection. On recovery, HEAD
+remained 8848eec with a clean tree, all four original hashes and no third
+cleanup section; the candidate was applied only after confirming no partial
+write. The precommit aggregate at 2026-11-07T23:29:21Z passed all eight checks:
+2137 Python tests plus 640 subtests, Node 80/14, seven assets, 81.8543%
+coverage and stable sources. Dirty candidate binding remains BLOCKED by design.
+Receipt: `enterprise-agent/eval/results/offline/cleanup-progress-png-precommit-20261107.json`.
+Exact clean-commit verification and remote CI remain separate required evidence.
