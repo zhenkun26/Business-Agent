@@ -468,3 +468,40 @@ The precommit aggregate at 2026-11-07T23:40:04Z passed all eight checks:
 coverage and stable sources. Dirty binding remains BLOCKED by design.
 Receipt: `enterprise-agent/eval/results/offline/cleanup-pending-png-precommit-20261107.json`.
 Exact clean-commit verification and remote CI remain separate required evidence.
+
+
+## Fifth reversible asset cleanup — 2026-11-07 UTC
+
+Only `interview/产品介绍网页/screenshots/09-zhaoliu-saga-result.png` is
+re-encoded: 445,522 to 297,334 bytes, saving 148,188 bytes (33.2617%).
+The standard PNG preserves 3200 x 1730, 8-bit RGBA, 192 DPI, original
+IHDR/pHYs/IEND bytes and all 22,145,730 scanline bytes. Only the identified
+17-byte fpng fdEC marker (payload 522493e300) is removed; standard zlib level 9
+does not claim compatibility with the specialized fpng fast decoder.
+No author/license or source-permission metadata is removed.
+
+Original SHA256: `51e2569a46772bbd3f5fdd19086b23d63f81b7b98ca76ba48f4be43b8d3b055e`.
+Current SHA256: `139cbde16d9152607db3c23f925fbfb2330892c830fb802e97af47925f0e4d9d`.
+Decoded pixel SHA256: `cfb92c720fa99537de31bd38cece412bdcceb79f5c1dfd1591da9dae39e3f843`.
+Strict chunk CRC/zlib EOF, identical scanlines, native ImageIO pixel/property
+checks and independent byte/pixel/recovery review passed before application.
+Originals are recoverable byte-for-byte from `3998172455f3fb54699e01a568be00c1852baee1`
+and retained original/Git-restored copies under
+`eval/results/saga-result-png-diagnostic-3998172455/`.
+
+Actual Edge InPrivate opened baseline and candidate sequentially; AX dimensions
+were 3200 x 1730 and screenshots displayed complete, normal, visually consistent
+historical Saga result content. Both actual browser image GETs returned 200
+at 23:45:17Z and 23:46:16Z on 2026-11-07, separately from the earlier HTTP probe.
+Fixture hashes were verified. Browser receipt:
+`eval/results/saga-result-png-browser-3998172455/browser-receipt.json`.
+This is not an automated screenshot pixel diff or cross-browser certification.
+The page uses unchanged WebP: no page-transfer or production-image saving is
+claimed. Only this PNG current inventory SHA and the dependent inventory binding
+are refreshed. All 465 source items remain pending; the historical 457-item CSV
+and prior evidence remain unchanged. Compression does not clear source rights.
+The precommit aggregate at 2026-11-07T23:49:17Z passed all eight checks:
+2137 Python tests plus 640 subtests, Node 80/14, seven assets, 81.8543%
+coverage and stable sources. Dirty binding remains BLOCKED by design.
+Receipt: `enterprise-agent/eval/results/offline/cleanup-saga-result-png-precommit-20261107.json`.
+Exact clean-commit verification and remote CI remain separate required evidence.
