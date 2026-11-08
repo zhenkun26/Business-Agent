@@ -505,3 +505,41 @@ The precommit aggregate at 2026-11-07T23:49:17Z passed all eight checks:
 coverage and stable sources. Dirty binding remains BLOCKED by design.
 Receipt: `enterprise-agent/eval/results/offline/cleanup-saga-result-png-precommit-20261107.json`.
 Exact clean-commit verification and remote CI remain separate required evidence.
+
+
+## Sixth reversible asset cleanup — 2026-11-08 UTC
+
+Only `interview/产品介绍网页/screenshots/02-zhangsan-welcome.png` is re-encoded:
+355,241 to 223,511 bytes, saving 131,730 bytes (37.0819%). Standard zlib level 9
+preserves IHDR/pHYs/IEND and all 22,145,730 scanline bytes; only the identified
+17-byte fdEC marker (522493e300) is removed. Specialized fpng decoder compatibility
+is not claimed. No author/license metadata is removed.
+
+Original SHA256: `21ca016aca8251db085999d00a19fad7cc62a1fb80259f2ac13226baa0f1d1e4`.
+Current SHA256: `288c70120096789963c7671f5bdae61c610e0518629e108fdc30a9143e0b9e8b`.
+ImageIO pixel SHA256: `26db214ecd58637606ee407b021027d66987cd8f2aa623a24e187b4230e39c61`.
+Strict CRC/EOF, scanline equality, native pixels/properties and independent review
+passed. Originals are recoverable from `d2ee6253d220510f68191bfd7afc24bb46cbcd13`
+and retained under `eval/results/zhangsan-welcome-png-diagnostic-20261107/`.
+
+Actual Edge InPrivate AX/screenshot inspection found both 3200 x 1730 images clear,
+normal and visually consistent. Direct image GETs returned 200 at 03:18:57Z and
+03:19:15Z on 2026-11-08. Screenshot evidence is in the task conversation tool
+history, not claimed as saved files. Browser receipt and fixture hashes:
+`eval/results/zhangsan-welcome-png-browser-20261107/browser-receipt.json`.
+This is not automated screenshot pixel diff or cross-browser certification.
+Only this current inventory SHA and its offline binding change. All 465 source
+items remain pending; historical 457-item CSV and earlier evidence are unchanged.
+Unchanged WebP page usage means no page-transfer or production-image savings
+are claimed. Compression does not clear source rights.
+
+ImageIO also confirms unchanged 3200 x 1730, 8-bit RGBA and 192 DPI.
+The initial Python 3.12 invocation lacked dependencies (seven checks passed,
+Python BLOCKED); its receipt is retained as
+`enterprise-agent/eval/results/offline/cleanup-welcome-png-precommit-20261108.json`.
+No dependency was installed. Re-running with the existing isolated Python 3.13
+environment passed all eight checks at 2026-11-08T03:24:02Z: 2137 tests plus
+640 subtests, Node 80/14, seven assets, 81.8543% coverage and stable sources.
+Receipt: `enterprise-agent/eval/results/offline/cleanup-welcome-png-precommit-20261108-env.json`.
+Dirty candidate binding remains BLOCKED by design; clean-commit verification
+and remote CI are separate evidence.
