@@ -15,6 +15,21 @@ class PublicationPolicyTests(unittest.TestCase):
     def setUp(self):
         self.workflow = yaml.safe_load((ROOT / ".github/workflows/ci.yml").read_text())
 
+    def test_builder_excludes_raw_event_at_source(self):
+        steps = self.workflow["jobs"]["docker"]["steps"]
+        setup = [s for s in steps if s.get("uses", "").startswith("docker/setup-buildx-action@")]
+        self.assertEqual(len(setup), 1)
+        self.assertEqual(setup[0]["uses"], "docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f")
+        self.assertEqual(setup[0]["with"], {
+            "version": "v0.38.1", "driver-opts": "provenance-add-gha=false"})
+        build = next(s for s in steps if s.get("uses", "").startswith("docker/build-push-action@"))
+        self.assertEqual(build["uses"], "docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8")
+        self.assertIs(build["with"]["push"], False)
+        self.assertIs(build["with"]["load"], True)
+        self.assertNotIn("provenance", build["with"])
+        self.assertNotIn("env", build)
+        self.assertNotIn("env", setup[0])
+
     def test_explicit_boolean_defaults_off(self):
         # PyYAML YAML 1.1 may resolve the GitHub 'on' key as True.
         events = self.workflow.get("on", self.workflow.get(True))
