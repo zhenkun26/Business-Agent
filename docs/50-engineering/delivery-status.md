@@ -7,7 +7,39 @@ grey release or production approval are established. C10 now has an offline impl
 publication. Real two-process race acceptance remains BLOCKED; C10 is not closed.
 
 <a id="current-handover"></a>
-## Local/main security integration — authorized 2026-11-07
+## Current verified candidate — 2026-11-08
+
+Latest remotely verified code/assets candidate, prior to this documentation update:
+`088d8c84daba0b3449d4196fc167b58c38136455` on
+[PR #8](https://github.com/zhenkun26/BusinessAgent/pull/8). The exact clean-head
+eight-check receipt is `enterprise-agent/eval/results/offline/cleanup-saga-input-png-clean-20261108.json`:
+2137 tests + 640 subtests, Node 80/14, seven assets, 81.8543% coverage; execution
+and candidate binding PASS. The matching secret scan is clean, retained in
+`enterprise-agent/eval/results/cleanup-saga-input-png-secrets-20261108/summary.json`.
+That scan uses the existing repository policy, including broad path allowlists in
+[`.gitleaks.toml`](../../.gitleaks.toml); it is not proof of secret absence across
+excluded documentation, assets or tests. No remote CI result is claimed for this
+subsequent documentation update.
+All 465 source records remain PENDING_SOURCE_REVIEW; these checks do not clear
+source rights, privacy, full runtime/RAG, enterprise UAT or release acceptance.
+
+[CI run #104](https://github.com/zhenkun26/BusinessAgent/actions/runs/42444081336)
+completed with all five jobs successful, including a successful Trivy scan in the
+actual log. Its tested PR merge commit is
+`edacb9712c22da260ebbf27bca6b4e9cdefe317c`, combining that head with base
+`f7d684be1a46758bddddc2d13e2a13a33896ba51`; this is a CI merge ref, not a merge
+into main. The jobs interface did not supply steps, so a GHCR skip result was
+not directly verified. The reviewed workflow disables automatic publication and
+requires an explicit publish dispatch on main. No merge or deployment has been
+performed.
+
+### Historical integration and CI-repair snapshots — 2026-11-07
+
+The original integration, intermediate repair status, test counts and restrictions
+below are historical snapshots bound to their named candidates, not current
+status. In particular, the four Debian Trivy records and verification in progress
+describe the earlier repair stage; the successful current run is recorded above.
+The original wording and evidence remain unchanged.
 
 Subsequent review state: [draft PR #8](https://github.com/zhenkun26/BusinessAgent/pull/8)
 contains the integrated candidate. Its initial CI stopped on unsafe matrix record naming

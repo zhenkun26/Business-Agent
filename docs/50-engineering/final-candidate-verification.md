@@ -617,3 +617,34 @@ seven assets, 81.8543% coverage and stable sources. No dependency was installed.
 Receipt: `enterprise-agent/eval/results/offline/cleanup-saga-input-png-precommit-20261108.json`.
 Dirty candidate binding remains BLOCKED by design; exact clean-commit verification
 and remote CI remain separate required evidence.
+
+
+## Final handover documentation correction — 2026-11-08 UTC
+
+This documentation-only follow-up to `088d8c84daba0b3449d4196fc167b58c38136455`
+labels the original integration and intermediate CI-repair status as historical,
+preserves their complete body and records the latest verified head/CI merge-ref
+separately. It also replaces the bootstrap runbook's ambiguous review/reissue
+wording with the existing human-hold contract: legacy NULL approvals stay
+non-executable; replacements cannot bypass uncertain effects or a human hold.
+No release or retry endpoint is added; any future operational procedure requires
+separate review. The approval boundary documentation and actual provenance/owner
+guards were checked. No application, schema, workflow or historical evidence changes.
+
+The unchanged eight-check precommit run at 2026-11-08T04:02:17.329650+00:00
+passed: 2137 tests + 640 subtests, Node 80/14, seven assets and 81.8543%
+coverage, with stable source inputs. Receipt:
+`enterprise-agent/eval/results/offline/handover-doc-review-precommit-20261108.json`.
+Execution PASS is distinct from dirty candidate binding BLOCKED (exit 2).
+These three documentation files are not bound by the current offline manifest;
+no manifest refresh is required. All 465 source records remain pending and
+release/UAT/privacy/full-runtime gates are not cleared. Exact clean-commit
+verification and a fresh secret scan follow the separate local commit; no new
+remote CI result is claimed for that documentation commit. No push, merge,
+deployment, installation or deletion is performed in this correction.
+
+Final review also makes explicit that the remote run belongs to the prior code/assets
+candidate, not this documentation commit, and that the retained secret scan uses
+the existing repository policy with broad path allowlists. A clean policy result
+is not proof of absence across excluded docs/assets/tests; no result from a
+separate default-rules-only scan is claimed here.

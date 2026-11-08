@@ -47,8 +47,13 @@ An authorized legacy copy that already has standalone 009 still requires
 installation; missing/overloaded functions, altered defaults, partial objects,
 changed CHECKs or disabled/changed triggers fail rather than repair or certify it.
 There is no approval data backfill: SQL NULL remains untrusted, and even NULL-to-
-contract updates are forbidden. Existing rows require manual review/reissue, not
-fabricated UTC provenance. Guard checks do not replace runtime binding/expiry checks.
+contract updates are forbidden. Existing SQL NULL approvals remain untrusted and
+non-executable and require authorized human review of the original records, provider
+evidence and possible effects, not fabricated UTC provenance. Reapproval or creating
+replacement requests must not bypass an uncertain outcome or human hold. No hold-release
+or retry/resubmit endpoint is supplied; enacting any future decision requires a separately
+reviewed operational procedure. See [approval human-review boundaries](../../docs/50-engineering/approval-utc-human-hold.md).
+Guard checks do not replace runtime binding/expiry checks.
 
 Startup, health/status and administrative operations read the actual catalog
 function bodies/security properties, CHECK dependency and trigger properties.
