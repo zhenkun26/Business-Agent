@@ -180,3 +180,44 @@ def test_symlink_escape_is_rejected(repository: tuple[Path, dict]) -> None:
     (root / "enterprise-agent/eval/external").symlink_to(root.parent, target_is_directory=True)
     with pytest.raises(ValueError):
         inventory.verify(root)
+
+
+@pytest.mark.parametrize('mutation', ['missing', 'tampered', 'unlisted', 'symlink'])
+def test_dompurify_babel_notice_is_required_and_hash_checked(
+        tmp_path: Path, mutation: str) -> None:
+    spec = importlib.util.spec_from_file_location(
+        'frontend_notice_verifier', ROOT/'enterprise-agent/scripts/verify_frontend_assets.py')
+    frontend = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(frontend)
+    source = ROOT/'enterprise-agent/app/static'
+    (tmp_path/'vendor').mkdir()
+    (tmp_path/'index.html').write_bytes((source/'index.html').read_bytes())
+    manifest = json.loads((source/'vendor/manifest.json').read_text())
+    target = 'dompurify-3.4.17/LICENSE-BABEL-HELPERS'
+    for package in manifest['packages']:
+        for entry in package['files']:
+            name = entry['file']
+            path = tmp_path/'vendor'/name
+            path.parent.mkdir(exist_ok=True)
+            if name == target and mutation in {'missing', 'symlink'}:
+                continue
+            path.write_bytes((source/'vendor'/name).read_bytes())
+    if mutation == 'tampered':
+        (tmp_path/'vendor'/target).write_text('Missing full permission notice')
+    elif mutation == 'unlisted':
+        package = next(p for p in manifest['packages'] if p['name'] == 'dompurify')
+        package['files'] = [entry for entry in package['files'] if entry['file'] != target]
+    elif mutation == 'symlink':
+        retained_target = tmp_path/'original-notice'
+        retained_target.write_bytes((source/'vendor'/target).read_bytes())
+        (tmp_path/'vendor'/target).symlink_to(retained_target)
+    (tmp_path/'vendor/manifest.json').write_text(json.dumps(manifest))
+    with pytest.raises((OSError, ValueError)):
+        frontend.verify(tmp_path)
+
+
+def test_browser_notice_addition_does_not_clear_any_source_record() -> None:
+    data = json.loads((ROOT/inventory.INVENTORY).read_text())
+    assert len(data['source_files']) == 465
+    assert {entry['status'] for entry in data['source_files'].values()} == {inventory.PENDING}
+    assert {entry['wheel_license_review'] for entry in data['python_packages'].values()} == {'PENDING'}

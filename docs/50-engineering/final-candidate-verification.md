@@ -648,3 +648,44 @@ candidate, not this documentation commit, and that the retained secret scan uses
 the existing repository policy with broad path allowlists. A clean policy result
 is not proof of absence across excluded docs/assets/tests; no result from a
 separate default-rules-only scan is claimed here.
+
+
+## Scoped source evidence and retained dependency notices (2026-11-08 UTC)
+
+This increment supplements, rather than rewrites, the retained provenance history.
+A fixed official Manrope 4.504 OFL is retained alongside the earlier notices; six
+font mappings gain historical evidence without changing font bytes or rights states.
+The C17 follow-up records the recovered, byte-exact six-control generation process
+and the limited fictional-data confirmation. It does not clear the original corpus,
+borrowed wording, screenshots or research materials, and does not rewrite historical
+unknown replies or the historical 457-item matrix.
+
+Four exact-version Python MIT notices and two complete upstream Schematron resources
+with their file-level MIT grants are retained as eight supplemental notice/index files.
+The latter match the lxml transform bodies under the explicitly recorded newline-only
+comparison, not entire original files. Original lxml resources and LICENSES remain
+unchanged. DOMPurify gains its lock-matched Babel helpers full MIT notice; its JavaScript,
+Apache and MPL files remain unchanged. No dependency version changes or installation.
+
+Build inputs bind the eight production notice files; the final Docker image explicitly
+copies them. The existing installed-inventory check now reads the fixed final image
+location and rejects missing, extra, changed or symlinked notices and version/hash-map
+drift. Source-mode and synthetic checks do not claim final-image notice retention.
+The actual Linux image check and new remote CI remain required after this commit.
+No workflow or GHCR publication behavior changes. These checks are not a complete
+native/vendor/OS license or corresponding-source audit, nor distribution acceptance.
+
+The precommit aggregate at 2026-11-08T04:59:10.980485+00:00 passed all eight checks:
+2170 Python tests plus 640 subtests, Node 80/14, eight frontend distribution/license
+files and 81.8543% coverage. All 388 controlled offline inputs remained stable.
+Receipt: `enterprise-agent/eval/results/offline/source-notices-precommit-20261108-r1.json`.
+Dirty candidate binding remains BLOCKED by design (exit 2); exact clean-commit checks,
+secret review and remote CI are separate subsequent evidence. The independent focused
+suite passed 163 cases; no warning, skip or guard denial was reported. The historical
+Manrope OFL preserves one upstream trailing space to retain exact official bytes.
+The two verbatim Schematron source-notice files also retain upstream whitespace
+flagged by the staged whitespace checker (11 locations); no source bytes are trimmed.
+Authored-file whitespace checks exclude only those two exact upstream files.
+All 465 source records stay pending, with F2-09/C10 and applicable runtime/privacy/UAT
+limits preserved. No merge, registry publication, deployment or source removal is granted
+by these evidence and notice changes.

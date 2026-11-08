@@ -26,6 +26,7 @@ WORKDIR /build
 COPY Dockerfile.prod /build-info/Dockerfile.prod
 COPY deploy/build-inputs.json deploy/requirements-prod.txt deploy/requirements-prod.lock deploy/requirements-ml.txt deploy/debian.sources /build-info/deploy/
 COPY scripts/verify_build.py /build-info/scripts/verify_build.py
+COPY deploy/third-party-notices /build-info/deploy/third-party-notices
 RUN python -I -B /build-info/scripts/verify_build.py --root /build-info
 COPY deploy/requirements-prod.txt deploy/requirements-prod.lock deploy/requirements-ml.txt ./
 RUN python -m venv /opt/venv
@@ -95,6 +96,8 @@ COPY scripts/recovery_archive.py ./deploy/recovery_archive.py
 COPY deploy/*.sql ./deploy/
 COPY deploy/schema_manifest.json ./deploy/
 COPY deploy/migrations ./deploy/migrations
+# Supplemental notices must exist in the final image, not only in builder evidence.
+COPY deploy/third-party-notices /app/deploy/third-party-notices
 
 USER 65534:65534
 

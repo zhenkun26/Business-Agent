@@ -11,14 +11,16 @@ records exact inputs, evidence limits and unresolved rights.
 | --- | --- | --- |
 | Vue | 3.5.44 / MIT | [LICENSE](enterprise-agent/app/static/vendor/vue-3.5.44/LICENSE) |
 | Marked | 18.1.1 / MIT | [LICENSE](enterprise-agent/app/static/vendor/marked-18.1.1/LICENSE) |
-| DOMPurify | 3.4.17 / Apache-2.0 OR MPL-2.0 | [Apache text](enterprise-agent/app/static/vendor/dompurify-3.4.17/LICENSE), [MPL text](enterprise-agent/app/static/vendor/dompurify-3.4.17/LICENSE-MPL) |
+| DOMPurify | 3.4.17 / Apache-2.0 OR MPL-2.0 | [Apache text](enterprise-agent/app/static/vendor/dompurify-3.4.17/LICENSE), [MPL text](enterprise-agent/app/static/vendor/dompurify-3.4.17/LICENSE-MPL), [Babel helpers MIT text](enterprise-agent/app/static/vendor/dompurify-3.4.17/LICENSE-BABEL-HELPERS) |
 
 Preserve these files and copyright/license headers with the corresponding distributions.
 The exact upstream tarball URLs, integrity values and local file hashes are recorded in
 the [vendor manifest](enterprise-agent/app/static/vendor/manifest.json). DOMPurify's
-vendored bundle additionally contains a regenerator-runtime MIT attribution to Facebook;
-that embedded notice is preserved. Its complete bundled-component license-text review
-remains pending. No dual-license election or complete notice audit is asserted here.
+vendored bundle additionally contains a regenerator-runtime MIT attribution to Facebook.
+That header is unchanged, and the complete @babel/helpers 7.29.10 MIT notice is now
+retained alongside it, bound to DOMPurify 3.4.17's official lock and the helper archive.
+The JavaScript and existing Apache/MPL texts are unchanged. No dual-license election
+or complete bundled-component notice audit is asserted here.
 
 ## Python, OS, optional profiles and externally supplied services
 
@@ -35,6 +37,38 @@ Development/evaluation/ML/IdP requirements, Docker/service images and CI tools a
 recorded separately as declarations. Unresolved closures, OS copyright files, bundled
 libraries, model weights and provider terms do not inherit the production inventory's
 coverage. The remote model profile does not distribute model weights.
+
+## Scoped production notice retention — 2026-11-08
+
+The [supplemental production notices](enterprise-agent/deploy/third-party-notices/README.md)
+retain four full official MIT texts for langchain-core 1.5.3,
+langchain-text-splitters 1.1.2, langsmith 0.10.15 and loguru 0.7.3. Verified local
+cache-origin/RECORD evidence found no full MIT notice in those package trees; this is
+not a fresh recomputation of their original wheel archives or final-image inspection.
+The [source map](enterprise-agent/deploy/third-party-notices/source-map.json) binds
+exact release-tag URLs, notice bytes and locked production wheel hashes.
+
+For lxml 6.1.1, a separate file-level supplement retains both full official Schematron
+converter files at commit 77dcd36c53d12ed786c144ece3b2af7694abdc56, including original
+author/history comments and the complete MIT permission notice. The two transform
+bodies match RNG2Schtrn.xsl and XSD2Schtrn.xsl in both locked Linux wheels under the
+source map's exact, limited normalization. Their headers and full-file bytes differ.
+This is specific upstream permission evidence, not an inference from lxml's BSD label.
+The original package resources and LICENSES.txt, including its older unlicensed wording,
+remain unchanged. No other lxml, native-library or OS obligation is cleared.
+
+Dockerfile.prod explicitly retains this directory in the final image. The sealed
+source-input check and `--installed` final-directory check are separate: the latter
+verifies exact file membership and hashes and exports a scoped receipt with the
+existing installed inventory. Source checks and synthetic regression tests do not
+establish actual image retention; the next actual Linux image check must pass.
+
+The 465 controlled source records remain PENDING_SOURCE_REVIEW, and all 98 top-level
+package wheel-review statuses remain PENDING. Outstanding work includes native/nested
+components, OpenTelemetry Apache-text mapping, OS copyright/common-license files,
+LGPL notices/companion GPL text/source and replaceability obligations, and MPL source
+requirements. These notice additions do not grant distribution, runtime or release
+acceptance and do not replace the project-wide provenance review.
 
 ## Verified upstream notice additions — 2026-11-07
 

@@ -28,12 +28,20 @@
     }
   },
   "files": {
-    "Dockerfile.prod": "7d2eeab00ca78e0affd259daee02ba86fc09479470d147abe93d5bf137d45ae0",
+    "Dockerfile.prod": "74b2c096940c032ef95cf7ac2c15e9993c3b86cce6a4fd5f2dcb81c5f650d849",
     "deploy/debian.sources": "74a7d1421a4572b640a4bcde29fa085259843fc5711f3a3a0419c237f15c1e51",
     "deploy/requirements-ml.txt": "d6a83665a8272c33e60638a0304e05ac50cf40a6187e4d3c168228ac2454c620",
     "deploy/requirements-prod.lock": "fb368dd69c38b5f2f9c54d0a8595c0c44f82222c67dba392e01d42469df09e9d",
     "deploy/requirements-prod.txt": "726303cb73fedff01a1308708a4819f938bd08cdfae126eec7739ff95b6fa710",
-    "scripts/verify_build.py": "1df3c4042953620ec6e63cf5df0366d1e6415321fe0670a6a1dcd4ef63c7682d"
+    "deploy/third-party-notices/ExtractSchFromRNG-77dcd36.xsl.txt": "e219462b395e0b87c8e0e969343fbc3fcac7195d0e0587dd2c7d6db7dca0ea2a",
+    "deploy/third-party-notices/ExtractSchFromXSD-77dcd36.xsl.txt": "2ba1909929c4bbbca5febd68627f2640ee1afe1b86923e7a15464770141e6d65",
+    "deploy/third-party-notices/LangChain-Core-1.5.3-MIT.txt": "4ec67e4ca6e6721dba849b2ca82261597c86a61ee214bbf21416006b7b2d0478",
+    "deploy/third-party-notices/LangChain-Text-Splitters-1.1.2-MIT.txt": "4ec67e4ca6e6721dba849b2ca82261597c86a61ee214bbf21416006b7b2d0478",
+    "deploy/third-party-notices/LangSmith-0.10.15-MIT.txt": "34e0b9842c7a31d34e53bc7eb224e81e07a34996106e029bbc72dea2d449f496",
+    "deploy/third-party-notices/Loguru-0.7.3-MIT.txt": "b35d026cc7aca9d5859a02eb87ddf7a386a24c986838651bd1f283f94e003327",
+    "deploy/third-party-notices/README.md": "fabfc5fb80aeefec244ce607cd635f6fc2968ee91e80c37ab19316f0024d7a61",
+    "deploy/third-party-notices/source-map.json": "9747d7b299b961d196bbb78f39a7d66002b0412d3bc7b7508b4b8199106bc90c",
+    "scripts/verify_build.py": "85a7fbb7e77170247c205e16fc7a519f3ac1a12c80f48db0bfef8813842b1b4f"
   },
   "frontend": {
     "amd64_digest": "sha256:7b32114e84ca21aeb2d6f871a0b62b3a0762193f75d9afd048ee4cbe889f3148",

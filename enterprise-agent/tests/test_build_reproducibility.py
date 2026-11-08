@@ -38,7 +38,8 @@ OS_PACKAGES = 'ca-certificates\t1\tall\ntzdata\t2\tall\nlibpq5:amd64\t3\tamd64\n
 
 def inventory(root: Path, manifest: dict, **kwargs: object) -> dict:
     args = dict(profile='production', python=manifest['python'], system='Linux',
-                machine='x86_64', os_packages=OS_PACKAGES)
+                machine='x86_64', os_packages=OS_PACKAGES,
+                notice_root=root/build.NOTICE_DIRECTORY)
     args.update(kwargs)
     return build.inventory(root, manifest, installed(manifest), **args)
 
@@ -138,7 +139,7 @@ def test_experimental_ml_is_never_production_verified() -> None:
     packages = installed(manifest)+[('synthetic-ml-extra','1')]
     result = build.inventory(ROOT, manifest, packages, profile='experimental-ml',
                              python=manifest['python'], system='Linux', machine='x86_64',
-                             os_packages=OS_PACKAGES)
+                             os_packages=OS_PACKAGES, notice_root=ROOT/build.NOTICE_DIRECTORY)
     assert result['status'] == 'EXPERIMENTAL_NOT_ACCEPTED'
     assert result['runtime_acceptance'] == 'BLOCKED'
     assert result['full_rag'] == 'BLOCKED' and result['c10'] == 'OPEN'
@@ -158,7 +159,8 @@ def test_inventory_is_order_independent_and_bound_to_input_bytes() -> None:
     first = inventory(ROOT, manifest)
     second = build.inventory(ROOT, manifest, reversed(installed(manifest)), profile='production',
                              python=manifest['python'], system='Linux', machine='x86_64',
-                             os_packages='\n'.join(reversed(OS_PACKAGES.splitlines()))+'\n')
+                             os_packages='\n'.join(reversed(OS_PACKAGES.splitlines()))+'\n',
+                             notice_root=ROOT/build.NOTICE_DIRECTORY)
     assert json.dumps(first, sort_keys=True) == json.dumps(second, sort_keys=True)
     assert first['build_inputs_sha256'] == build.digest((ROOT/'deploy/build-inputs.json').read_bytes())
     assert first['status'] == 'INSTALLED_SET_VERIFIED'
@@ -202,6 +204,7 @@ def test_installed_cli_uses_bounded_read_only_inventory_command(
     from types import SimpleNamespace
     manifest = build.verify_inputs(ROOT)
     monkeypatch.setattr(sys, 'argv', ['verify_build', '--root', str(ROOT), '--installed'])
+    monkeypatch.setattr(build, 'FINAL_NOTICE_ROOT', ROOT/build.NOTICE_DIRECTORY)
     monkeypatch.setattr(build.platform, 'python_version', lambda: manifest['python'])
     monkeypatch.setattr(build.platform, 'system', lambda: 'Linux')
     monkeypatch.setattr(build.platform, 'machine', lambda: 'x86_64')
@@ -247,3 +250,124 @@ def test_reviewed_metadata_closure_preserves_ci_and_production_patch_baselines(
                 continue
             dependency = packages[build.normalized(dep.name)]
             assert dependency['version'] in dep.specifier, (name, value)
+
+
+@pytest.mark.parametrize('mutation', ['missing', 'extra', 'tampered', 'file-symlink',
+                                      'directory-symlink'])
+def test_actual_final_notice_directory_must_match_sealed_inputs(
+        tmp_path: Path, mutation: str) -> None:
+    root, manifest = fixture(tmp_path/'build-info')
+    final = tmp_path/'final-notices'
+    final.mkdir()
+    target = 'LangChain-Core-1.5.3-MIT.txt'
+    for name in build.NOTICE_FILES:
+        if name == target and mutation in {'missing', 'file-symlink'}:
+            continue
+        (final/name).write_bytes((root/build.NOTICE_DIRECTORY/name).read_bytes())
+    if mutation == 'extra':
+        (final/'unreviewed.txt').write_text('Unreviewed notice')
+    elif mutation == 'tampered':
+        (final/target).write_bytes((final/target).read_bytes()+b'changed')
+    elif mutation == 'file-symlink':
+        (final/target).symlink_to(root/build.NOTICE_DIRECTORY/target)
+    elif mutation == 'directory-symlink':
+        alias = tmp_path/'notice-alias'
+        alias.symlink_to(final, target_is_directory=True)
+        final = alias
+    # Source evidence still passes; only reading the final directory finds the error.
+    build.verify_inputs(root)
+    with pytest.raises(build.InvalidBuild):
+        inventory(root, manifest, notice_root=final)
+
+
+def test_installed_receipt_reads_final_bytes_and_keeps_license_acceptance_blocked(
+        tmp_path: Path) -> None:
+    root, manifest = fixture(tmp_path/'build-info')
+    final = tmp_path/'final-notices'
+    final.mkdir()
+    for name in build.NOTICE_FILES:
+        (final/name).write_bytes((root/build.NOTICE_DIRECTORY/name).read_bytes())
+    receipt = inventory(root, manifest, notice_root=final)['retained_notices']
+    assert receipt['checked_location'] == 'FINAL_IMAGE'
+    assert receipt['directory'] == str(final)
+    assert receipt['status'] == 'SCOPED_NOTICE_BYTES_VERIFIED'
+    assert receipt['distribution_acceptance'] == 'BLOCKED'
+    assert receipt['complete_license_audit'] == 'NOT_ESTABLISHED'
+    assert receipt['files'] == {name: manifest['files'][build.NOTICE_DIRECTORY+'/'+name]
+                                for name in build.NOTICE_FILES}
+
+
+@pytest.mark.parametrize('mutation', ['missing-component', 'missing-file', 'extra-file',
+                                      'version', 'wheel', 'sha256', 'bytes', 'source', 'escape',
+                                      'clearance'])
+def test_resealed_notice_map_cannot_hide_missing_coverage_or_version_drift(
+        tmp_path: Path, mutation: str) -> None:
+    root, manifest = fixture(tmp_path)
+    name = build.NOTICE_DIRECTORY+'/source-map.json'
+    mapping = json.loads((root/name).read_text())
+    entry = mapping['components']['langchain-core']
+    filename = 'LangChain-Core-1.5.3-MIT.txt'
+    if mutation == 'missing-component':
+        mapping['components'].pop('langchain-core')
+    elif mutation == 'missing-file':
+        entry['files'].clear()
+    elif mutation == 'extra-file':
+        entry['files']['unreviewed.txt'] = entry['files'][filename]
+    elif mutation == 'version':
+        entry['version'] = '0'
+    elif mutation == 'wheel':
+        entry['wheel_sha256'] = ['0'*64]
+    elif mutation in {'sha256', 'bytes', 'source'}:
+        entry['files'][filename][mutation] = {'sha256': '0'*64, 'bytes': 0,
+                                              'source': 'file:///untrusted'}[mutation]
+    elif mutation == 'escape':
+        entry['files']['../'+filename] = entry['files'].pop(filename)
+    else:
+        mapping['distribution_acceptance'] = 'PASS'
+    (root/name).write_text(json.dumps(mapping))
+    reseal(root, manifest, name)
+    with pytest.raises(build.InvalidBuild):
+        build.verify_inputs(root)
+
+
+def test_resealed_build_manifest_cannot_drop_notice_inputs(tmp_path: Path) -> None:
+    root, manifest = fixture(tmp_path)
+    manifest['files'].pop(build.NOTICE_DIRECTORY+'/LangSmith-0.10.15-MIT.txt')
+    (root/'deploy/build-inputs.json').write_text(json.dumps(manifest))
+    with pytest.raises(build.InvalidBuild, match='BUILD_MANIFEST_INVALID'):
+        build.verify_inputs(root)
+
+
+def test_final_notice_copy_precedes_non_root_installed_check() -> None:
+    recipe = (ROOT/'Dockerfile.prod').read_text()
+    builder, runner = recipe.split(' AS runner', maxsplit=1)
+    assert 'COPY deploy/third-party-notices /build-info/deploy/third-party-notices' in builder
+    assert runner.index('COPY deploy/third-party-notices /app/deploy/third-party-notices') < (
+        runner.index('USER 65534:65534')) < runner.index('--installed')
+
+
+def test_source_cli_does_not_claim_installed_notices(
+        monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture) -> None:
+    monkeypatch.setattr(sys, 'argv', ['verify_build', '--root', str(ROOT)])
+    monkeypatch.setattr(build, 'FINAL_NOTICE_ROOT', ROOT/'does-not-exist')
+    assert build.main() == 0
+    result = json.loads(capsys.readouterr().out)
+    assert result['notice_source_inputs'] == 'VERIFIED'
+    assert result['installed_notices'] == 'NOT_CHECKED'
+    assert 'retained_notices' not in result
+
+
+def test_installed_cli_rejects_missing_final_notices_despite_valid_source_inputs(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture) -> None:
+    from types import SimpleNamespace
+    manifest = build.verify_inputs(ROOT)
+    monkeypatch.setattr(sys, 'argv', ['verify_build', '--root', str(ROOT), '--installed'])
+    monkeypatch.setattr(build, 'FINAL_NOTICE_ROOT', tmp_path/'absent-final-notices')
+    monkeypatch.setattr(build.platform, 'python_version', lambda: manifest['python'])
+    monkeypatch.setattr(build.platform, 'system', lambda: 'Linux')
+    monkeypatch.setattr(build.platform, 'machine', lambda: 'x86_64')
+    monkeypatch.setattr(build.importlib.metadata, 'distributions', lambda: [
+        SimpleNamespace(metadata={'Name':n}, version=v) for n,v in installed(manifest)])
+    monkeypatch.setattr(build.subprocess, 'run', Mock(return_value=SimpleNamespace(stdout=OS_PACKAGES)))
+    assert build.main() == 1
+    assert json.loads(capsys.readouterr().out)['status'] == 'FAIL'

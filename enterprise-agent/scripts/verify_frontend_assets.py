@@ -23,6 +23,11 @@ def verify(root: Path) -> int:
             raise ValueError
         if not any('LICENSE' in entry['file'] for entry in package['files']):
             raise ValueError
+        if package['name'] == 'dompurify':
+            required = {'LICENSE', 'LICENSE-MPL', 'LICENSE-BABEL-HELPERS'}
+            names = {entry['file'] for entry in package['files']}
+            if not {f'dompurify-{package["version"]}/{name}' for name in required} <= names:
+                raise ValueError
         for entry in package['files']:
             relative = Path(entry['file'])
             if relative.is_absolute() or '..' in relative.parts:
