@@ -10,6 +10,17 @@ A multi-agent platform for enterprise knowledge and business workflows, bringing
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue)](enterprise-agent/pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
+## Phase-one source scope
+
+The [candidate-bound source assessment](docs/50-engineering/license-provenance.md#phase-one-source-assessment--2026-11-08) covers 465 records: 229 supported by
+upstream evidence, 232 common-project contributions with maintainer-reported MIT
+consent, and four repository-declared MIT associated research documents. Historical
+PENDING inventory labels remain intact and are not 465 unresolved current blockers.
+This is source-only scope, not independent proof of authorship or blanket third-party
+clearance. Actual binary releases and the three later enterprise stages require separate
+review; privacy/full RAG/full C10 acceptance is not closed. Final documentation review
+and candidate checks remain required before merge.
+
 ## Approval safety boundary
 
 Approval and atomic batch decisions do not execute actions. The original requester must

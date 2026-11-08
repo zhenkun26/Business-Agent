@@ -1,5 +1,59 @@
 # License and data provenance inventory
 
+## Phase-one source assessment — 2026-11-08
+
+This additive assessment is bound to candidate `69b59e24b446ed1cdef451355b9f701044643bd4`.
+It concerns source-only phase one, not complete binary-distribution compliance or
+enterprise acceptance. Historical inventory statuses, the 457-record CSV and earlier
+unknown-source replies remain unchanged as records of their original evidence state.
+`PENDING_SOURCE_REVIEW` in that retained schema is not 465 current unresolved blockers.
+
+The 465 controlled records are assessed in three disjoint groups:
+
+- **229 upstream-supported records:** 217 fonts and 12 OpenSpec-generated tooling files.
+  Retained source maps, full notices and applicable license conditions support this group.
+  This does not mean every file has an exact upstream byte match. Conditional OFL evidence,
+  reserved-name/notice requirements and incomplete Manrope release lineage remain documented.
+- **232 common-project contributions:** BusinessAgent derives from the project jointly developed with kingoftaro,
+  [hello-xiao-a project](https://github.com/kingoftaro/hello-xiao-a/tree/8a9544594d129de0dc3b4738b988d36372091d5b). The maintainer reports
+  the co-contributor agreed to use the jointly developed code, examples and screenshots
+  in BusinessAgent under MIT for publication, modification, redistribution and commercial
+  use. This is maintainer-reported contributor consent, not independently signed proof,
+  verified sole authorship, a copyright transfer or permission for third-party inputs.
+  Preserve joint-project attribution and all applicable existing notices. Earlier scoped
+  fictional-data statements and creation evidence remain recorded. Unrecovered historical
+  generation logs do not change the separately recorded contributor permission; specific
+  third-party exceptions remain subject to their own licenses.
+- **Four repository-declared MIT associated research documents** (仓库声明MIT的随附研究文档):
+  the exact files below are unchanged between the initial snapshot, public main and this
+  candidate. Their repository classification and license declaration support their inclusion
+  in source-only phase one; they are not independent proof of original authorship.
+
+The [initial snapshot](https://github.com/zhenkun26/BusinessAgent/commit/b4cca93b762724c4070276b0bddb098811632ecd)
+contains all four; [the move](https://github.com/zhenkun26/BusinessAgent/commit/cb560d5ecd5df3259f95f85c112102fa3aafcd4e)
+is R100, and the same-day [MIT declaration](https://github.com/zhenkun26/BusinessAgent/commit/945e6a6105beab718eefc278f24b53e4e46a1809)
+explicitly covers associated documentation files. The
+[product index](https://github.com/zhenkun26/BusinessAgent/blob/f7d684be1a46758bddddc2d13e2a13a33896ba51/docs/10-product-plan/README.md)
+identifies three reports and an executive-summary PDF as selection research. The PDF has
+ChatGPT markings. No specific republication source or contrary license was identified;
+absence of contrary evidence is not independent authorship verification. GitHub author
+mapping is absent, signatures were not verified, original generation sessions are unrecovered,
+and external factual/numerical claims were not independently checked. These limitations
+remain recorded. No specific unresolved source-permission conflict was identified
+within this phase-one scope.
+
+- [deep-research-report (1).md](https://github.com/zhenkun26/BusinessAgent/blob/69b59e24b446ed1cdef451355b9f701044643bd4/docs/10-product-plan/research/deep-research-report%20%281%29.md): SHA-256 `086694bfcb524c831a8854f842b8a1d7c723fe75a2acd11d46c01b1734447e8c`.
+- [deep-research-report (2).md](https://github.com/zhenkun26/BusinessAgent/blob/69b59e24b446ed1cdef451355b9f701044643bd4/docs/10-product-plan/research/deep-research-report%20%282%29.md): SHA-256 `e8efa36c76da427a5c51e2f65707d3dc880fb44626580e8d8a2552820b24830e`.
+- [deep-research-report.md](https://github.com/zhenkun26/BusinessAgent/blob/69b59e24b446ed1cdef451355b9f701044643bd4/docs/10-product-plan/research/deep-research-report.md): SHA-256 `6a9328ba96eb437e47fd4addd66b2f391afcde671809bb9d434ac08de7748508`.
+- [执行摘要.pdf](https://github.com/zhenkun26/BusinessAgent/blob/69b59e24b446ed1cdef451355b9f701044643bd4/docs/10-product-plan/research/%E6%89%A7%E8%A1%8C%E6%91%98%E8%A6%81.pdf): SHA-256 `908eedeaf8e67ce44a2fdc7bf9c41f959a382f46b98e66cbf24f79295aede197`.
+
+This assessment does not clear third-party works outside its evidence, privacy in retained
+screenshots, downstream font exports, model/provider terms, or all wheel/native/OS license
+obligations. Actual binary releases require their own final-artifact notices and source/
+replaceability review where applicable. Enterprise pilot evaluation, real-environment pilot
+and production use remain later stages; privacy, full RAG and full C10 acceptance are not
+closed. Final candidate checks and independent review are still required before merge.
+
 ## F2-09 plan — authorized 2026-10-20
 
 Baseline: local build-input increment `c518a2a`; portfolio/open-source presentation,

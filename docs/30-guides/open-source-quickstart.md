@@ -1,5 +1,16 @@
 # Open-source quickstart / 开源快速开始
 
+## Phase-one source scope / 第一阶段来源范围
+
+The [candidate-bound source assessment](../50-engineering/license-provenance.md#phase-one-source-assessment--2026-11-08) covers 465 records: 229 supported by
+upstream evidence, 232 common-project contributions with maintainer-reported MIT
+consent, and four repository-declared MIT associated research documents. Historical
+PENDING inventory labels remain intact and are not 465 unresolved current blockers.
+This is source-only scope, not independent proof of authorship or blanket third-party
+clearance. Actual binary releases and the three later enterprise stages require separate
+review; privacy/full RAG/full C10 acceptance is not closed. Final documentation review
+and candidate checks remain required before merge.
+
 ## Current milestone / 当前阶段
 
 Stage one targets reproducible isolated startup with synthetic examples and honest capability and source-rights boundaries. It is not a claim of real enterprise deployment, formal UAT, or production readiness.
@@ -9,7 +20,7 @@ Stage one targets reproducible isolated startup with synthetic examples and hone
 ## Starter verification / 启动入口核验
 
 Scoped macOS arm64 checks passed with Python 3.13.15 and a previously approved binary-driver
-test adapter. Run-05 passed 15 real HTTP checks and 14 focused demo tests after a startup-log correction; owned services were stopped with data retained. Run-04 browser checks passed login, both greeting shortcuts, unsupported-operation rejection, current-session history, refresh/login isolation, relogin and logout. The log-only follow-up did not change UI bytes. The Mac adapter is not native libpq proof. Separately, [CI run 42376168479](https://github.com/zhenkun26/BusinessAgent/actions/runs/42376168479) passed all five jobs for code head 42644960a499cefe71c8ad21110bdd0b9cec39ce (actual merge checkout 96fb4ed665f20e13d461829320bba913f6041b22), including native-driver startup and 15/15 checks on its Ubuntu runner. Source-rights blockers remain; this is not unconditional stage-one acceptance.
+test adapter. Run-05 passed 15 real HTTP checks and 14 focused demo tests after a startup-log correction; owned services were stopped with data retained. Run-04 browser checks passed login, both greeting shortcuts, unsupported-operation rejection, current-session history, refresh/login isolation, relogin and logout. The log-only follow-up did not change UI bytes. The Mac adapter is not native libpq proof. Separately, [CI run 42376168479](https://github.com/zhenkun26/BusinessAgent/actions/runs/42376168479) passed all five jobs for code head 42644960a499cefe71c8ad21110bdd0b9cec39ce (actual merge checkout 96fb4ed665f20e13d461829320bba913f6041b22), including native-driver startup and 15/15 checks on its Ubuntu runner. That historical run did not assess source rights; see the current phase-one assessment above.
 
 The verified Linux path assumes an Ubuntu CI-style environment with Python 3.13 already installed, a running accessible Docker daemon, and configured Ubuntu/PGDG APT sources. It is not a verified native-libpq setup for macOS or every bare Linux host. Complete the isolated setup and import preflight below before startup.
 
@@ -80,6 +91,8 @@ Use a new environment directory; Docker must already be running and accessible. 
 
 A full page refresh returns to login. After relogin there is no visible entry to recover the old session. Current-session history may show a persisted snapshot with unknown status; that is not a successful business execution receipt. Do not claim automatic cross-refresh recovery.
 
+Historical synthetic-example evidence (not superseding the current source-only assessment):
+
 The source inventory now contains 465 records: the historical 457 baseline plus eight new engineering fixtures. Registration does not clear unknown rights. The maintainer stated that three C17 documents (two departmental documents and after-sales policy) and eight CRM examples were fictional from creation; this is scoped author testimony, not external permission or clearance of other C17 material. The completed separate CRM increment labels eight fictional customers and uses NOT-A-PHONE telephone placeholders and example.invalid customer email addresses. The internal-mail seed deliberately retains fictional-demo-manager@company.internal with a synthetic-data comment: this private demo domain is required by the unchanged internal-mail safety classifier. It is not a customer address or a relaxed mail policy. Three focused tests passed; order and non-contact fields were unchanged. The expected full Python count is 2137 (2120 baseline + 14 demo + 3 CRM). Both supported Python CI jobs passed 2137 tests plus 640 subtests; the recorded CI also verified candidate binding and the native starter.
 
 This document is a documentation-only follow-up to the verified code head named above. Any later documentation commit and its own CI result are recorded separately in the PR; no self-referential commit hash is invented here. Existing successful CI evidence does not by itself prove a new starter works. See [source provenance](../50-engineering/license-provenance.md) and [third-party notices](../../THIRD_PARTY_NOTICES.md); unknown rights are not permission to redistribute.
@@ -94,4 +107,4 @@ This document is a documentation-only follow-up to the verified code head named 
 
 Stage-one merge requires verified reproducibility, accurate limitations, resolved material distribution-rights blockers and current candidate checks. Later enterprise milestones remain openly unfinished. Do not replace missing evidence with a PASS label.
 
-Retained historical screenshots were not replaced and may still display historical contact details or additional unconfirmed recipients. The text/fixture update is not a claim that all visual examples or their source rights have been cleared.
+Retained historical screenshots were not replaced and may still display historical contact details or additional unconfirmed recipients. The current source assessment records maintainer-reported consent for common-project screenshots; it does not independently verify every depicted identity, recipient or privacy condition.

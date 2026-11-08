@@ -5,6 +5,23 @@ clearance. The project's [MIT license](LICENSE) does not relicense third-party
 components, fonts, media or datasets. The [F2-09 inventory and review procedure](docs/50-engineering/license-provenance.md)
 records exact inputs, evidence limits and unresolved rights.
 
+## Candidate-bound Linux notice evidence — 2026-11-08
+
+[CI #106](https://github.com/zhenkun26/BusinessAgent/actions/runs/42450124426)
+verified head `69b59e24b446ed1cdef451355b9f701044643bd4` through actual PR merge ref
+`9ed7f55adf7b62e93bbd52a46753916a2f15fa25`, with base
+`f7d684be1a46758bddddc2d13e2a13a33896ba51`. All five jobs succeeded; Trivy succeeded,
+and GHCR login/push completed as skipped. This was verification, not publication or deployment.
+The [production-build-inventory artifact](https://github.com/zhenkun26/BusinessAgent/actions/runs/42450124426/artifacts/13605366825)
+ZIP SHA-256 is `70ca8d0522fb11e304a20303afdae0135a24aa1a475495956962bbaa70779319`.
+Its receipt reports `SCOPED_NOTICE_BYTES_VERIFIED` for exactly eight notice files and
+binds their SHA-256 values at `/app/deploy/third-party-notices` in image
+`sha256:f880389b3f041b210edddc5dfa4f0d640c85b56dbac2da4abed60f4fec118e19`.
+This is actual scoped final-image retention evidence, not a complete image license audit.
+It does not bind this subsequent documentation diff to a newly successful CI run.
+
+The [phase-one source assessment](docs/50-engineering/license-provenance.md#phase-one-source-assessment--2026-11-08) distinguishes 229 upstream-supported records, 232 common-project contributions with maintainer-reported MIT consent, and four repository-declared MIT associated research documents. Historical PENDING labels remain unchanged, not 465 unresolved present-day blockers. BusinessAgent derives from the [hello-xiao-a](https://github.com/kingoftaro/hello-xiao-a/tree/8a9544594d129de0dc3b4738b988d36372091d5b) jointly developed with kingoftaro; this attribution does not transfer copyright or relicense third-party material.
+
 ## Browser components already retained in source
 
 | Component | Declared version/license | Preserved upstream text |
@@ -61,9 +78,11 @@ Dockerfile.prod explicitly retains this directory in the final image. The sealed
 source-input check and `--installed` final-directory check are separate: the latter
 verifies exact file membership and hashes and exports a scoped receipt with the
 existing installed inventory. Source checks and synthetic regression tests do not
-establish actual image retention; the next actual Linux image check must pass.
+establish actual image retention. CI #106 now supplies the separately bound actual
+scoped retention evidence above; full image-license review remains separate.
 
-The 465 controlled source records remain PENDING_SOURCE_REVIEW, and all 98 top-level
+The retained inventory schema still marks 465 controlled source records
+PENDING_SOURCE_REVIEW; their newer source-only assessment is linked above. All 98 top-level
 package wheel-review statuses remain PENDING. Outstanding work includes native/nested
 components, OpenTelemetry Apache-text mapping, OS copyright/common-license files,
 LGPL notices/companion GPL text/source and replaceability obligations, and MPL source
@@ -102,7 +121,7 @@ reserved names for modified fonts, and continued OFL licensing of font derivativ
 The upstream full texts control. These font licenses do not relicense application code
 or documents created using the fonts.
 
-## Unconfirmed fonts, media and sample data
+## Historical unresolved-source assessment — before phase-one follow-up
 
 The remaining font lineage questions, screenshots, documentation illustrations/research
 material, seed SQL, evaluation corpus and embedded fixtures still need scoped author or

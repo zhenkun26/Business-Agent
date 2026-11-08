@@ -13,13 +13,26 @@
 受控 SSO 的独立 IdP、PKCE/RS256/身份映射及 HTTPS 配方见[工程指南](../docs/50-engineering/controlled-sso.md)。仅离线候选，真实签名/浏览器/部署验收 BLOCKED；默认关闭。
 前端固定本地依赖、角色流程及 API-only 管理边界见[浏览器交付指南](../docs/50-engineering/browser-delivery.md)。从同源 `/ui/` 访问；B01–B16 真实浏览器验收仍 BLOCKED。
 
+## Phase-one source scope / 第一阶段来源范围
+
+第一阶段仅评估源码：465项分为229项上游依据支持、232项共同项目贡献（维护者转述MIT许可同意）及4项仓库声明MIT的随附研究文档；历史清单不改，后续二进制及企业验收另行审查。
+
+The [candidate-bound source assessment](../docs/50-engineering/license-provenance.md#phase-one-source-assessment--2026-11-08) covers 465 records: 229 supported by
+upstream evidence, 232 common-project contributions with maintainer-reported MIT
+consent, and four repository-declared MIT associated research documents. Historical
+PENDING inventory labels remain intact and are not 465 unresolved current blockers.
+This is source-only scope, not independent proof of authorship or blanket third-party
+clearance. Actual binary releases and the three later enterprise stages require separate
+review; privacy/full RAG/full C10 acceptance is not closed. Final documentation review
+and candidate checks remain required before merge.
+
 ## 当前整合审批边界 / Current integrated approval boundary
 
 批准及原子批量决策仅记录决定，原发起人须明确确认；逐次派发校验精确已提交审批、当前权限及 UTC 截止时间。混合 QUERY + 审批 ACTION 失败关闭，先查询再审批纯动作。证据接口只读，无解除暂停接口。
 
 Approval and atomic batch decisions never execute actions. The original requester confirms explicitly; each dispatch checks the committed approval, current permissions and UTC deadline. Mixed query/action plans fail closed: query first, then approve actions. Failures/unknown effects halt without automatic compensation. Late receipts cannot clear holds.
 
-See [current guidance](../docs/50-engineering/approval-utc-human-hold.md) and [integration change](../openspec/changes/integrate-local-delivery-security/proposal.md). Managed v9 preserves C10 v8; do not execute historical standalone main 009 on the managed path. Runtime/C10/privacy/rights acceptance remains blocked or pending. Historical milestone claims below retain their original scope, not current execution authority.
+See [current guidance](../docs/50-engineering/approval-utc-human-hold.md) and [integration change](../openspec/changes/integrate-local-delivery-security/proposal.md). Managed v9 preserves C10 v8; do not execute historical standalone main 009 on the managed path. Runtime/C10/privacy acceptance remains separate; source rights are assessed by phase above. Historical milestone claims below retain their original scope, not current execution authority.
 
 ## 快速开始
 

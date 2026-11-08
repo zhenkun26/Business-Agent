@@ -40,3 +40,26 @@ Progress details and the retained first full-suite failure are recorded in docs/
 - [x] Verify clean committed candidate binding and actual Linux/native/C10 CI; do not infer these from dirty precommit success.
 
 Verified code: 42644960a499cefe71c8ad21110bdd0b9cec39ce; actual merge checkout: 96fb4ed665f20e13d461829320bba913f6041b22. Five jobs PASS in run 42376168479. Ubuntu native evidence is scoped to that runner, and C10 still declares full_c10=false. See the dated verification record for artifacts and limits. This docs-only follow-up does not close stage one or authorize deployment.
+
+
+## Source-only phase-one assessment alignment — plan 2026-11-08
+
+Before implementation: add a candidate-bound assessment in license-provenance; align
+THIRD_PARTY_NOTICES, delivery-status, open-source-quickstart and the three README
+entries. Preserve historical replies, PENDING inventory schema, the 457 CSV and all
+source/evidence bytes. Distinguish 229 upstream-supported, 232 common-project
+contributions with maintainer-reported MIT consent, and four repository-declared
+MIT associated research documents. Record residual evidential limits without
+inventing signatures, copyright transfer or blanket third-party clearance. Bind
+actual Linux notice retention to CI #106, not an assumed complete image license audit.
+Later enterprise, binary-distribution, privacy/RAG/C10 gates remain separate.
+
+- [x] Align the seven existing public documents with this additive assessment.
+- [x] Verify counts, fixed candidate links, historical provenance body and whitespace.
+  Eight existing files only; local Markdown targets resolve, 229 + 232 + 4 = 465,
+  historical provenance body is byte-for-byte unchanged, and no CSV/JSON/source
+  or retained evidence file is modified. No new/deleted file or commit is included.
+- [x] Independently review the eight-document source assessment and retained history.
+- [ ] Verify the exact clean documentation commit and its new Linux CI before merge.
+
+Precommit receipt `phase-one-source-precommit-20261108-r1` reports all eight checks PASS: 2170 Python tests plus 640 subtests, Node 80/14, eight frontend assets and 81.8543% coverage. Dirty candidate binding remains BLOCKED (exit 2); this does not substitute for the clean-commit or new remote checks.

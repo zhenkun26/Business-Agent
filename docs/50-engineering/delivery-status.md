@@ -7,7 +7,34 @@ grey release or production approval are established. C10 now has an offline impl
 publication. Real two-process race acceptance remains BLOCKED; C10 is not closed.
 
 <a id="current-handover"></a>
-## Current verified candidate — 2026-11-08
+## Candidate-bound Linux notice evidence — 2026-11-08
+
+[CI #106](https://github.com/zhenkun26/BusinessAgent/actions/runs/42450124426)
+verified head `69b59e24b446ed1cdef451355b9f701044643bd4` through actual PR merge ref
+`9ed7f55adf7b62e93bbd52a46753916a2f15fa25`, with base
+`f7d684be1a46758bddddc2d13e2a13a33896ba51`. All five jobs succeeded; Trivy succeeded,
+and GHCR login/push completed as skipped. This was verification, not publication or deployment.
+The [production-build-inventory artifact](https://github.com/zhenkun26/BusinessAgent/actions/runs/42450124426/artifacts/13605366825)
+ZIP SHA-256 is `70ca8d0522fb11e304a20303afdae0135a24aa1a475495956962bbaa70779319`.
+Its receipt reports `SCOPED_NOTICE_BYTES_VERIFIED` for exactly eight notice files and
+binds their SHA-256 values at `/app/deploy/third-party-notices` in image
+`sha256:f880389b3f041b210edddc5dfa4f0d640c85b56dbac2da4abed60f4fec118e19`.
+This is actual scoped final-image retention evidence, not a complete image license audit.
+It does not bind this subsequent documentation diff to a newly successful CI run.
+
+Current source-only assessment: 465 = 229 upstream-supported + 232 common-project
+contributions with maintainer-reported MIT consent + four repository-declared MIT
+associated research documents. See [scope and limitations](license-provenance.md#phase-one-source-assessment--2026-11-08).
+Historical PENDING labels are retained, not a count of current unresolved blockers.
+Later binary-distribution and enterprise/privacy/RAG/full C10 gates remain separate.
+The eight-document diff passed independent source-scope, attribution, immutable-history,
+link and whitespace review. Precommit receipt `phase-one-source-precommit-20261108-r1`
+reported all eight checks PASS (2170 Python tests + 640 subtests, Node 80/14, eight
+assets, 81.8543% coverage), with dirty binding BLOCKED and exit 2 as expected.
+The exact clean documentation commit and its new Linux CI still require verification
+before merge; this precommit result is not a new remote or clean-binding pass.
+
+### Historical verified candidate before notice/source follow-up — 2026-11-08
 
 Latest remotely verified code/assets candidate, prior to this documentation update:
 `088d8c84daba0b3449d4196fc167b58c38136455` on
