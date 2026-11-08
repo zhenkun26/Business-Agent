@@ -543,3 +543,40 @@ environment passed all eight checks at 2026-11-08T03:24:02Z: 2137 tests plus
 Receipt: `enterprise-agent/eval/results/offline/cleanup-welcome-png-precommit-20261108-env.json`.
 Dirty candidate binding remains BLOCKED by design; clean-commit verification
 and remote CI are separate evidence.
+
+
+## Seventh reversible asset cleanup — 2026-11-08 UTC
+
+Only `interview/产品介绍网页/screenshots/03-zhangsan-submitted.png` is re-encoded:
+305,411 to 179,710 bytes, saving 125,701 bytes (41.1580%). Standard zlib level 9
+preserves IHDR/pHYs/IEND and all 22,145,730 scanline bytes; only the identified
+17-byte fdEC marker (522493e300) is removed. Specialized fpng fast-decoder
+compatibility is not claimed. No author/license metadata is removed.
+
+Original SHA256: `a0732246a54690d76adae99564f76bf9442ccbc1d0eeeed7f7b99490526dbd5d`.
+Current SHA256: `78c6c288ac051c9ec0139e1b19f2194a3a7d95631a308de849e1925594bd8e1e`.
+ImageIO pixel SHA256: `ecb90419829ad49441bd1d967ef755ce09cda838b3090ed2510f1280acdebfe3`.
+Strict CRC/EOF, identical scanlines, native ImageIO pixels/properties and independent
+RGBA reconstruction passed. Dimensions remain 3200 x 1730, 8-bit RGBA, 192 DPI.
+Originals are recoverable byte-for-byte from `f96ae123ec57a976a3148282d0cd467f200808d0`
+and retained under `eval/results/zhangsan-submitted-png-diagnostic-20261108/`.
+
+Actual Edge InPrivate index AX showed Baseline/Candidate. Direct baseline/candidate
+AX dimensions were 3200 x 1730 and screenshots were clear, normal and visually
+consistent; historical content is unchanged. Actual direct GETs returned 200 at
+03:31:24Z and 03:31:38Z on 2026-11-08, distinct from the 03:30:58Z HTTP probe.
+Screenshot evidence is in the task conversation tool history, not saved files.
+Browser receipt with verified fixture hashes:
+`eval/results/zhangsan-submitted-png-browser-20261108/browser-receipt.json`.
+This is not automatic screenshot pixel diff or cross-browser certification.
+Only this current inventory SHA and its dependent offline binding change.
+All 465 source items remain pending; historical 457-item CSV and prior evidence
+remain unchanged. Unchanged WebP page usage means no page-transfer or production-image
+saving is claimed. Compression does not clear source rights.
+
+The precommit aggregate at 2026-11-08T03:33:27Z passed all eight checks using the
+existing isolated Python environment: 2137 tests plus 640 subtests, Node 80/14,
+seven assets, 81.8543% coverage and stable sources. No dependency was installed.
+Receipt: `enterprise-agent/eval/results/offline/cleanup-submitted-png-precommit-20261108.json`.
+Dirty candidate binding remains BLOCKED by design; exact clean-commit verification
+and remote CI remain separate required evidence.
