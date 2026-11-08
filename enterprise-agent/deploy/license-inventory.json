@@ -2340,7 +2340,7 @@
     "enterprise-agent/eval/run_w9_milvus.py": {
       "category": "evaluation",
       "status": "PENDING_SOURCE_REVIEW",
-      "sha256": "46fe6d36b6eab78bfe142603cf06a2194ecaa80fb78f298315d829c81535133f"
+      "sha256": "e68b7425e19c62ef0e304a9eb99d88c7086b4cecf853b38f944526bb93b41272"
     },
     "enterprise-agent/eval/run_w9_tracing.py": {
       "category": "evaluation",
@@ -4125,7 +4125,7 @@
     "interview/产品介绍网页/启动演讲汇报.bat": {
       "category": "presentation",
       "status": "PENDING_SOURCE_REVIEW",
-      "sha256": "2c858a27fa9baed208fca72c3179b5ef3988abf714cb897ec6712049c0747440"
+      "sha256": "2769efd97bad86ffaeffcfbcd7ce83508647b10faaa1acc86de4d13757f06cf1"
     },
     "interview/产品介绍网页/演讲提示词.md": {
       "category": "presentation",
@@ -4954,6 +4954,16 @@
         "enterprise-agent/tests/test_db_bootstrap.py"
       ],
       "rights": "PENDING_SOURCE_REVIEW; user confirmation is limited to fictional examples, not clearance of other sources; distribution acceptance remains BLOCKED"
+    },
+    {
+      "date": "2026-11-08",
+      "scope": "Current de-identified publication candidate source hashes only; original historical evidence remains private and unchanged. This is not historical CI acceptance.",
+      "added": [],
+      "updated": [
+        "enterprise-agent/eval/run_w9_milvus.py",
+        "interview/产品介绍网页/启动演讲汇报.bat"
+      ],
+      "rights": "PENDING_SOURCE_REVIEW; distribution acceptance remains BLOCKED; no historical source clearance"
     }
   ]
 }
