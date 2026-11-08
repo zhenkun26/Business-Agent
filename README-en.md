@@ -215,7 +215,7 @@ docker compose up -d etcd minio milvus-standalone postgres redis
 docker compose ps
 ```
 
-Wait for readiness. PostgreSQL no longer auto-runs application initialization SQL. Explicitly migrate to schema v8, check status and bootstrap an administrator before starting the application. Use the [database guide](enterprise-agent/deploy/DATABASE_BOOTSTRAP.md); legacy adoption is allowed only on an authorized isolated copy.
+Wait for readiness. PostgreSQL no longer auto-runs application initialization SQL. Explicitly apply the current managed migration manifest through schema v9, check status and bootstrap an administrator before starting the application. Use the [database guide](enterprise-agent/deploy/DATABASE_BOOTSTRAP.md); legacy adoption is allowed only on an authorized isolated copy.
 
 `python -B -m app.core.db_bootstrap plan` is an offline preview. Real PostgreSQL/API/Linux and model acceptance remain BLOCKED; model calls and ingestion require separate authorization.
 
