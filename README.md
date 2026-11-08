@@ -201,7 +201,7 @@ docker compose up -d etcd minio milvus-standalone postgres redis
 docker compose ps
 ```
 
-等待依赖服务就绪。C03 已取消 PostgreSQL 自动执行应用初始化 SQL；空库必须先显式迁移至 schema v8、检查版本并创建管理员，再启动应用。命令与凭证输入方式见[数据库初始化手册](enterprise-agent/deploy/DATABASE_BOOTSTRAP.md)。已有库只允许对获准的隔离副本显式接管，不直接修改当前库。
+等待依赖服务就绪。C03 已取消 PostgreSQL 自动执行应用初始化 SQL；空库必须先按当前托管迁移清单显式迁移至 schema v9、检查版本并创建管理员，再启动应用。命令与凭证输入方式见[数据库初始化手册](enterprise-agent/deploy/DATABASE_BOOTSTRAP.md)。已有库只允许对获准的隔离副本显式接管，不直接修改当前库。
 
 可先运行 `python -B -m app.core.db_bootstrap plan` 做离线预览；真实数据库、API 与 Linux 部署验收仍 BLOCKED。当前生产候选使用[外部模型 profile](enterprise-agent/deploy/MODEL_PROFILE.md)，下文涉及真实模型/入库的步骤需另行授权。
 
