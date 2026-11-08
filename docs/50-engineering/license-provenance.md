@@ -675,3 +675,47 @@ and C17 corpus/metrics/counts remain unchanged. Older hash tables and receipts r
 their stated baselines; they are not auto-refreshed into evidence for this update.
 No original-author, synthetic-data, privacy, redistribution or actual-distribution
 clearance is granted. Real runtime/full RAG/privacy remain BLOCKED, C10 OPEN.
+
+## Backend/C17 provenance follow-up — 2026-11-08
+
+This additive follow-up preserves the [historical received replies](#backend-c17-unknown-source-responses)
+as statements received at that time; it does not rewrite their table. The bounded plan
+is to retain redacted evidence, verify the recovered creation process against exact
+bytes, and record remaining gaps without changing source inputs or admission decisions.
+
+Verified against `2b26f68b3d2bae6bf92e65abb7ec1444144b6e32`: all eleven objects still
+match the full SHA-256 values in the [frozen register](#backend-c17-confirmation-worksheet).
+Targeted original local records now establish E02's exact generation process: a Codex
+assistant-authored Python command at 2026-10-18T03:20:46.026Z constructed the six controls,
+and its matching execution receipt records exit 0. Independent in-memory reconstruction
+from AST literals and the reviewed construction rules, without executing that historical
+script, matches current E02 and its original `cd49d78` blob byte-for-byte:
+`099a01828a6f8f78beac62bcf409f95fafff41f7a7b26f9bc570b9653bd1b929` (4,509 bytes).
+ACL001–ACL003 bind to D03 and ACL004–ACL006 to D02, with matching source hashes.
+The older local review matrix's `a8c4eec` history entry is an integration observation,
+not E02's first creation.
+
+The maintainer's newer confirmation covers **D02, D03 and D06 as fictional from the
+start**, and is not extended to the other materials. This supports the declared data
+origin of E02's two source documents; it does not establish rights to any borrowed
+wording, complete earlier input origins, publication authority or applicable permissions.
+
+E01 was already 22 cases in the parentless `b4cca93` snapshot. At `862d295`, it retained
+all 22 IDs, changed only `expected_keywords` in 15 original rows, and added Q101–Q200.
+The [expansion design](../../openspec/changes/archive/2026-08-05-rag-answer-quality/design.md)
+and [tasks](../../openspec/changes/archive/2026-08-05-rag-answer-quality/tasks.md)
+describe using sample documents and adding HR/IT material; these are contextual records,
+not original-generation or permission receipts. Original creation and upstream-input
+provenance remain unestablished for D01–D09/E01. The smallest remaining locator question
+is which computer/tool holds the pre-August-4 records and the August-5/6 expansion
+conversations, scripts or exports. Unrecoverable origins remain unknown.
+
+Redacted per-file hashes, E01 history, E02 reconstruction and scoped validation are retained
+in a unique ignored local results directory, not as a portable public attestation.
+No raw conversation, personal path or policy/query content is added here. Corpus,
+inventory, rights states, evaluator and metric definitions are unchanged: primary 122
+(115 answer / 5 refusal / 2 clarification), supplemental 6 (2 answer / 4 refusal).
+Source rights remain pending; F2-09 and C10 remain OPEN, and privacy, real runtime and
+full RAG remain BLOCKED. The provenance investigation did not execute historical scripts,
+evaluate models or transmit corpus contents. It does not grant merge or distribution
+acceptance.

@@ -56,3 +56,26 @@ The [retained official OFL](Manrope-OFL.txt) additionally preserves: Copyright 2
 Version 4.504 and its exact historical release/acquisition chain remain unverified. Official Google Fonts metadata identifies Mikhail Sharanda and the same project under OFL; this supports conditional applicability, not an exact-release-verification claim. No specific RFN was found in inspected notices. Preserve both attributions and the provenance limitation.
 
 All groups remain subject to the conditions above and the full controlling license texts. These additions do not clear unknown C17 materials or establish complete repository-wide rights.
+
+## Manrope 4.504 historical OFL corroboration (2026-11-08)
+
+The earlier Manrope assessment above is supplemented, not replaced, by the
+[official Google Fonts 4.504 update](https://github.com/google/fonts/pull/3642/files)
+and its [commit-pinned full OFL](https://raw.githubusercontent.com/google/fonts/d5bee0d9645512aa817f47efdd2d54f415345f3c/ofl/manrope/OFL.txt),
+retained byte-for-byte as [Manrope-4.504-OFL.txt](Manrope-4.504-OFL.txt)
+(4,384 bytes; SHA-256
+`e01b637272e0cbdfb240184dd98ea5cc671556d9894dae2668d92ab2c906787c`).
+The historical notice reads: Copyright 2018 The Manrope Project Authors
+(https://github.com/sharanda/manrope). Preserve it alongside the original embedded
+2019 sharanda notice and the existing 2018 googlefonts notice; neither is replaced.
+
+Only the six Manrope records in [the conditional map](unresolved-source-map.json)
+gain this source/hash/notice binding. It corroborates the historical version OFL,
+not the exact local WOFF2 acquisition/build lineage or binary equivalence.
+The 89 exact-byte matches, 128 conditional records, and all 465 controlled pending
+source-rights records retain their existing states. No blanket rights clearance or
+new full-suite/runtime verification is claimed.
+
+The source repository retains the applicable notices and full OFL texts. A
+standalone font-directory or website export must carry those full texts and
+copyright notices, together with the relevant mapping, in the distributed copy.

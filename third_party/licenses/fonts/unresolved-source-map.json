@@ -7115,7 +7115,18 @@
         "Respect applicable reserved primary font names when modifying.",
         "Actual package notice inclusion requires verification."
       ],
-      "remaining_limits": "Exact Manrope 4.504 release/acquisition chain is unverified; embedded 2019 project attribution and official project author/OFL metadata support applicability, not exact-release provenance."
+      "remaining_limits": "Exact Manrope 4.504 release/acquisition chain is unverified; embedded 2019 project attribution and official project author/OFL metadata support applicability, not exact-release provenance.",
+      "additional_upstream_evidence": {
+        "reviewed_on": "2026-11-08",
+        "embedded_version": "4.504",
+        "upstream_commit": "d5bee0d9645512aa817f47efdd2d54f415345f3c",
+        "license_source": "https://raw.githubusercontent.com/google/fonts/d5bee0d9645512aa817f47efdd2d54f415345f3c/ofl/manrope/OFL.txt",
+        "sha256": "e01b637272e0cbdfb240184dd98ea5cc671556d9894dae2668d92ab2c906787c",
+        "license_text_path": "third_party/licenses/fonts/Manrope-4.504-OFL.txt",
+        "notice_path": "third_party/licenses/fonts/NOTICE.md#manrope-4504-historical-ofl-corroboration-2026-11-08",
+        "version_update_source": "https://github.com/google/fonts/pull/3642/files",
+        "limit": "Historical version 4.504 OFL corroboration only; exact local WOFF2 acquisition/build lineage and binary equivalence are not established. Existing evidence and rights states remain unchanged."
+      }
     },
     {
       "path": "interview/产品介绍网页/fonts/xn7gYHE41ni1AdIRggSxSuXd.woff2",
@@ -7179,7 +7190,18 @@
         "Respect applicable reserved primary font names when modifying.",
         "Actual package notice inclusion requires verification."
       ],
-      "remaining_limits": "Exact Manrope 4.504 release/acquisition chain is unverified; embedded 2019 project attribution and official project author/OFL metadata support applicability, not exact-release provenance."
+      "remaining_limits": "Exact Manrope 4.504 release/acquisition chain is unverified; embedded 2019 project attribution and official project author/OFL metadata support applicability, not exact-release provenance.",
+      "additional_upstream_evidence": {
+        "reviewed_on": "2026-11-08",
+        "embedded_version": "4.504",
+        "upstream_commit": "d5bee0d9645512aa817f47efdd2d54f415345f3c",
+        "license_source": "https://raw.githubusercontent.com/google/fonts/d5bee0d9645512aa817f47efdd2d54f415345f3c/ofl/manrope/OFL.txt",
+        "sha256": "e01b637272e0cbdfb240184dd98ea5cc671556d9894dae2668d92ab2c906787c",
+        "license_text_path": "third_party/licenses/fonts/Manrope-4.504-OFL.txt",
+        "notice_path": "third_party/licenses/fonts/NOTICE.md#manrope-4504-historical-ofl-corroboration-2026-11-08",
+        "version_update_source": "https://github.com/google/fonts/pull/3642/files",
+        "limit": "Historical version 4.504 OFL corroboration only; exact local WOFF2 acquisition/build lineage and binary equivalence are not established. Existing evidence and rights states remain unchanged."
+      }
     },
     {
       "path": "interview/产品介绍网页/fonts/xn7gYHE41ni1AdIRggexSg.woff2",
@@ -7248,7 +7270,18 @@
         "Respect applicable reserved primary font names when modifying.",
         "Actual package notice inclusion requires verification."
       ],
-      "remaining_limits": "Exact Manrope 4.504 release/acquisition chain is unverified; embedded 2019 project attribution and official project author/OFL metadata support applicability, not exact-release provenance."
+      "remaining_limits": "Exact Manrope 4.504 release/acquisition chain is unverified; embedded 2019 project attribution and official project author/OFL metadata support applicability, not exact-release provenance.",
+      "additional_upstream_evidence": {
+        "reviewed_on": "2026-11-08",
+        "embedded_version": "4.504",
+        "upstream_commit": "d5bee0d9645512aa817f47efdd2d54f415345f3c",
+        "license_source": "https://raw.githubusercontent.com/google/fonts/d5bee0d9645512aa817f47efdd2d54f415345f3c/ofl/manrope/OFL.txt",
+        "sha256": "e01b637272e0cbdfb240184dd98ea5cc671556d9894dae2668d92ab2c906787c",
+        "license_text_path": "third_party/licenses/fonts/Manrope-4.504-OFL.txt",
+        "notice_path": "third_party/licenses/fonts/NOTICE.md#manrope-4504-historical-ofl-corroboration-2026-11-08",
+        "version_update_source": "https://github.com/google/fonts/pull/3642/files",
+        "limit": "Historical version 4.504 OFL corroboration only; exact local WOFF2 acquisition/build lineage and binary equivalence are not established. Existing evidence and rights states remain unchanged."
+      }
     },
     {
       "path": "interview/产品介绍网页/fonts/xn7gYHE41ni1AdIRggixSuXd.woff2",
@@ -7310,7 +7343,18 @@
         "Respect applicable reserved primary font names when modifying.",
         "Actual package notice inclusion requires verification."
       ],
-      "remaining_limits": "Exact Manrope 4.504 release/acquisition chain is unverified; embedded 2019 project attribution and official project author/OFL metadata support applicability, not exact-release provenance."
+      "remaining_limits": "Exact Manrope 4.504 release/acquisition chain is unverified; embedded 2019 project attribution and official project author/OFL metadata support applicability, not exact-release provenance.",
+      "additional_upstream_evidence": {
+        "reviewed_on": "2026-11-08",
+        "embedded_version": "4.504",
+        "upstream_commit": "d5bee0d9645512aa817f47efdd2d54f415345f3c",
+        "license_source": "https://raw.githubusercontent.com/google/fonts/d5bee0d9645512aa817f47efdd2d54f415345f3c/ofl/manrope/OFL.txt",
+        "sha256": "e01b637272e0cbdfb240184dd98ea5cc671556d9894dae2668d92ab2c906787c",
+        "license_text_path": "third_party/licenses/fonts/Manrope-4.504-OFL.txt",
+        "notice_path": "third_party/licenses/fonts/NOTICE.md#manrope-4504-historical-ofl-corroboration-2026-11-08",
+        "version_update_source": "https://github.com/google/fonts/pull/3642/files",
+        "limit": "Historical version 4.504 OFL corroboration only; exact local WOFF2 acquisition/build lineage and binary equivalence are not established. Existing evidence and rights states remain unchanged."
+      }
     },
     {
       "path": "interview/产品介绍网页/fonts/xn7gYHE41ni1AdIRggmxSuXd.woff2",
@@ -7379,7 +7423,18 @@
         "Respect applicable reserved primary font names when modifying.",
         "Actual package notice inclusion requires verification."
       ],
-      "remaining_limits": "Exact Manrope 4.504 release/acquisition chain is unverified; embedded 2019 project attribution and official project author/OFL metadata support applicability, not exact-release provenance."
+      "remaining_limits": "Exact Manrope 4.504 release/acquisition chain is unverified; embedded 2019 project attribution and official project author/OFL metadata support applicability, not exact-release provenance.",
+      "additional_upstream_evidence": {
+        "reviewed_on": "2026-11-08",
+        "embedded_version": "4.504",
+        "upstream_commit": "d5bee0d9645512aa817f47efdd2d54f415345f3c",
+        "license_source": "https://raw.githubusercontent.com/google/fonts/d5bee0d9645512aa817f47efdd2d54f415345f3c/ofl/manrope/OFL.txt",
+        "sha256": "e01b637272e0cbdfb240184dd98ea5cc671556d9894dae2668d92ab2c906787c",
+        "license_text_path": "third_party/licenses/fonts/Manrope-4.504-OFL.txt",
+        "notice_path": "third_party/licenses/fonts/NOTICE.md#manrope-4504-historical-ofl-corroboration-2026-11-08",
+        "version_update_source": "https://github.com/google/fonts/pull/3642/files",
+        "limit": "Historical version 4.504 OFL corroboration only; exact local WOFF2 acquisition/build lineage and binary equivalence are not established. Existing evidence and rights states remain unchanged."
+      }
     },
     {
       "path": "interview/产品介绍网页/fonts/xn7gYHE41ni1AdIRggqxSuXd.woff2",
@@ -7443,7 +7498,18 @@
         "Respect applicable reserved primary font names when modifying.",
         "Actual package notice inclusion requires verification."
       ],
-      "remaining_limits": "Exact Manrope 4.504 release/acquisition chain is unverified; embedded 2019 project attribution and official project author/OFL metadata support applicability, not exact-release provenance."
+      "remaining_limits": "Exact Manrope 4.504 release/acquisition chain is unverified; embedded 2019 project attribution and official project author/OFL metadata support applicability, not exact-release provenance.",
+      "additional_upstream_evidence": {
+        "reviewed_on": "2026-11-08",
+        "embedded_version": "4.504",
+        "upstream_commit": "d5bee0d9645512aa817f47efdd2d54f415345f3c",
+        "license_source": "https://raw.githubusercontent.com/google/fonts/d5bee0d9645512aa817f47efdd2d54f415345f3c/ofl/manrope/OFL.txt",
+        "sha256": "e01b637272e0cbdfb240184dd98ea5cc671556d9894dae2668d92ab2c906787c",
+        "license_text_path": "third_party/licenses/fonts/Manrope-4.504-OFL.txt",
+        "notice_path": "third_party/licenses/fonts/NOTICE.md#manrope-4504-historical-ofl-corroboration-2026-11-08",
+        "version_update_source": "https://github.com/google/fonts/pull/3642/files",
+        "limit": "Historical version 4.504 OFL corroboration only; exact local WOFF2 acquisition/build lineage and binary equivalence are not established. Existing evidence and rights states remain unchanged."
+      }
     }
   ],
   "license_interpretation": "OFL permits modified, subset and format-converted versions subject to notice retention, RFN conditions, continued OFL licensing, no standalone font sales and no author endorsement. Exact current-distribution byte identity is not a license condition.",
