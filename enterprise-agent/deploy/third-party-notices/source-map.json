@@ -1,0 +1,100 @@
+{
+  "components": {
+    "langchain-core": {
+      "files": {
+        "LangChain-Core-1.5.3-MIT.txt": {
+          "bytes": 1067,
+          "sha256": "4ec67e4ca6e6721dba849b2ca82261597c86a61ee214bbf21416006b7b2d0478",
+          "source": "https://raw.githubusercontent.com/langchain-ai/langchain/langchain-core==1.5.3/LICENSE"
+        }
+      },
+      "notice_license": "MIT",
+      "version": "1.5.3",
+      "wheel_sha256": [
+        "48b56fa580277209594dd7baf837f5b9a2a3651613f34ff9fb1728b429df015f"
+      ]
+    },
+    "langchain-text-splitters": {
+      "files": {
+        "LangChain-Text-Splitters-1.1.2-MIT.txt": {
+          "bytes": 1067,
+          "sha256": "4ec67e4ca6e6721dba849b2ca82261597c86a61ee214bbf21416006b7b2d0478",
+          "source": "https://raw.githubusercontent.com/langchain-ai/langchain/langchain-text-splitters==1.1.2/LICENSE"
+        }
+      },
+      "notice_license": "MIT",
+      "version": "1.1.2",
+      "wheel_sha256": [
+        "a2de0d799ff31886429fd6e2e0032df275b60ec817c19059a7b46181cc1c2f10"
+      ]
+    },
+    "langsmith": {
+      "files": {
+        "LangSmith-0.10.15-MIT.txt": {
+          "bytes": 1066,
+          "sha256": "34e0b9842c7a31d34e53bc7eb224e81e07a34996106e029bbc72dea2d449f496",
+          "source": "https://raw.githubusercontent.com/langchain-ai/langsmith-sdk/v0.10.15/LICENSE"
+        }
+      },
+      "notice_license": "MIT",
+      "version": "0.10.15",
+      "wheel_sha256": [
+        "7afd7979a9cdf846a88c980e0a31ed518c33631d29e672adbfbb33446f3817cf"
+      ]
+    },
+    "loguru": {
+      "files": {
+        "Loguru-0.7.3-MIT.txt": {
+          "bytes": 1056,
+          "sha256": "b35d026cc7aca9d5859a02eb87ddf7a386a24c986838651bd1f283f94e003327",
+          "source": "https://raw.githubusercontent.com/Delgan/loguru/0.7.3/LICENSE"
+        }
+      },
+      "notice_license": "MIT",
+      "version": "0.7.3",
+      "wheel_sha256": [
+        "31a33c10c8e1e10422bfd431aeb5d351c7cf7fa671e3c4df004162264b28220c"
+      ]
+    },
+    "lxml": {
+      "body_comparison_algorithm": "Decode UTF-8; take text from first '<xsl:transform' through EOF; replace CRLF with LF; remove only trailing LF characters; encode UTF-8. No other whitespace/code normalization.",
+      "files": {
+        "ExtractSchFromRNG-77dcd36.xsl.txt": {
+          "body_comparison": "EXACT_MATCH",
+          "bytes": 4464,
+          "copyright_notice": "Copyright (c) 2002-2010 Rick Jelliffe and Topologi Pty. Ltd.",
+          "normalized_body_bytes": 2842,
+          "normalized_body_sha256": "499a3288be9591c04b830bcfff85e464f68139c6b0a4ede02ff9270c12d82aa6",
+          "sha256": "e219462b395e0b87c8e0e969343fbc3fcac7195d0e0587dd2c7d6db7dca0ea2a",
+          "source": "https://raw.githubusercontent.com/Schematron/schematron/77dcd36c53d12ed786c144ece3b2af7694abdc56/trunk/converters/code/ToSchematron/ExtractSchFromRNG.xsl",
+          "source_commit": "77dcd36c53d12ed786c144ece3b2af7694abdc56",
+          "wheel_member": "lxml/isoschematron/resources/xsl/RNG2Schtrn.xsl",
+          "wheel_member_sha256": "39b79bb01f16b7e777b8803f539354f394e99d0dcfc4f5f7f1374e02aa2c31a7"
+        },
+        "ExtractSchFromXSD-77dcd36.xsl.txt": {
+          "body_comparison": "EXACT_MATCH",
+          "bytes": 5785,
+          "copyright_notice": "Copyright (c) 2002-2010 Rick Jelliffe and Topologi Pty. Ltd.",
+          "normalized_body_bytes": 4128,
+          "normalized_body_sha256": "4f0ff886a520a28c4aaeb06c9d0d6d92be7fdce88216eb9fa39b2a94840223e0",
+          "sha256": "2ba1909929c4bbbca5febd68627f2640ee1afe1b86923e7a15464770141e6d65",
+          "source": "https://raw.githubusercontent.com/Schematron/schematron/77dcd36c53d12ed786c144ece3b2af7694abdc56/trunk/converters/code/ToSchematron/ExtractSchFromXSD.xsl",
+          "source_commit": "77dcd36c53d12ed786c144ece3b2af7694abdc56",
+          "wheel_member": "lxml/isoschematron/resources/xsl/XSD2Schtrn.xsl",
+          "wheel_member_sha256": "430791ac820cfb315c820f7c19703609a59f21b8151345ca11e6127efbfaec0d"
+        }
+      },
+      "notice_license": "MIT",
+      "permission_change_commit": "https://github.com/Schematron/schematron/commit/ecb9f3e19c52e2bf7d2111bdbacdf08e5c7e6dee",
+      "scope": "Only the two named Schematron transform resources; not the whole lxml distribution. Original wheel resources and LICENSES.txt remain unchanged.",
+      "version": "6.1.1",
+      "wheel_sha256": [
+        "1d4962d4c66bf830a7e59ed6cfc17d148149898a3aefa8ec6e59763e6e3ed085",
+        "762ff394d5bd56da0cf034a23dcce4e13923f15321a2adfa2ac00201dc6d3fca"
+      ]
+    }
+  },
+  "distribution_acceptance": "BLOCKED",
+  "schema": 1,
+  "scope": "Scoped supplemental notice retention for exact production versions; not a complete image license audit."
+}
