@@ -1,4 +1,4 @@
-# BusinessAgent · Zhiduoxing
+# Business-Agent · Zhiduoxing
 
 A multi-agent platform for enterprise knowledge and business workflows, bringing retrieval, data analysis, and business operations into a shared natural-language workflow.
 
@@ -6,7 +6,7 @@ A multi-agent platform for enterprise knowledge and business workflows, bringing
 
 [Quick start](#quick-start) · [Architecture](#architecture) · [Documentation](#documentation)
 
-[![CI](https://github.com/zhenkun26/BusinessAgent/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/zhenkun26/BusinessAgent/actions/workflows/ci.yml)
+[![CI](https://github.com/zhenkun26/Business-Agent/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/zhenkun26/Business-Agent/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue)](enterprise-agent/pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
@@ -176,8 +176,8 @@ The selected profile needs no local model downloads. Legacy BGE/Ollama paths are
 ### 2. Get the code and install dependencies
 
 ```bash
-git clone https://github.com/zhenkun26/BusinessAgent.git
-cd BusinessAgent/enterprise-agent
+git clone https://github.com/zhenkun26/Business-Agent.git
+cd Business-Agent/enterprise-agent
 
 python3 -m venv .venv
 source .venv/bin/activate
@@ -300,7 +300,7 @@ See the [ROADMAP](docs/40-process/ROADMAP.md) for detailed progress and outstand
 ## Repository structure
 
 ```text
-BusinessAgent/
+Business-Agent/
 ├── README.md               # Chinese introduction and canonical navigation
 ├── README-en.md            # English translation
 ├── enterprise-agent/
@@ -343,13 +343,18 @@ The detailed project documentation below is primarily in Simplified Chinese.
 
 ## Feedback and contributions
 
-Use [GitHub Issues](https://github.com/zhenkun26/BusinessAgent/issues) to report problems or discuss improvements.
+Use [GitHub Issues](https://github.com/zhenkun26/Business-Agent/issues) to report problems or discuss improvements.
 Include reproduction steps, expected behavior, actual behavior, and sanitized environment details.
 
 Before contributing, read [AGENTS.md](AGENTS.md) and the
 [project change workflow](openspec/specs/openspec-normalization/spec.md),
 and run the checks relevant to your changes.
 
+## Origin and collaborator
+
+This independent repository was migrated from [BusinessAgent](https://github.com/zhenkun26/BusinessAgent). Collaborator [kingoftaro](https://github.com/kingoftaro) developed the original [hello-xiao-a](https://github.com/kingoftaro/hello-xiao-a) project; [zhenkun26](https://github.com/zhenkun26) is responsible for subsequent BusinessAgent development and maintenance. Thank you to kingoftaro for the original project.
+All 145 historical commits and 11 branches are retained. Five historical tags are not pushed yet to avoid triggering legacy publication workflows. At the maintainer's request, only two previously deleted photos were removed from the new repository's history, changing the affected commit hashes. The source repository is unchanged. See the [migration record and commit mapping](docs/40-process/business-agent-migration.md).
+
 ## License
 
-[MIT](LICENSE)
+The project remains under the [MIT License](LICENSE), allowing publication, modification, redistribution and commercial use while retaining the copyright and permission notices. Third-party components, fonts and other bundled materials remain subject to their respective licenses; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Contributor permission is recorded in the [source assessment](docs/50-engineering/license-provenance.md#phase-one-source-assessment--2026-11-08).

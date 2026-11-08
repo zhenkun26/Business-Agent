@@ -1,4 +1,4 @@
-# BusinessAgent · 智多星
+# Business-Agent · 智多星
 
 面向企业知识与业务流程的多智能体平台，将知识检索、数据分析和业务操作接入统一的自然语言工作流。
 
@@ -6,7 +6,7 @@
 
 [快速开始](#快速开始) · [系统架构](#系统架构) · [文档](#文档)
 
-[![CI](https://github.com/zhenkun26/BusinessAgent/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/zhenkun26/BusinessAgent/actions/workflows/ci.yml)
+[![CI](https://github.com/zhenkun26/Business-Agent/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/zhenkun26/Business-Agent/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue)](enterprise-agent/pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
@@ -16,7 +16,7 @@
 真实环境试点、生产使用**，不宣称已有企业落地或正式 UAT。
 [开源快速开始与验证状态](docs/30-guides/open-source-quickstart.md)说明专用演示入口、
 原生 libpq 前置、私密测试凭证与保留数据的停止方法。当前 Mac 检查使用二进制驱动适配器，
-真实浏览器检查通过；[已验证代码的CI](https://github.com/zhenkun26/BusinessAgent/actions/runs/42376168479)五项作业通过，包含 Ubuntu runner 的原生 libpq、15项演示检查及候选绑定。
+真实浏览器检查通过；[原仓库的历史CI证据](https://github.com/zhenkun26/BusinessAgent/actions/runs/42376168479)五项作业通过，包含 Ubuntu runner 的原生 libpq、15项演示检查及候选绑定。
 这不等于所有裸机/操作系统可复现，也不解除未知来源或完整企业/RAG验收限制。
 当前会话历史可查看，刷新会回登录，重登后没有恢复旧会话的可见入口。
 来源清单共465项：[候选绑定评估](docs/50-engineering/license-provenance.md#phase-one-source-assessment--2026-11-08)分为229项上游证据支持、232项共同项目贡献（维护者转述共同贡献者同意MIT许可）及4项仓库声明MIT的随附研究文档。历史PENDING清单不改，不代表465项现时阻塞。此结论仅针对源码第一阶段，不是独立原创证明、版权转让或第三方全面清权。后续二进制发行和三个企业阶段仍需分别审查；最终文档审核和候选验证完成前不宣称可合并。
@@ -163,8 +163,8 @@ flowchart TD
 ### 2. 获取代码并安装依赖
 
 ```bash
-git clone https://github.com/zhenkun26/BusinessAgent.git
-cd BusinessAgent/enterprise-agent
+git clone https://github.com/zhenkun26/Business-Agent.git
+cd Business-Agent/enterprise-agent
 
 python3 -m venv .venv
 source .venv/bin/activate
@@ -279,7 +279,7 @@ python3 -I -B enterprise-agent/scripts/final_candidate.py --execute --record can
 ## 项目结构
 
 ```text
-BusinessAgent/
+Business-Agent/
 ├── README.md               # Chinese introduction and canonical navigation
 ├── README-en.md            # English translation
 ├── enterprise-agent/
@@ -320,7 +320,7 @@ BusinessAgent/
 
 ## 反馈与贡献
 
-欢迎通过 [GitHub Issues](https://github.com/zhenkun26/BusinessAgent/issues)
+欢迎通过 [GitHub Issues](https://github.com/zhenkun26/Business-Agent/issues)
 提交问题或讨论改进方向。
 
 报告问题时，请提供复现步骤、预期行为、实际行为和已脱敏的环境信息。
@@ -329,6 +329,11 @@ BusinessAgent/
 [项目变更规范](openspec/specs/openspec-normalization/spec.md)，
 并运行与修改范围相关的检查。
 
+## 来源与合作者
+
+本项目从 [BusinessAgent](https://github.com/zhenkun26/BusinessAgent) 独立迁移。[hello-xiao-a](https://github.com/kingoftaro/hello-xiao-a) 初版由合作者 [kingoftaro](https://github.com/kingoftaro) 完成，BusinessAgent 后续开发与维护由 [zhenkun26](https://github.com/zhenkun26) 负责。感谢 kingoftaro 对初始项目的贡献。
+迁移保留全部145个历史提交和11个分支；5个历史标签暂不推送，避免触发旧版发布流程。依维护者要求，仅从新仓库历史中移除两张已删除照片，相关 SHA 因此改变。旧仓库未作修改。详见[迁移记录与提交映射](docs/40-process/business-agent-migration.md)。
+
 ## 许可证
 
-[MIT](LICENSE)
+继续采用 [MIT](LICENSE) 许可，允许公开发布、修改、再分发和商业使用；须保留版权声明与许可文本。第三方组件、字体与其他随附材料仍适用其各自许可，见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。共同贡献者的许可说明见[来源评估](docs/50-engineering/license-provenance.md#phase-one-source-assessment--2026-11-08)。
