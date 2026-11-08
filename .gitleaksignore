@@ -2,19 +2,19 @@
 # Each value was recomputed from its referenced Git blob at this exact commit.
 # Scope: commit + manifest path + rule + line only; future findings still fail.
 # Evidence: docs/40-process/ci-pytest-repair.md (remote CI follow-up).
-dabb32d55a4bd99dd4d7ef580facfcb0313d3102:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:20
-dabb32d55a4bd99dd4d7ef580facfcb0313d3102:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:43
-dabb32d55a4bd99dd4d7ef580facfcb0313d3102:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:65
-dabb32d55a4bd99dd4d7ef580facfcb0313d3102:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:86
-dabb32d55a4bd99dd4d7ef580facfcb0313d3102:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:90
-dabb32d55a4bd99dd4d7ef580facfcb0313d3102:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:136
-dabb32d55a4bd99dd4d7ef580facfcb0313d3102:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:140
-dabb32d55a4bd99dd4d7ef580facfcb0313d3102:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:146
-dabb32d55a4bd99dd4d7ef580facfcb0313d3102:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:177
-dabb32d55a4bd99dd4d7ef580facfcb0313d3102:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:236
-dabb32d55a4bd99dd4d7ef580facfcb0313d3102:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:237
-dabb32d55a4bd99dd4d7ef580facfcb0313d3102:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:245
-dabb32d55a4bd99dd4d7ef580facfcb0313d3102:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:246
-dabb32d55a4bd99dd4d7ef580facfcb0313d3102:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:252
-dabb32d55a4bd99dd4d7ef580facfcb0313d3102:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:282
-dabb32d55a4bd99dd4d7ef580facfcb0313d3102:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:285
+5bb08f91076614a69b6ae207b1295b413a3c55a0:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:20
+5bb08f91076614a69b6ae207b1295b413a3c55a0:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:43
+5bb08f91076614a69b6ae207b1295b413a3c55a0:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:65
+5bb08f91076614a69b6ae207b1295b413a3c55a0:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:86
+5bb08f91076614a69b6ae207b1295b413a3c55a0:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:90
+5bb08f91076614a69b6ae207b1295b413a3c55a0:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:136
+5bb08f91076614a69b6ae207b1295b413a3c55a0:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:140
+5bb08f91076614a69b6ae207b1295b413a3c55a0:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:146
+5bb08f91076614a69b6ae207b1295b413a3c55a0:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:177
+5bb08f91076614a69b6ae207b1295b413a3c55a0:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:236
+5bb08f91076614a69b6ae207b1295b413a3c55a0:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:237
+5bb08f91076614a69b6ae207b1295b413a3c55a0:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:245
+5bb08f91076614a69b6ae207b1295b413a3c55a0:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:246
+5bb08f91076614a69b6ae207b1295b413a3c55a0:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:252
+5bb08f91076614a69b6ae207b1295b413a3c55a0:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:282
+5bb08f91076614a69b6ae207b1295b413a3c55a0:enterprise-agent/scripts/final_candidate_sources.json:generic-api-key:285
