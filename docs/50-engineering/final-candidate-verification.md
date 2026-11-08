@@ -689,3 +689,81 @@ Authored-file whitespace checks exclude only those two exact upstream files.
 All 465 source records stay pending, with F2-09/C10 and applicable runtime/privacy/UAT
 limits preserved. No merge, registry publication, deployment or source removal is granted
 by these evidence and notice changes.
+
+
+## Bounded Gitleaks archive download retry (2026-11-08 UTC)
+
+### Plan recorded before implementation
+
+Baseline: `0707b0d1e0b45559cd44a8dde3129b6d821fa17d`, PR #8.
+[CI 107](https://github.com/zhenkun26/BusinessAgent/actions/runs/42469818111)
+attempts 1 and 2 failed while downloading the fixed official Gitleaks 8.24.3
+Linux archive with HTTP 504. This is an upstream download failure, not a secret
+finding or a failed Python assertion; later security/image checks did not run.
+
+Add curl's finite transient-error retries with connection/per-attempt timeouts,
+a retry-start budget and a hard step timeout. Preserve the exact official URL,
+version, SHA-256, HTTPS/TLS flags, file output and checksum-before-extraction order.
+No mirror, scanner bypass, broad error suppression, dependency installation or
+application behavior change. Extend the existing workflow regression test with
+bounded retry/pinning and fail-closed installation checks. Refresh only the two
+changed existing workflow/test bindings in the current offline source manifest;
+leave all historical manifests and evidence unchanged. Record focused outcomes
+below; final full-suite, exact-commit and new remote CI evidence remain separate.
+
+### Focused implementation evidence
+
+The download now uses `--retry 4 --retry-delay 5 --retry-max-time 120` with
+`--connect-timeout 10 --max-time 30`, plus a three-minute runner step timeout.
+This allows at most five attempts. The 120-second retry budget limits retry
+starts, not the duration of a final in-flight attempt; it is not described as
+a hard wall-clock cap. The installed curl 8.7.1 official manual confirms that
+default retry handling includes HTTP 504 and timeouts. No `--retry-all-errors`,
+insecure flag, alternate URL, checksum waiver or continue-on-error is added.
+
+Eight workflow regression cases PASS (five new and three existing). The actual
+workflow bash block runs with offline shell-command doubles: download exit codes
+22/28/6/60 stop before validation/extraction; checksum failure stops before tar;
+tar failure stops before PATH publication; success validates the exact fixed
+checksum input before extraction and PATH publication. Exact curl options and
+step timeout are locked. These tests verify shell control flow and configured
+bounds, not curl internals, real HTTPS transport or upstream availability. No
+network transfer, temporary fixture deletion or new dependency is used.
+
+Workflow YAML parsing, installation bash syntax, authored whitespace and all
+388 current source bindings PASS. Only the existing workflow and regression-test
+SHA-256 fields are refreshed; source membership and historical manifests remain
+unchanged. The unchanged full offline suite, clean-commit binding and new remote
+CI are separate subsequent checks. Existing runtime/privacy/UAT/source-rights
+limits remain; this repair does not clear skipped security or image gates.
+
+### First full precommit result and binding correction plan
+
+The initial full run, `gitleaks-retry-precommit-20261108-r1`, remains FAIL
+(exit 1): Python and provenance failed while the other six checks passed.
+Python reported 2169 passed, 640 subtests passed, one failed and zero guard
+denials. Its sole failure was `test_license_inventory.py::test_repository_inventory`,
+raising `dependency declaration drift`. The current offline source bindings
+were stable, but the separate license inventory still held the earlier workflow
+SHA-256 in `declarations[".github/workflows/ci.yml"]`. The declaration items and
+all source-file hashes matched; this was a missed secondary binding, not a
+dependency, rights-state or application change.
+
+Before correcting it: refresh only that existing declaration SHA-256 and then
+the current offline manifest binding for `deploy/license-inventory.json`. Preserve
+all items, counts, rights states, gates, historical manifests and the failed r1
+receipt. Recheck the exact failed test, provenance verification, workflow cases
+and 388 current bindings; a new full r2 run remains separate evidence.
+
+After the scoped binding correction, provenance integrity, the exact previously
+failed repository-inventory test, all eight workflow regression cases, 388 current
+source bindings and whitespace checks PASS. The declaration count remains 32,
+source rights remain pending for all 465 records, and production/browser package
+counts remain 98/3. The failed r1 aggregate and child evidence remain unchanged.
+These focused results do not replace the required new full run.
+
+Full precommit rerun `gitleaks-retry-precommit-20261108-r2` passed all eight checks:
+2170 Python tests plus 640 subtests, Node 80/14, eight frontend assets and
+81.8543% coverage, with stable sources. Dirty candidate binding remains BLOCKED
+(exit 2); the retained r1 failure is not overwritten. Exact clean-commit checks
+and new remote CI are still required before merge.
