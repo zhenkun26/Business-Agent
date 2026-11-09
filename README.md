@@ -331,7 +331,7 @@ Business-Agent/
 
 ## 来源与合作者
 
-本项目从 [BusinessAgent](https://github.com/zhenkun26/BusinessAgent) 独立迁移。[hello-xiao-a](https://github.com/kingoftaro/hello-xiao-a) 初版由合作者 [kingoftaro](https://github.com/kingoftaro) 完成，BusinessAgent 后续开发与维护由 [zhenkun26](https://github.com/zhenkun26) 负责。感谢 kingoftaro 对初始项目的贡献。
+本项目从 BusinessAgent（[迁移说明](docs/40-process/business-agent-migration.md)）独立迁移。[hello-xiao-a](https://github.com/kingoftaro/hello-xiao-a) 初版由合作者 [kingoftaro](https://github.com/kingoftaro) 完成，BusinessAgent 后续开发与维护由 [zhenkun26](https://github.com/zhenkun26) 负责。感谢 kingoftaro 对初始项目的贡献。
 迁移保留全部145个历史提交和11个分支；5个历史标签暂不推送，避免触发旧版发布流程。依维护者要求，仅从新仓库历史中移除两张已删除照片，相关 SHA 因此改变。旧仓库未作修改。详见[迁移记录与提交映射](docs/40-process/business-agent-migration.md)。
 
 ## 许可证
