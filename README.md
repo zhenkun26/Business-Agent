@@ -1,118 +1,114 @@
-# Business-Agent · 智多星
+# Business-Agent · Zhiduoxing
 
-面向企业知识与业务流程的多智能体平台，将知识检索、数据分析和业务操作接入统一的自然语言工作流。
+A multi-agent platform for enterprise knowledge and business workflows, bringing retrieval, data analysis, and business operations into a shared natural-language workflow.
 
-**简体中文** | [English](README-en.md)
+**English** | [简体中文](README-zh.md)
 
-[快速开始](#快速开始) · [系统架构](#系统架构) · [文档](#文档)
+[Quick start](#quick-start) · [Architecture](#architecture) · [Documentation](#documentation)
 
 [![CI](https://github.com/zhenkun26/Business-Agent/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/zhenkun26/Business-Agent/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue)](enterprise-agent/pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-## 开源第一阶段：当前边界
+> Engineering portfolio and synthetic demonstrations. These do not establish real-customer, production-environment or full acceptance. See [current status and limitations](#current-status-and-limitations).
 
-本轮目标是隔离启动、合成示例和清楚的许可证/来源说明，后续依次是**企业试点评估、
-真实环境试点、生产使用**，不宣称已有企业落地或正式 UAT。
-[开源快速开始与验证状态](docs/30-guides/open-source-quickstart.md)说明专用演示入口、
-原生 libpq 前置、私密测试凭证与保留数据的停止方法。
-2026-11-09 的[新 CI 验证](https://github.com/zhenkun26/Business-Agent/actions/runs/42591561481)
-为 `workflow_dispatch` attempt 1，精确提交 `15cd84f942ccc0ce49afcfc1513efe4c2f07f441`，五项作业通过：
-Python 3.11/3.13 各 2170 tests + 640 subtests、八项离线检查、扫描/依赖检查、
-C10 隔离持久化切片、Ubuntu 原生 libpq 的 15 项合成 HTTP 检查及镜像/安装清单/Trivy。
-`publish=false`，GHCR 登录与推送跳过；不代表浏览器重验、完整 C10/RAG、正式 UAT 或发布验收。
-扫描范围与策略限制见快速开始；本次后续文档修改不属于该 CI 执行的提交。
-[2026-11-07 的 Mac/浏览器观察](docs/50-engineering/final-candidate-verification.md#stage-one-technical-candidate-progress--2026-11-07)
-仅为历史证据，Mac 使用二进制驱动适配器；当时当前会话历史可查看，刷新会回登录，重登后无恢复旧会话的可见入口。
-这些结果不证明所有裸机/操作系统可复现，也不解除来源权利或完整企业验收限制。
-来源清单共465项：[候选绑定评估](docs/50-engineering/license-provenance.md#phase-one-source-assessment--2026-11-08)分为229项上游证据支持、232项共同项目贡献（维护者转述共同贡献者同意MIT许可）及4项仓库声明MIT的随附研究文档。历史PENDING清单不改，不代表465项现时阻塞。此结论仅针对源码第一阶段，不是独立原创证明、版权转让或第三方全面清权。后续二进制发行和三个企业阶段仍需分别审查；最终文档审核和候选验证完成前不宣称可合并。
+<a id="项目介绍"></a>
 
-## 审批安全边界
+## Overview
 
-批准和原子批量决策都不执行动作，须由原发起人明确确认；每次派发重新校验已提交的精确审批计划、当前权限和 UTC 截止时间。混合查询与审批动作计划拒绝执行：先独立查询，再审批纯动作计划。结果不明及迟到回执不能自动解除人工暂停。
-授权证据接口只读，返回安全的逐操作摘要，不提供解除暂停接口。详见[当前审批说明](docs/50-engineering/approval-utc-human-hold.md)与[整合变更](openspec/changes/integrate-local-delivery-security/proposal.md)。托管 schema v9 保留 C10 v8；main 独立 009 仅属历史材料，不是托管安装命令。整合不解除真实运行、C10、隐私和权利验收阻塞。
+A business request can involve checking a policy, retrieving data, and performing an operation.
+BusinessAgent uses a Planner to break requests into subtasks, delegates them to specialized agents, and combines their results.
 
-## 项目介绍
+The project covers the path from a natural-language request to business execution:
 
-企业中的一次业务请求，往往同时涉及查制度、取数据和执行操作。
-BusinessAgent 通过 Planner 拆解请求，由不同 Agent 处理子任务，再汇总结果。
+- For questions, retrieve knowledge accessible to the user and provide source information.
+- For analysis, read a snapshot from the CRM provider and calculate and render a deterministic report in Python.
+- For business operations, check tool permissions and apply human approval where required.
+- Approved actions stop on failure or unknown effects and retain evidence for human review; they do not automatically compensate.
 
-项目关注从自然语言请求到业务执行的完整过程：
+The repository includes a backend service, Web interface, evaluation scripts, and deployment configuration.
+It is intended for exploring multi-agent orchestration, enterprise RAG, and controlled tool execution.
 
-- 回答问题时，检索用户有权访问的知识，并提供来源信息。
-- 分析数据时，按 CRM provider 读取快照，由 Python 计算并生成确定性报告。
-- 执行业务操作时，校验工具权限，并按操作规则进入人工审批。
-- 审批动作失败或结果不明时停止执行，保留证据供人工核对，不自动补偿。
+This project is a backend employment portfolio for future GitHub open-source presentation,
+with no current plans for customer deployment or commercial operation. Development and
+delivery follow real-project processes; implementation, offline checks and runtime acceptance
+are reported separately, without claiming enterprise adoption. A targeted
+[twelve-perspective review](docs/40-process/multi-expert-review-c57d473.md) of a frozen candidate
+is complete (single-agent role simulation); recorded findings and acceptance gaps do not
+constitute independent certification or runtime approval.
 
-仓库包含后端服务、Web 交互界面、评测脚本和部署配置，适合研究多智能体编排、企业 RAG 与受控工具执行。
+<a id="可以做什么"></a>
 
-本项目用于后续 GitHub 开源展示与后端求职，目前没有实际客户部署或商业运营计划。开发与交付仍按真实项目流程推进；已实现能力、离线验证、真实运行验收分别记录，不宣称已有企业落地。已完成针对固定候选的[十二视角审核](docs/40-process/multi-expert-review-c57d473.md)（单代理角色模拟）；发现项与验收缺口公开记录，不代表独立认证或运行放行。
+## Use cases
 
-## 可以做什么
+These examples require the relevant knowledge documents, user roles, and model configuration.
+The shipped sample documents and interface are primarily in Chinese; the requests below describe the same scenarios in English.
 
-以下示例需要对应知识文档、用户角色及模型配置。
-
-| 场景 | 示例请求 | 处理方式 |
+| Scenario | Example request | Workflow |
 | --- | --- | --- |
-| 企业知识问答 | “公司的差旅报销有哪些规定？” | 检索知识库，组织回答并返回来源 |
-| 业务数据分析 | “统计各客户的订单总额并进行排名。” | 按授权读取 CRM 快照，由 Python 聚合并生成确定性报告 |
-| 业务记录查询 | “查询客户 C001 的信息。” | 校验角色权限后调用业务工具 |
-| 流程操作 | “为客户 C001 创建一个售后工单。” | 提取参数，执行权限检查并调用工单工具 |
-| 审批协作 | “给外部客户发送一封跟进邮件。” | 根据操作规则创建审批请求，由有权限的人员处理 |
-| 组合任务 | “查询客户信息，同时说明公司的售后政策。” | 将请求拆分为不同 Agent 的子任务并汇总结果 |
+| Enterprise knowledge Q&A | “What are the company's travel reimbursement rules?” | Retrieve knowledge, compose an answer, and return sources |
+| Business data analysis | “Rank customers by their total order value.” | Read an authorized CRM snapshot, aggregate in Python, and render a deterministic report |
+| Business record lookup | “Look up customer C001.” | Check role permissions before calling a business tool |
+| Business operations | “Create a support ticket for customer C001.” | Extract parameters, check permissions, and call the ticket tool |
+| Approval collaboration | “Send a follow-up email to an external customer.” | Create an approval request according to operation rules for an authorized reviewer |
+| Combined requests | “Look up the customer and explain the company's after-sales policy.” | Dispatch subtasks to different agents and aggregate the results |
 
-> 默认业务工具使用 Mock provider，分析复用同一 CRM provider；Mock 使用内置样例，HTTP 使用受控快照接口。
-> 示例用于体验工作流；连接真实业务系统需要配置适配器并完成联调。
+> Business tools default to Mock. Analysis uses the same CRM provider: built-in samples for Mock, controlled snapshot endpoints for HTTP.
+> These examples demonstrate workflows. Connecting real business systems requires adapter configuration and integration testing.
 
-### 先试一个离线示例
+### Try an offline example
 
-想知道销售能看哪些制度，可以先查看内置样例。克隆或解压仓库后，从仓库根目录运行以下命令。只需 Python 3.11 或更高版本，无需安装项目依赖、启动 Docker 或配置模型密钥。
+Which policies can a salesperson read? The bundled example lets you inspect that decision with Python 3.11 or later. After cloning or unpacking the repository, run these commands from its root. You do not need project dependencies, Docker, or a model API key.
 
 ```bash
 cd enterprise-agent
 python3 -m eval.run_uat_replay
 ```
 
-Windows 安装了 Python 启动器时，可将 `python3` 换成 `py -3`。在当前目录打开 `eval/results/uat_replay_report.md`，找到 `scenario-UAT-K02`。这一项检查样例中的销售人员可以读取销售报价指南，同时无法读取财务部的退款制度。[场景数据](enterprise-agent/eval/uat_simulation/fixture.json)
+On Windows, use `py -3` in place of `python3` if you have the Python launcher. Open `eval/results/uat_replay_report.md` from the current directory and find `scenario-UAT-K02`. This check verifies that the sample salesperson can read the sales quotation guide while the finance department's refund policy is restricted. [Scenario data](enterprise-agent/eval/uat_simulation/fixture.json)
 
-当前样例预期显示 `passed`，16 项检查覆盖 12 个合成场景。回放仅核对预设数据与规则。浏览器合成演示与限制见[开源快速开始](docs/30-guides/open-source-quickstart.md)，不支持任意问答或真实 RAG。
+The bundled fixture should report `passed` for 16 checks across 12 synthetic scenarios. The replay only checks preset data against its rules. To ask your own question in the Web UI, follow the [quick start](#quick-start) to launch the full application.
 
-## 核心能力
+<a id="核心能力"></a>
 
-### 多智能体编排
+## Core capabilities
 
-- 使用 LangGraph 组织 Planner → Agent Executor → Aggregator 工作流。
-- 通过 Send API 并行分发子任务。
-- 由 Knowledge、Analysis、Execution 三类 Agent 承担不同职责。
-- 对需要补充检索的结果进行有限重规划，最多追加 2 轮。
+### Multi-agent orchestration
 
-### 知识检索与回答
+- A Planner → Agent Executor → Aggregator workflow built with LangGraph.
+- Parallel subtask dispatch through the Send API.
+- Knowledge, Analysis, and Execution agents with distinct responsibilities.
+- Bounded replanning for results that require additional retrieval, with at most 2 extra rounds.
 
-- 支持 Markdown、PDF、DOCX 和 TXT 文档加载。
-- 使用 Milvus 向量召回与 Reranker 重排。
-- 随附 `.env.example` 选择百炼北京 `text-embedding-v4`（1024 维）与 `qwen3-rerank`；本地 BGE 仅保留为开发选项。
-- 在检索路径中应用角色与部门命名空间过滤。
-- 提供来源信息、置信度决策和检索异常降级路径。
+### Knowledge retrieval and answers
 
-### 受控业务执行
+- Document loading for Markdown, PDF, DOCX, and TXT.
+- Milvus vector retrieval followed by reranking.
+- The supplied `.env.example` selects Beijing Bailian `text-embedding-v4` (1024 dimensions) and `qwen3-rerank`; local BGE remains a development option.
+- Role and department namespace filtering in the retrieval path.
+- Source information, confidence-based decisions, and fallback paths for retrieval failures.
 
-- 提供客户、订单、CRM 任务、工单、邮件与审批查询工具。
-- 通过 RBAC 限定不同角色的工具访问权限。
-- 对需要审批的操作接入人工审批流程。
-- 审批多步骤执行保留逐操作回执并交由人工核对；历史 Saga 恢复属于独立范围。
-- 提供外部 HTTP 适配层，以及超时、重试和审计机制。
+### Controlled business execution
 
-### 状态管理与可观测性
+- Tools for customers, orders, CRM tasks, tickets, email, and approval queries.
+- RBAC to restrict tool access by role.
+- Human approval for operations that require review.
+- Retained operation receipts and human review for approved multistep actions; historical Saga recovery is a separate scope.
+- An external HTTP adapter layer with timeouts, retries, and audit records.
 
-- 通过 Checkpointer 保存会话状态，支持状态恢复。
-- 显式选择 Redis 或 PostgreSQL checkpoint；故障时拒绝运行，内存仅限开发显式启用。
-- 支持 SSE 输出执行进度与回答文本。
-- 提供审计日志、Token 用量采集、Prometheus 指标和 OpenTelemetry 链路追踪。
-- 提供 Prompt 版本管理、知识候选审核与用户管理接口。
+### State management and observability
 
-## 系统架构
+- Checkpoints to save conversation state and support recovery.
+- Explicit Redis or PostgreSQL checkpoints that fail closed on outages; memory requires an explicit development choice.
+- SSE events for execution progress and response text.
+- Audit logs, token usage collection, Prometheus metrics, and OpenTelemetry tracing.
+- APIs for prompt versioning, knowledge candidate review, and user administration.
 
-以下为主工作流的简化结构：
+<a id="系统架构"></a>
+
+## Architecture
+
+The following diagram simplifies the main workflow:
 
 ```mermaid
 flowchart TD
@@ -137,36 +133,50 @@ flowchart TD
     G --> O[Answer · Sources · Execution Status]
 ```
 
-| 层次 | 主要技术 |
+| Layer | Main technologies |
 | --- | --- |
-| API 与交互 | FastAPI、Web UI、SSE |
-| Agent 编排 | LangGraph、LangChain |
-| 模型接入 | DeepSeek Flash 默认、Pro 复杂任务；Ollama 仅开发选项 |
-| 检索与重排 | Milvus、百炼北京 text-embedding-v4、qwen3-rerank |
-| 业务数据与状态 | PostgreSQL、Redis Stack |
-| 安全与流程 | JWT、RBAC、人工审批、Saga |
-| 可观测性 | OpenTelemetry、Prometheus、审计日志 |
-| 部署与检查 | Docker Compose、Kubernetes 清单、GitHub Actions |
+| API and interaction | FastAPI, Web UI, SSE |
+| Agent orchestration | LangGraph, LangChain |
+| Model access | DeepSeek Flash by default, Pro for complex tasks; Ollama for development only |
+| Retrieval and reranking | Milvus, Beijing Bailian text-embedding-v4, qwen3-rerank |
+| Business data and state | PostgreSQL, Redis Stack |
+| Security and workflows | JWT, RBAC, human approval, Saga |
+| Observability | OpenTelemetry, Prometheus, audit logs |
+| Deployment and checks | Docker Compose, Kubernetes manifests, GitHub Actions |
 
-## 快速开始
+<a id="审批安全边界"></a>
 
-优先查看[隔离合成演示](docs/30-guides/open-source-quickstart.md)。以下为完整产品的高级开发配置，**不是已验收的新用户快捷启动路径**。
+## Approval safety boundary
 
-以下以 macOS / Linux 的本地开发环境为例：
-基础设施通过 Docker Compose 启动，API 与 Worker 在本机运行。
-工程交付目标是隔离 Linux 单机 Compose；以下为待验收操作步骤，需准备独立数据、账户与 API 预算，不能直接作用于当前业务环境。
+Approval and atomic batch decisions do not execute actions. The original requester must
+confirm explicitly; each dispatch rechecks the committed plan, current permissions and UTC
+deadline. Mixed query/action approval plans fail closed: query first, then approve an
+action-only plan. Unknown effects and late receipts cannot automatically release human holds.
+Authorized evidence retrieval is read-only, with safe per-operation summaries and no release
+endpoint. See [current approval guidance](docs/50-engineering/approval-utc-human-hold.md)
+and the [integration change](openspec/changes/integrate-local-delivery-security/proposal.md).
+Managed schema v9 preserves C10 v8; standalone main 009 is historical, not a managed
+installation command. Runtime/C10/privacy/rights acceptance is not cleared by integration.
 
-### 1. 准备环境
+<a id="快速开始"></a>
+
+## Quick start
+
+These steps target local development on macOS / Linux.
+Infrastructure runs through Docker Compose; the API and Worker run on the host.
+The engineering target is isolated single-host Linux Compose. These procedures await runtime acceptance and require separate data, accounts and an API budget; do not apply them to current business environments.
+
+### 1. Prerequisites
 
 - Python 3.11+
 - Git
-- Docker 与 Docker Compose
-- 百炼北京 embedding/reranker 与 DeepSeek 的独立凭证、访问权限及预算
-- 模型/数据/角色配置见[模型 profile](enterprise-agent/deploy/MODEL_PROFILE.md)；别名需在真实验收时再次核对
+- Docker and Docker Compose
+- Separate credentials, access and budget for Beijing Bailian embedding/reranking and DeepSeek
+- Model/data/role settings from the [model profile](enterprise-agent/deploy/MODEL_PROFILE.md); verify provider aliases again during real acceptance
 
-所选 profile 不需下载本地模型；旧 BGE/Ollama 路径不属于首轮生产候选。
+The selected profile needs no local model downloads. Legacy BGE/Ollama paths are outside the first production candidate.
 
-### 2. 获取代码并安装依赖
+### 2. Get the code and install dependencies
 
 ```bash
 git clone https://github.com/zhenkun26/Business-Agent.git
@@ -178,82 +188,88 @@ source .venv/bin/activate
 python -m pip install -r deploy/requirements-prod.txt
 ```
 
-### 3. 配置环境变量
+### 3. Configure environment variables
 
 ```bash
 cp .env.example .env
 ```
 
-编辑 `.env`，重点检查以下配置：
+Edit `.env` and review these settings:
 
-| 配置项 | 用途 |
+| Setting | Purpose |
 | --- | --- |
-| `MODEL_PROFILE` | 当前候选保持 `bailian-deepseek-v1` |
-| `OPENAI_API_KEY`、`OPENAI_BASE_URL`、`PRIMARY_LLM_MODEL`、`LITE_LLM_MODEL` | DeepSeek 凭证与 profile 规定的模型名称 |
-| `EMBEDDING_API_KEY`、`RERANKER_API_KEY` | 独立百炼北京凭证；端点、维度和集合必须配套 |
-| `POSTGRES_*`、`REDIS_*`、`MILVUS_*` | 对应隔离基础设施 |
-| `JWT_SECRET_KEY`、`AUTH_REQUIRE_PASSWORD`、`AUTH_CHECK_DB` | 随机密钥，启用口令与数据库身份检查 |
-| `TOOL_PROVIDER`、`CRM_TOOL_PROVIDER` | 首次合成数据体验使用 Mock；HTTP 参考服务需另行显式配置 |
-| `MODEL_STARTUP_PROBES_ENABLED` | 初始为 false；生产启动须先明确授权付费探针 |
+| `MODEL_PROFILE` | Keep `bailian-deepseek-v1` for the selected candidate |
+| `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `PRIMARY_LLM_MODEL`, `LITE_LLM_MODEL` | DeepSeek credentials and profile-defined model names |
+| `EMBEDDING_API_KEY`, `RERANKER_API_KEY` | Independent Beijing Bailian credentials; keep endpoints/dimension/collection aligned |
+| `POSTGRES_*`, `REDIS_*`, `MILVUS_*` | Match the isolated infrastructure |
+| `JWT_SECRET_KEY`, `AUTH_REQUIRE_PASSWORD`, `AUTH_CHECK_DB` | Random secret; password and database identity checks enabled |
+| `TOOL_PROVIDER`, `CRM_TOOL_PROVIDER` | Mock for initial synthetic data; explicitly configure HTTP reference services separately |
+| `MODEL_STARTUP_PROBES_ENABLED` | False initially; production startup refuses until paid probes are explicitly authorized |
 
-不要提交 `.env` 凭证。当前 profile 使用外部模型；可选本地 ML 实验使用独立声明的
-`deploy/requirements-ml.txt`，不是当前候选必需项。不可变镜像、显式迁移与生产配置见
-[部署指南](enterprise-agent/deploy/DEPLOY.md)。
+Do not commit credentials from `.env`. The selected profile uses external models. Optional
+local ML experiments use the separately declared `deploy/requirements-ml.txt`; they are not
+required for this candidate. See the [deployment guide](enterprise-agent/deploy/DEPLOY.md)
+for the immutable image, explicit migration and production configuration.
 
-### 4. 启动依赖服务
+### 4. Start infrastructure
 
 ```bash
 docker compose up -d etcd minio milvus-standalone postgres redis
 docker compose ps
 ```
 
-等待依赖服务就绪。C03 已取消 PostgreSQL 自动执行应用初始化 SQL；空库必须先按当前托管迁移清单显式迁移至 schema v9、检查版本并创建管理员，再启动应用。命令与凭证输入方式见[数据库初始化手册](enterprise-agent/deploy/DATABASE_BOOTSTRAP.md)。已有库只允许对获准的隔离副本显式接管，不直接修改当前库。
+Wait for readiness. PostgreSQL no longer auto-runs application initialization SQL. Explicitly apply the current managed migration manifest through schema v9, check status and bootstrap an administrator before starting the application. Use the [database guide](enterprise-agent/deploy/DATABASE_BOOTSTRAP.md); legacy adoption is allowed only on an authorized isolated copy.
 
-可先运行 `python -B -m app.core.db_bootstrap plan` 做离线预览；真实数据库、API 与 Linux 部署验收仍 BLOCKED。当前生产候选使用[外部模型 profile](enterprise-agent/deploy/MODEL_PROFILE.md)，下文涉及真实模型/入库的步骤需另行授权。
+`python -B -m app.core.db_bootstrap plan` is an offline preview. Real PostgreSQL/API/Linux and model acceptance remain BLOCKED; model calls and ingestion require separate authorization.
 
-### 5. 导入示例知识并启动服务
+### 5. Import sample knowledge and start services
 
-使用[知识发布契约](docs/50-engineering/knowledge-publication.md)中的获准上传、审核与发布流程，可将 `eval/sample_docs/财务报销制度.md` 作为合成输入。历史直接入库命令不能证明当前发布可见性；真实入库会调用外部模型并写存储，本候选尚未执行验收。
+Use the authorized upload/review/publication flow in the [knowledge publication contract](docs/50-engineering/knowledge-publication.md), with `eval/sample_docs/财务报销制度.md` as a synthetic input. Historical direct ingestion commands do not establish current publication visibility. Real ingestion calls external models and writes stores; it has not been executed for this candidate.
 
-启动 API：
+Start the API:
 
 ```bash
 python -m app.main
 ```
 
-在另一个终端中，进入 `enterprise-agent/` 并激活同一虚拟环境，
-启动后台 Worker：
+In another terminal, enter `enterprise-agent/`, activate the same virtual environment,
+and start the background Worker:
 
 ```bash
 python -m app.worker
 ```
 
-Worker 负责后台任务，包括文档入库处理、审批超时与独立范围的历史恢复任务；审批动作不安排自动补偿。
+The Worker handles background tasks, including document ingestion, approval timeouts, and separately scoped historical recovery tasks; approved actions do not schedule compensation.
 
-### 6. 打开应用
+### 6. Open the application
 
-| 入口 | 地址 |
+| Entry point | URL |
 | --- | --- |
-| Web 界面 | http://localhost:8000/ui/ |
-| API 文档 | http://localhost:8000/docs |
-| 服务存活检查 | http://localhost:8000/health |
-| 依赖状态 | http://localhost:8000/ready |
-| Prometheus 指标 | http://localhost:8000/metrics |
+| Web interface | http://localhost:8000/ui/ |
+| API documentation | http://localhost:8000/docs |
+| API liveness | http://localhost:8000/health |
+| Dependency status | http://localhost:8000/ready |
+| Prometheus metrics | http://localhost:8000/metrics |
 
-使用显式 bootstrap 的账户登录，由 `/me` 核验当前角色；没有默认口令或按角色绕过登录。可以先尝试：
+Sign in with an explicitly bootstrapped account; `/me` verifies its current role. There is no default password or role-based login bypass. Try this question against the Chinese sample policy:
 
 > 公司的差旅报销有哪些规定？
 
-再使用具备订单查询权限的角色尝试：
+This asks for the company's travel reimbursement rules.
+Then use a role with order-query permission to try:
 
 > 统计所有客户的订单总额。
 
-`/health` 用于检查 API 是否存活；
-完整功能还依赖数据库、检索服务、模型及相应配置。
+This asks for total order value across customers.
 
-## 验证与测试
+`/health` checks whether the API is alive. Complete functionality also depends on databases,
+retrieval services, models, and their configuration.
 
-从仓库根目录使用已审查的离线清单：
+<a id="验证与测试"></a>
+
+## Verification and tests
+
+From the repository root, use the reviewed offline inventory:
 
 ```bash
 python3 -I -B enterprise-agent/scripts/final_candidate.py
@@ -261,33 +277,72 @@ python3 -I -B enterprise-agent/scripts/final_candidate.py
 python3 -I -B enterprise-agent/scripts/final_candidate.py --execute --record candidate-001
 ```
 
-范围与副作用见[最终候选验证说明](docs/50-engineering/final-candidate-verification.md)。
-真实门禁未齐时，执行后的退出码为 2。全量 pytest/插件、历史 W5–W9 脚本须另行审查依赖与副作用；固定清单不代表所有测试或真实服务已通过。历史 CI 和上方 `main` 徽章不代表当前候选验收；按提交绑定的 PR/CI 记录与阻塞见[交付状态](docs/50-engineering/delivery-status.md)。
+See [verification scope and side effects](docs/50-engineering/final-candidate-verification.md).
+The executed sweep returns 2 while real gates remain BLOCKED. Full pytest/plugins and
+historical W5–W9 scripts require separate dependency and side-effect review; the fixed
+inventory does not claim to cover every test or real service. Never infer current acceptance
+from historical CI results or the `main` badge above. Candidate-specific PR/CI evidence and
+remaining gates are recorded in the [delivery status](docs/50-engineering/delivery-status.md).
 
-## 当前状态与边界
+<a id="开源第一阶段：当前边界"></a>
 
-核心 Agent 工作流、RAG、权限校验、审批、补偿和 Web 交互已有实现。
-仓库同时保留自动化测试、技术验证与交付记录。
+## Current technical verification
 
-当前需要注意：
+The [2026-11-09 CI verification](https://github.com/zhenkun26/Business-Agent/actions/runs/42591561481)
+is workflow_dispatch attempt 1 at exact head `15cd84f942ccc0ce49afcfc1513efe4c2f07f441`.
+All five jobs passed: Python 3.11/3.13 each ran 2170 tests + 640 subtests, eight offline
+checks, scanner/dependency checks, the isolated C10 persistence slice, 15 synthetic HTTP
+checks with native libpq on Ubuntu, and image/installed-inventory/Trivy checks.
+With publish=false, GHCR login and push were skipped. This is not fresh browser testing,
+full C10/RAG, formal UAT or release acceptance. See the [quickstart](docs/30-guides/open-source-quickstart.md#starter-verification--启动入口核验)
+for scan scope and policy limits. This later documentation diff was not executed by that run.
 
-- 数据分析按 CRM provider 读取有界快照并生成确定性报告；真实 HTTP 数据分析验收仍 BLOCKED。
-- 业务工具默认采用 Mock；外部适配代码不等于已完成真实系统验收。
-- CRM、邮件及 SSO 的真实接入仍需接口契约、测试环境与联调证据。
-- 正式 UAT、真实安全验收、灰度运行与生产放行尚未完成。
-- 仅独立子任务可并行，识别到依赖会拒绝整单；通用 DAG、多租户和长期记忆不在当前候选范围。
-- Checkpoint 不再自动回退；已提供运行线程隔离与数据库条件发布的离线实现，真实双进程持久化与租约到期写入 fencing 仍未验收。
-- 单组织、Linux 单机 Compose 为目标；Kubernetes/多机高可用、容量实测和生产就绪均未通过当前验收。
-- 源码版本保持 1.3.0，收尾变更未发布；提交、镜像与 schema 身份须分别记录，L/D/O/B/S/R 全部运行矩阵及完整 RAG 继续 BLOCKED。
+The [2026-11-07 Mac/browser observations](docs/50-engineering/final-candidate-verification.md#stage-one-technical-candidate-progress--2026-11-07)
+are historical: Mac used a binary-driver adapter; current-session history was visible,
+refresh returned to login, and relogin had no visible old-session recovery entry. These
+results do not prove every bare machine/OS works or clear source rights or enterprise acceptance.
 
-详细进度与待办见 [ROADMAP](docs/40-process/ROADMAP.md)。
+## Phase-one source scope
 
-## 项目结构
+The [candidate-bound source assessment](docs/50-engineering/license-provenance.md#phase-one-source-assessment--2026-11-08) covers 465 records: 229 supported by
+upstream evidence, 232 common-project contributions with maintainer-reported MIT
+consent, and four repository-declared MIT associated research documents. Historical
+PENDING inventory labels remain intact and are not 465 unresolved current blockers.
+This is source-only scope, not independent proof of authorship or blanket third-party
+clearance. Actual binary releases and the three later enterprise stages require separate
+review; privacy/full RAG/full C10 acceptance is not closed. Final documentation review
+and candidate checks remain required before merge.
+
+
+<a id="当前状态与边界"></a>
+
+## Current status and limitations
+
+Core agent workflows, RAG, permission checks, approvals, compensation, and the Web interface are implemented.
+The repository also contains automated tests, technical verification, and delivery records.
+
+Current boundaries:
+
+- Analysis follows the CRM provider with bounded snapshots and deterministic reports; real HTTP analytics acceptance remains BLOCKED.
+- Business tools default to Mock mode. Adapter code alone does not establish acceptance against real systems.
+- Real CRM, email, and SSO integration still requires interface contracts, test environments, and integration evidence.
+- Formal UAT, security acceptance against real systems, staged rollout, and production approval remain incomplete.
+- Only independent subtasks run in parallel; identified dependencies are rejected. General DAG scheduling, multitenancy and long-term memory are outside this candidate.
+- Checkpoints do not automatically fall back. Per-run checkpoint isolation and database-owned publication have an offline implementation; two-process persistence and lease-expiry fencing acceptance remain BLOCKED.
+- Single-organization, single-host Linux Compose is the target; Kubernetes/multihost HA, measured capacity and production readiness are not accepted claims.
+- The source version remains 1.3.0 with unreleased changes; commit/image/schema identities must be recorded separately. All L/D/O/B/S/R runtime matrices and full RAG remain BLOCKED.
+
+See the [ROADMAP](docs/40-process/ROADMAP.md) for detailed progress and outstanding work.
+
+<a id="项目结构"></a>
+
+## Repository structure
 
 ```text
 Business-Agent/
-├── README.md               # Chinese introduction and canonical navigation
-├── README-en.md            # English translation
+├── README.md               # English introduction and canonical navigation
+├── README-zh.md            # Simplified Chinese companion
+├── README-en.md            # Compatibility links to the English README
 ├── enterprise-agent/
 │   ├── app/
 │   │   ├── agents/          # Knowledge, Analysis, Execution
@@ -306,40 +361,48 @@ Business-Agent/
 └── interview/              # Presentation and interview materials
 ```
 
-## 文档
+<a id="文档"></a>
 
-| 内容 | 入口 |
+## Documentation
+
+The detailed project documentation below is primarily in Simplified Chinese.
+
+| Topic | Entry point |
 | --- | --- |
-| 全仓库目录索引 | [contents](contents.md) |
-| 产品方案 | [企业知识工作流 Agent 产品方案](docs/10-product-plan/企业知识工作流Agent产品方案_v3_整合版.md) |
-| 产品功能与设计 | [产品文档](docs/20-product/产品文档.md) |
-| Web 界面使用 | [产品使用手册](docs/30-guides/产品使用手册-前端版.md) |
-| 场景与操作示例 | [使用案例手册](docs/30-guides/使用案例手册.md) |
-| 运维与故障处理 | [运维维护手册](docs/30-guides/运维维护手册.md) |
-| 部署配置 | [部署说明](enterprise-agent/deploy/DEPLOY.md) |
-| 示例知识文档 | [sample_docs](enterprise-agent/eval/sample_docs/) |
-| 开发进度 | [ROADMAP](docs/40-process/ROADMAP.md) |
-| 设计决策 | [DECISIONS](docs/40-process/DECISIONS.md) |
-| 已知问题 | [ISSUES](docs/40-process/ISSUES.md) |
-| 版本变化 | [CHANGELOG](CHANGELOG.md) |
-| 项目介绍与面试材料 | [演示网页](interview/产品介绍网页/index.html) · [面试备稿](interview/Agent项目面试备稿.md) |
+| Complete repository index | [contents](contents.md) |
+| Product proposal | [Enterprise knowledge workflow Agent proposal](docs/10-product-plan/企业知识工作流Agent产品方案_v3_整合版.md) |
+| Product features and design | [Product documentation](docs/20-product/产品文档.md) |
+| Web interface usage | [User guide](docs/30-guides/产品使用手册-前端版.md) |
+| Scenarios and examples | [Use case guide](docs/30-guides/使用案例手册.md) |
+| Operations and troubleshooting | [Operations guide](docs/30-guides/运维维护手册.md) |
+| Deployment configuration | [Deployment guide](enterprise-agent/deploy/DEPLOY.md) |
+| Sample knowledge documents | [sample_docs](enterprise-agent/eval/sample_docs/) |
+| Development progress | [ROADMAP](docs/40-process/ROADMAP.md) |
+| Design decisions | [DECISIONS](docs/40-process/DECISIONS.md) |
+| Known issues | [ISSUES](docs/40-process/ISSUES.md) |
+| Version history | [CHANGELOG](CHANGELOG.md) |
+| Presentation and interview materials | [Presentation page](interview/产品介绍网页/index.html) · [Interview notes](interview/Agent项目面试备稿.md) |
 
-## 反馈与贡献
+<a id="反馈与贡献"></a>
 
-欢迎通过 [GitHub Issues](https://github.com/zhenkun26/Business-Agent/issues)
-提交问题或讨论改进方向。
+## Feedback and contributions
 
-报告问题时，请提供复现步骤、预期行为、实际行为和已脱敏的环境信息。
+Use [GitHub Issues](https://github.com/zhenkun26/Business-Agent/issues) to report problems or discuss improvements.
+Include reproduction steps, expected behavior, actual behavior, and sanitized environment details.
 
-提交变更前，请阅读 [AGENTS.md](AGENTS.md) 与
-[项目变更规范](openspec/specs/openspec-normalization/spec.md)，
-并运行与修改范围相关的检查。
+Before contributing, read [AGENTS.md](AGENTS.md) and the
+[project change workflow](openspec/specs/openspec-normalization/spec.md),
+and run the checks relevant to your changes.
 
-## 来源与合作者
+<a id="来源与合作者"></a>
 
-本项目从 BusinessAgent（[迁移说明](docs/40-process/business-agent-migration.md)）独立迁移。[hello-xiao-a](https://github.com/kingoftaro/hello-xiao-a) 初版由合作者 [kingoftaro](https://github.com/kingoftaro) 完成，BusinessAgent 后续开发与维护由 [zhenkun26](https://github.com/zhenkun26) 负责。感谢 kingoftaro 对初始项目的贡献。
-迁移保留全部145个历史提交和11个分支；5个历史标签暂不推送，避免触发旧版发布流程。依维护者要求，仅从新仓库历史中移除两张已删除照片，相关 SHA 因此改变。旧仓库未作修改。详见[迁移记录与提交映射](docs/40-process/business-agent-migration.md)。
+## Origin and collaborator
 
-## 许可证
+This independent repository was migrated from BusinessAgent ([migration explanation](docs/40-process/business-agent-migration.md)). Collaborator [kingoftaro](https://github.com/kingoftaro) developed the original [hello-xiao-a](https://github.com/kingoftaro/hello-xiao-a) project; [zhenkun26](https://github.com/zhenkun26) is responsible for subsequent BusinessAgent development and maintenance. Thank you to kingoftaro for the original project.
+This public repository is an independent, de-identified derivative, not a byte-identical archive of the original repository. Only reviewed development branches are included; no tags are included. Public attribution, the initial contribution, MIT copyright and third-party notices are retained. Original evidence and detailed commit mappings remain private; historical signatures are not asserted valid after rewriting. See the [migration explanation and scope](docs/40-process/business-agent-migration.md).
 
-继续采用 [MIT](LICENSE) 许可，允许公开发布、修改、再分发和商业使用；须保留版权声明与许可文本。第三方组件、字体与其他随附材料仍适用其各自许可，见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。共同贡献者的许可说明见[来源评估](docs/50-engineering/license-provenance.md#phase-one-source-assessment--2026-11-08)。
+<a id="许可证"></a>
+
+## License
+
+The project remains under the [MIT License](LICENSE), allowing publication, modification, redistribution and commercial use while retaining the copyright and permission notices. Third-party components, fonts and other bundled materials remain subject to their respective licenses; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Contributor permission is recorded in the [source assessment](docs/50-engineering/license-provenance.md#phase-one-source-assessment--2026-11-08).

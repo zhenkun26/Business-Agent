@@ -4,8 +4,9 @@
 
 ```text
 BusinessAgent/
-├── README.md                           # 中文项目介绍与全仓库导航入口
-├── README-en.md                        # English translation of the root README
+├── README.md                           # English introduction and canonical navigation
+├── README-zh.md                        # 简体中文完整说明
+├── README-en.md                        # Compatibility links to the English README
 ├── contents.md                         # 本文件：目录树索引（每行注释用途）
 ├── CHANGELOG.md                        # 版本变更日志（按时间倒序，含版本号/日期/摘要）
 ├── AGENTS.md                           # AI 助手项目说明：目录结构、常用命令、工程约定
@@ -155,6 +156,7 @@ BusinessAgent/
     │   ├── release-management/         # UAT、灰度与正式放行契约
     │   └── uat-replay/                 # G0 技术彩排与证据边界
     └── changes/                        # 变更记录（propose→apply→archive 生命周期）
+        ├── align-public-migration-facts/ # 公开迁移说明与通知证据来源对齐
         ├── engineering-delivery-closeout/ # S0/C24/C01 配置已交付；C01/C02/C03/C04/C05/C06/C07/C08/C09/C10 运行验收阻塞
         ├── crm-mail-sso-integration/       # CRM/邮件/SSO 真实接入（实施中 9/19）
         ├── uat-and-ga-rollout/             # UAT、灰度、上线门槛（实施中 8/15）
