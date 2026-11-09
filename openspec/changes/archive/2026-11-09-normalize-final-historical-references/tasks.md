@@ -8,8 +8,8 @@
 ## 2. Candidate checks
 - [x] 2.1 Verify zero historical PR/CI/artifact navigation links for the original repository `zhenkun26/BusinessAgent` in the current tracked candidate; preserve other historical snapshot URLs and Git history, and verify unchanged protected files.
 - [x] 2.2 Run strict OpenSpec and whitespace checks; record exact checks and limitations for independent review.
-- [ ] 2.3 Obtain independent review of the exact local candidate before publication.
+- [x] 2.3 Obtain independent review of the exact local candidate before publication.
 
 ## Workflow follow-up
-- Await PR5 postmerge audit and explicit publication authorization; merge requires separate confirmation.
-- Archive only after review and authorization, using supported directory rename flow.
+- PR5 postmerge audit and publication authorization completed before implementation PR6; merge still requires separate confirmation.
+- Local archive authorized after independent implementation review and CI audit; this later archive revision requires its own CI and audit before merge.
