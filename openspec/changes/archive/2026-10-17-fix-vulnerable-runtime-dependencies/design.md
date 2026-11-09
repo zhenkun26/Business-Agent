@@ -17,7 +17,7 @@ introducing a known subsequent dependency-audit failure.
 
 ## Sources
 
-- https://github.com/zhenkun26/BusinessAgent/actions/runs/39011635217
+- `zhenkun26/BusinessAgent/actions/runs/39011635217`（原始 CI 证据目前不公开可访问）
 - https://pypi.org/pypi/PyJWT/2.15.0/json
 - https://github.com/jpadilla/pyjwt/releases/tag/2.15.0
 - https://pypi.org/pypi/langgraph-sdk/0.4.4/json
@@ -50,3 +50,5 @@ using the existing skip_specs convention, without claiming CLI validation.
 
 Merge only the verified PR head. Required review approval is independent of CI;
 do not represent an administrator merge as an approved review.
+
+> 导航勘误（2026-11-09）：仅将失效链接改为明确的历史仓库运行标识；原有结果、修复、测试数量、哈希、审批状态及 CLI 不可用结论保持不变。本次检查不代表重新执行历史 CI。

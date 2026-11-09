@@ -161,6 +161,7 @@ BusinessAgent/
         ├── uat-and-ga-rollout/             # UAT、灰度、上线门槛（实施中 8/15）
         └── archive/                        # 已归档变更（全部完成）
             ├── 2026-11-09-align-public-migration-facts/ # English-default bilingual README and migration facts
+            ├── 2026-11-09-normalize-final-historical-references/ # Historical navigation derivative and errata
             ├── 2026-11-09-clarify-historical-evidence-navigation/ # Implementation CI verified; archive revision pending
             ├── 2026-11-09-refresh-current-ci-evidence/ # Six live references; candidate CI verified, archive revision pending
             ├── 2026-11-09-update-mapped-provenance-links/ # Eight links and unchanged historical evidence

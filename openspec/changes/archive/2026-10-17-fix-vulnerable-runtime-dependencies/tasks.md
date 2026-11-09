@@ -19,7 +19,7 @@ accept the selected SDK/urllib3 versions. Application code, READMEs, Dockerfile,
 CI workflow, and vulnerability exemptions are unchanged.
 
 PASS: remediation commit 492882c8792c3385e8b3ef00100698ed2fedb762 passed
-[CI run 39012279790](https://github.com/zhenkun26/BusinessAgent/actions/runs/39012279790).
+`zhenkun26/BusinessAgent/actions/runs/39012279790`（原始 CI 证据目前不公开可访问）.
 
 - Python 3.11: 143 tests passed (20 warnings).
 - Python 3.13: 143 tests passed (34 warnings).
@@ -31,3 +31,5 @@ OpenSpec CLI strict validation was unavailable. The completed change was manuall
 archived without changing main specifications (skip_specs: true). The subsequent
 record-only commit must pass CI again before merge. Formal UAT, external integration,
 and production release acceptance are not established by these checks.
+
+> 导航勘误（2026-11-09）：仅将失效链接改为明确的历史仓库运行标识；原有结果、修复、测试数量、哈希、审批状态及 CLI 不可用结论保持不变。本次检查不代表重新执行历史 CI。
