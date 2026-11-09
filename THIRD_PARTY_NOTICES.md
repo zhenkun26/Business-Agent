@@ -85,8 +85,9 @@ Dockerfile.prod explicitly retains this directory in the final image. The sealed
 source-input check and `--installed` final-directory check are separate: the latter
 verifies exact file membership and hashes and exports a scoped receipt with the
 existing installed inventory. Source checks and synthetic regression tests do not
-establish actual image retention. CI #106 now supplies the separately bound actual
-scoped retention evidence above; full image-license review remains separate.
+establish actual image retention. Run 42591561481 supplies the separately bound actual
+scoped retention evidence above for source `15cd84f942ccc0ce49afcfc1513efe4c2f07f441`;
+full image-license review remains separate.
 
 The retained inventory schema still marks 465 controlled source records
 PENDING_SOURCE_REVIEW; their newer source-only assessment is linked above. All 98 top-level

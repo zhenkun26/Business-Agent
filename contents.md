@@ -4,8 +4,9 @@
 
 ```text
 BusinessAgent/
-├── README.md                           # 中文项目介绍与全仓库导航入口
-├── README-en.md                        # English translation of the root README
+├── README.md                           # English introduction and canonical navigation
+├── README-zh.md                        # 简体中文完整说明
+├── README-en.md                        # Compatibility links to the English README
 ├── contents.md                         # 本文件：目录树索引（每行注释用途）
 ├── CHANGELOG.md                        # 版本变更日志（按时间倒序，含版本号/日期/摘要）
 ├── AGENTS.md                           # AI 助手项目说明：目录结构、常用命令、工程约定
@@ -159,6 +160,7 @@ BusinessAgent/
         ├── crm-mail-sso-integration/       # CRM/邮件/SSO 真实接入（实施中 9/19）
         ├── uat-and-ga-rollout/             # UAT、灰度、上线门槛（实施中 8/15）
         └── archive/                        # 已归档变更（全部完成）
+            ├── 2026-11-09-align-public-migration-facts/ # English-default bilingual README and migration facts
             ├── 2026-11-09-clarify-historical-evidence-navigation/ # Implementation CI verified; archive revision pending
             ├── 2026-11-09-refresh-current-ci-evidence/ # Six live references; candidate CI verified, archive revision pending
             ├── 2026-11-09-update-mapped-provenance-links/ # Eight links and unchanged historical evidence
