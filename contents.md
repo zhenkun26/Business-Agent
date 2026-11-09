@@ -139,6 +139,7 @@ BusinessAgent/
     ├── config.yaml                     # openspec 配置（schema + 项目 context）
     ├── specs/                          # 主规格 15 项（既有规格；不代表企业现场已验收）
     │   ├── documentation-layout/       # 文档目录布局规格
+    │   ├── provenance-object-links/     # Truthful phase-one evidence-link correspondence
     │   ├── version-control/            # 版本控制规格
     │   ├── progress-issue-records/     # 进度与问题记录规格
     │   ├── openspec-normalization/     # openspec 规范化规格
@@ -158,6 +159,7 @@ BusinessAgent/
         ├── crm-mail-sso-integration/       # CRM/邮件/SSO 真实接入（实施中 9/19）
         ├── uat-and-ga-rollout/             # UAT、灰度、上线门槛（实施中 8/15）
         └── archive/                        # 已归档变更（全部完成）
+            ├── 2026-11-09-update-mapped-provenance-links/ # Eight links and unchanged historical evidence
             ├── 2026-08-04-documentation-baseline/        # 文档基线（归档）
             ├── 2026-08-04-complete-business-processes/   # 业务闭环补齐 41/41（归档）
             ├── 2026-08-05-production-readiness-baseline/ # 生产就绪基线 10/10（归档）
