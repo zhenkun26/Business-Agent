@@ -14,6 +14,8 @@
 
 - Refresh six live CI/artifact references with run 42591561481, attempt 1, at exact head 15cd84f942ccc0ce49afcfc1513efe4c2f07f441; align English verification wording and preserve historical Mac/browser evidence, scoped security/notice limits and formal UAT/release gates. No software version, rights clearance or publication change.
 
+- Link the bilingual README source paragraphs to the labeled migration explanation; preserve original contributor and maintenance credit, license statements and historical evidence. No acceptance-gate change.
+
 - Update eight phase-one provenance object links to verified corresponding objects; retain the historical candidate ID, content hashes, attribution and rights conclusions. No software version or acceptance-gate change.
 
 ### 当前工程候选（2026-10-20；未发布）

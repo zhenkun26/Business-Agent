@@ -4,6 +4,8 @@
 
 ## 内容
 
+- [迁移说明 / Migration explanation](business-agent-migration.md)：独立仓库来源、隐私处理与历史证据边界；[双语 README 链接维护记录](../../openspec/changes/archive/2026-11-09-clarify-readme-migration-links/tasks.md)
+
 - [F2 twelve-perspective review](multi-expert-review-c57d473.md): frozen `c57d473`, evidence-limited scorecard, eleven findings and bounded follow-up plan; no runtime approval
 
 - [CI pytest 修复](ci-pytest-repair.md)：C25 推送、完整测试修复、零跳过与远端复验边界

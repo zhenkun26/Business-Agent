@@ -368,7 +368,7 @@ and run the checks relevant to your changes.
 
 ## Origin and collaborator
 
-This independent repository was migrated from [BusinessAgent](https://github.com/zhenkun26/BusinessAgent). Collaborator [kingoftaro](https://github.com/kingoftaro) developed the original [hello-xiao-a](https://github.com/kingoftaro/hello-xiao-a) project; [zhenkun26](https://github.com/zhenkun26) is responsible for subsequent BusinessAgent development and maintenance. Thank you to kingoftaro for the original project.
+This independent repository was migrated from BusinessAgent ([migration explanation](docs/40-process/business-agent-migration.md)). Collaborator [kingoftaro](https://github.com/kingoftaro) developed the original [hello-xiao-a](https://github.com/kingoftaro/hello-xiao-a) project; [zhenkun26](https://github.com/zhenkun26) is responsible for subsequent BusinessAgent development and maintenance. Thank you to kingoftaro for the original project.
 All 145 historical commits and 11 branches are retained. Five historical tags are not pushed yet to avoid triggering legacy publication workflows. At the maintainer's request, only two previously deleted photos were removed from the new repository's history, changing the affected commit hashes. The source repository is unchanged. See the [migration record and commit mapping](docs/40-process/business-agent-migration.md).
 
 ## License
