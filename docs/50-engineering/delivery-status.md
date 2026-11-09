@@ -7,14 +7,25 @@ grey release or production approval are established. C10 now has an offline impl
 publication. Real two-process race acceptance remains BLOCKED; C10 is not closed.
 
 <a id="current-handover"></a>
-## Candidate-bound Linux notice evidence — 2026-11-08
+## Current technical validation — 2026-11-09
 
-[CI #106](https://github.com/zhenkun26/BusinessAgent/actions/runs/42450124426)
+[CI run 42591561481](https://github.com/zhenkun26/Business-Agent/actions/runs/42591561481) was workflow_dispatch attempt 1 at exact main `15cd84f942ccc0ce49afcfc1513efe4c2f07f441`, from 09:12:08 to 09:19:42 UTC. All five jobs passed. Python 3.11 and 3.13 each passed 2170 tests + 640 subtests; all eight current offline checks, nine publication-policy tests and 39 scanner regressions passed. Current event-history/tree scans, pip-audit, the isolated persistence slice, 15 synthetic HTTP checks and the image/Trivy gate passed within the [documented scope](../30-guides/open-source-quickstart.md#starter-verification--启动入口核验).
+
+GHCR login/push were skipped. The build used cache and is not two-clean-build reproducibility evidence. This is not browser UI, full C10/RAG, formal UAT, privacy or release acceptance. This later navigation-only documentation revision was not tested by that run.
+
+The [current notice record](../../THIRD_PARTY_NOTICES.md#candidate-bound-linux-notice-evidence--2026-11-09) separately identifies artifact 13661334195 and its eight-file scoped receipt. Its listed retention deadline is 2027-02-07 09:12:09 UTC; permanent or anonymous artifact access is not established. The old ZIP/image hashes below still identify the 2026-11-08 objects.
+
+**Historical record navigation.** Original PR/run/artifact records from `zhenkun26/BusinessAgent` are not publicly accessible. Unlinked repository-qualified IDs retain their identity; they are not transferred events or same-number PRs in `Business-Agent`. The following dated records retain their time-of-writing status, counts, hashes and limitations. Statements about pending verification or an unmerged/draft PR describe those historical stages, not this separate current technical result.
+
+<a id="candidate-bound-linux-notice-evidence--2026-11-08"></a>
+### Historical candidate-bound Linux notice evidence — 2026-11-08
+
+Historical CI #106 (`zhenkun26/BusinessAgent/actions/runs/42450124426`)
 verified head `69b59e24b446ed1cdef451355b9f701044643bd4` through actual PR merge ref
 `9ed7f55adf7b62e93bbd52a46753916a2f15fa25`, with base
 `f7d684be1a46758bddddc2d13e2a13a33896ba51`. All five jobs succeeded; Trivy succeeded,
 and GHCR login/push completed as skipped. This was verification, not publication or deployment.
-The [production-build-inventory artifact](https://github.com/zhenkun26/BusinessAgent/actions/runs/42450124426/artifacts/13605366825)
+The historical production-build-inventory artifact (`zhenkun26/BusinessAgent/actions/runs/42450124426/artifacts/13605366825`)
 ZIP SHA-256 is `70ca8d0522fb11e304a20303afdae0135a24aa1a475495956962bbaa70779319`.
 Its receipt reports `SCOPED_NOTICE_BYTES_VERIFIED` for exactly eight notice files and
 binds their SHA-256 values at `/app/deploy/third-party-notices` in image
@@ -36,9 +47,9 @@ before merge; this precommit result is not a new remote or clean-binding pass.
 
 ### Historical verified candidate before notice/source follow-up — 2026-11-08
 
-Latest remotely verified code/assets candidate, prior to this documentation update:
+Latest remotely verified code/assets candidate recorded in the 2026-11-08 snapshot, prior to that documentation update:
 `088d8c84daba0b3449d4196fc167b58c38136455` on
-[PR #8](https://github.com/zhenkun26/BusinessAgent/pull/8). The exact clean-head
+historical PR `zhenkun26/BusinessAgent#8`. The exact clean-head
 eight-check receipt is `enterprise-agent/eval/results/offline/cleanup-saga-input-png-clean-20261108.json`:
 2137 tests + 640 subtests, Node 80/14, seven assets, 81.8543% coverage; execution
 and candidate binding PASS. The matching secret scan is clean, retained in
@@ -50,7 +61,7 @@ subsequent documentation update.
 All 465 source records remain PENDING_SOURCE_REVIEW; these checks do not clear
 source rights, privacy, full runtime/RAG, enterprise UAT or release acceptance.
 
-[CI run #104](https://github.com/zhenkun26/BusinessAgent/actions/runs/42444081336)
+Historical CI run #104 (`zhenkun26/BusinessAgent/actions/runs/42444081336`)
 completed with all five jobs successful, including a successful Trivy scan in the
 actual log. Its tested PR merge commit is
 `edacb9712c22da260ebbf27bca6b4e9cdefe317c`, combining that head with base
@@ -66,9 +77,9 @@ The original integration, intermediate repair status, test counts and restrictio
 below are historical snapshots bound to their named candidates, not current
 status. In particular, the four Debian Trivy records and verification in progress
 describe the earlier repair stage; the successful current run is recorded above.
-The original wording and evidence remain unchanged.
+Historical claims, counts, candidate identities and outcomes are retained; navigation labels were updated on 2026-11-09.
 
-Subsequent review state: [draft PR #8](https://github.com/zhenkun26/BusinessAgent/pull/8)
+Subsequent review state: historical draft PR `zhenkun26/BusinessAgent#8`
 contains the integrated candidate. Its initial CI stopped on unsafe matrix record naming
 before tests or security scans. The authorized repair preserves the safe-ID validator and
 full secret-scan coverage while adding exact cryptographic provenance for manifest false
@@ -818,33 +829,33 @@ Schema v8, drain/upgrade requirements and acceptance scenarios are in the
 
 Read-only GitHub observations on 2026-10-19:
 
-- [PR #2](https://github.com/zhenkun26/BusinessAgent/pull/2),
+- Historical PR `zhenkun26/BusinessAgent#2`,
   `docs: close delivery records and advance offline readiness`, remains OPEN against `main`;
   inspected head `d8a26b5`, `mergeStateStatus=BLOCKED`, `reviewDecision=REVIEW_REQUIRED`.
   Its title predates the expanded closeout implementation; update scope/title/body only in
   a separately authorized remote PR update. No review approval or merge was submitted.
-- [C24 CI run 39204305429](https://github.com/zhenkun26/BusinessAgent/actions/runs/39204305429)
+- Historical C24 CI run `zhenkun26/BusinessAgent/actions/runs/39204305429`
   is **FAIL**: both Python 3.11 and 3.13 test jobs failed, production image build skipped.
   Both fail collection at `tests/test_security_hardening.py`, which imports removed
   `_redact_url` from `app.graph.checkpointer` (`ImportError`). Local source confirms that
   stale import. Subsequent local full-suite repair is recorded below; the old run remains FAIL.
-- [C23 CI run 39202178839](https://github.com/zhenkun26/BusinessAgent/actions/runs/39202178839)
+- Historical C23 CI run `zhenkun26/BusinessAgent/actions/runs/39202178839`
   also failed collection in that file. This is observed failure, not an unrun BLOCKED check.
-- [C25 CI run 39205591288](https://github.com/zhenkun26/BusinessAgent/actions/runs/39205591288)
+- Historical C25 CI run `zhenkun26/BusinessAgent/actions/runs/39205591288`
   at pushed `fe2ae78` also fails the same import in Python 3.11/3.13 (logs verified).
 - The separately authorized local CI repair passes **871 tests + 225 subtests, zero skips**,
   with **73.40% local line coverage**. It replaces stale contracts and separates shared
   fixtures from test classes; all 440 original test bodies across the 13 fixture-related
   files remain identical. No CI gate, production behavior or dependency declaration changed.
   See [repair record and environment](../40-process/ci-pytest-repair.md).
-- [Repair CI 39208343449](https://github.com/zhenkun26/BusinessAgent/actions/runs/39208343449)
+- Historical repair CI run `zhenkun26/BusinessAgent/actions/runs/39208343449`
   on `b8c4457`: Linux Python 3.11/3.13 each pass **871 tests + 225 subtests, zero skips**,
   with 75% reported coverage. Gitleaks then fails on 16 verified source-hash false positives.
   Scanner follow-up `16c882b` adds only exact historical fingerprints and a complete
   event-head scan. Run 39208901960 passes both test/security jobs but fails Docker COPY
   because the build context excludes two required scripts. Narrow context exceptions and
   one additional regression are implemented in `0d1a7ce`.
-- [CI 39209313444](https://github.com/zhenkun26/BusinessAgent/actions/runs/39209313444)
+- Historical CI run `zhenkun26/BusinessAgent/actions/runs/39209313444`
   on `0d1a7ce` is **PASS**: each Python version runs **872 tests + 225 subtests, zero skips**,
   Gitleaks and pip-audit pass, production image build/non-root imports/assets pass, and
   Trivy HIGH/CRITICAL reports zero findings under its unchanged policy. No image is published.

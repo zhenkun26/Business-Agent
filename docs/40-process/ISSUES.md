@@ -1,5 +1,7 @@
 # ISSUES · 问题、坑与 backlog
 
+**证据导航说明（2026-11-09）：** 下列 `zhenkun26/BusinessAgent` PR/CI 编号属于原仓库的历史记录，原始证据不公开可访问；保留日期、失败/成功结果、测试计数及候选哈希，不将它们映射为新仓库的同编号事件。另行完成的[当前 CI 42591561481](https://github.com/zhenkun26/Business-Agent/actions/runs/42591561481) 在提交 `15cd84f942ccc0ce49afcfc1513efe4c2f07f441` 上通过五项作业，Python 3.11/3.13 各 2170 tests + 640 subtests、八项当前离线检查及当前安全/镜像检查通过；[范围与限制](../30-guides/open-source-quickstart.md#starter-verification--启动入口核验) 单独记录。这不重写旧 FAIL，不代表正式 UAT、完整 C10/RAG、隐私或发布验收，也未测试本次后续导航文档改动。
+
 > 问题与坑记录的单一事实源。格式：状态（open/fixed）/ 优先级 / 现象 / 根因 / 修复 / 验证 / 日期。
 > 已从运维维护手册第 8 节与临时备忘迁移；新问题追加在「待办与开放问题」，已修复的记入「已修复」。
 
@@ -323,7 +325,7 @@ The targeted twelve-perspective audit is complete; it provides no commercial/run
 
 - **最终候选离线增量（2026-10-19）**：固定 30 个已审查入口、287 份源码/配置/夹具哈希、候选提交与内容绑定、脱敏保留式回执；修复陈旧的 C02 worker 测试夹具，补齐参考/SSO YAML 字符串引号。789 项测试 PASS、1 项 PyYAML 跳过/BLOCKED，7 个前端文件完整性 PASS；五函数执行 PASS，UAT/发布仍 BLOCKED。见[验证契约与 C01–C24 映射](../50-engineering/final-candidate-verification.md)及[交付记录](阶段性总结_C24最终候选离线验证.md)。
 - **剩余缺口**：全量 pytest/真实依赖、当前镜像构建/扫描/CI、OpenSpec strict、L/D/O/B/S/R、真实运行/完整 RAG/历史凭证验收全部 BLOCKED；C10 写入竞态不关闭。C24/7.1 整项 open，仅完成 7.1.1 离线部分；C24 `d8a26b5` 已按后续授权推送并核验，C25 离线核对见下项。
-- **CI 复核（2026-10-19）**：[C24 run 39204305429](https://github.com/zhenkun26/BusinessAgent/actions/runs/39204305429) 的 Python 3.11/3.13 均 FAIL：`tests/test_security_hardening.py` 导入已移除的 `app.graph.checkpointer._redact_url`，pytest 收集终止；镜像构建 skipped。这不在固定离线清单内，789 PASS 不覆盖该失败。后续须按当前契约修复并审查全量测试；本轮仅记录，不抑制用例或改 CI。
+- **CI 复核（2026-10-19）**：历史 C24 run 39204305429（原仓库 `zhenkun26/BusinessAgent`，非公开历史证据） 的 Python 3.11/3.13 均 FAIL：`tests/test_security_hardening.py` 导入已移除的 `app.graph.checkpointer._redact_url`，pytest 收集终止；镜像构建 skipped。这不在固定离线清单内，789 PASS 不覆盖该失败。后续须按当前契约修复并审查全量测试；本轮仅记录，不抑制用例或改 CI。
 
 - **CI 修复后续增量（2026-10-19）**：陈旧导入、夹具继承重复收集及请求 ID/发布可见性/检索失败/Saga/错误码旧断言已修复；本地完整 pytest **871 tests + 225 subtests PASS、零跳过**，覆盖率 73.40%。该测试修复未修改 CI 规则、未新增 skip/xfail，未改生产代码；历史远端 FAIL 保留；`b8c4457` 已推送，远端双版本各 871 tests + 225 subtests PASS、零跳过；Gitleaks 的 16 个源码哈希误报已逐条核验，精确指纹与完整事件范围修复 `16c882b` 已推送，镜像上下文修复 `0d1a7ce` 已推送，远端 CI 39209313444 全部 PASS（双版本各 872 tests + 225 subtests、零跳过；密钥/依赖扫描、镜像构建/导入/Trivy PASS）。详见[记录](ci-pytest-repair.md)。
 
@@ -336,7 +338,7 @@ The targeted twelve-perspective audit is complete; it provides no commercial/run
 
 
 - **离线交付（2026-10-19）**：核对 C01–C24 提交/阶段记录及支持契约，统一双语 README、修复后端五个导航断链、区分历史手册/当前候选、纠正模型/schema v7/分析/checkpoint/审计说明；CHANGELOG 在 Unreleased 记录兼容性变化。版本仍 1.3.0，旧 tag 与候选不同；15 主规格/15 归档/3 active change 保持不变。见[交付状态与证据映射](../50-engineering/delivery-status.md)及[阶段记录](阶段性总结_C25离线交付核对.md)。
-- **Git/CI/结论**：C25 `fe2ae78` 已按后续授权推送并核验；[C25 CI](https://github.com/zhenkun26/BusinessAgent/actions/runs/39205591288) 同样收集 FAIL。后续修复 `b8c4457` 已推送，双版本远端 pytest PASS；扫描后续修复 `16c882b` 已推送，镜像上下文修复 `0d1a7ce` 已推送，远端 CI 39209313444 全部 PASS（双版本各 872 tests + 225 subtests、零跳过；密钥/依赖扫描、镜像构建/导入/Trivy PASS），运行/严格校验仍 BLOCKED；工程交付结论为 **尚未通过验收，不可放行**。C10 open，L/D/O/B/S/R/真实运行/完整 RAG 阻塞保留，C25 整项 open；不合并、发布、部署、同步或归档，等待确认。
+- **Git/CI/结论**：C25 `fe2ae78` 已按后续授权推送并核验；历史 C25 CI 39205591288（原仓库 `zhenkun26/BusinessAgent`，非公开历史证据） 同样收集 FAIL。后续修复 `b8c4457` 已推送，双版本远端 pytest PASS；扫描后续修复 `16c882b` 已推送，镜像上下文修复 `0d1a7ce` 已推送，远端 CI 39209313444 全部 PASS（双版本各 872 tests + 225 subtests、零跳过；密钥/依赖扫描、镜像构建/导入/Trivy PASS），运行/严格校验仍 BLOCKED；工程交付结论为 **尚未通过验收，不可放行**。C10 open，L/D/O/B/S/R/真实运行/完整 RAG 阻塞保留，C25 整项 open；不合并、发布、部署、同步或归档，等待确认。
 
 ### I-12 备份恢复演练：MinIO 备份缺口发现与收口（2026-08-05 发现，2026-08-06 复演关闭）
 
@@ -441,10 +443,10 @@ The targeted twelve-perspective audit is complete; it provides no commercial/run
 ### I-13 PR #3 生产镜像依赖漏洞阻断（2026-10-17）
 
 - 状态：fixed（492882c 云端 CI 验证通过；待 PR 集成）· 优先级 P1
-- 现象：[CI 39011635217](https://github.com/zhenkun26/BusinessAgent/actions/runs/39011635217) 的 Python 3.11/3.13 检查通过，Trivy 报告 16 个 HIGH、1 个 CRITICAL，生产镜像检查失败。
+- 现象：历史 CI 39011635217（原仓库 `zhenkun26/BusinessAgent`，非公开历史证据） 的 Python 3.11/3.13 检查通过，Trivy 报告 16 个 HIGH、1 个 CRITICAL，生产镜像检查失败。
 - 根因：生产依赖清单锁定的 PyJWT、langgraph-sdk、pypdf、urllib3 版本命中已公布漏洞；README 变更未修改这些依赖。
 - 修复：生产 pin 分别升级到 2.15.0、0.4.4、6.19.0、2.8.0；开发 requirements 与 pyproject 同步安全下限。PyJWT 2.14.0 仍有后续公告，选择已发布的 2.15.0。
-- 验证：三份清单一致性、上游约束、diff 检查通过；[CI 39012279790](https://github.com/zhenkun26/BusinessAgent/actions/runs/39012279790) 在修复提交 `492882c` 上全部通过：Python 3.11/3.13 各 143 测试通过，gitleaks/pip-audit 无发现，生产镜像构建与 Trivy 门禁通过。归档记录提交仍需最终 CI；PR 检查未发布镜像。
+- 验证：三份清单一致性、上游约束、diff 检查通过；历史 CI 39012279790（原仓库 `zhenkun26/BusinessAgent`，非公开历史证据） 在修复提交 `492882c` 上全部通过：Python 3.11/3.13 各 143 测试通过，gitleaks/pip-audit 无发现，生产镜像构建与 Trivy 门禁通过。归档记录提交仍需最终 CI；PR 检查未发布镜像。
 - 边界：扫描门槛、漏洞豁免、分支保护均未修改；必需批准审核独立于 CI。详见 [修复记录](../../openspec/changes/archive/2026-10-17-fix-vulnerable-runtime-dependencies/tasks.md)。
 
 ### 2026-08-15 生产镜像 runner 阶段 pip 清理顺序导致 CI 构建失败

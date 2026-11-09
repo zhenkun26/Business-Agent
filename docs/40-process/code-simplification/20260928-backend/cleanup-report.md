@@ -1,13 +1,17 @@
 # Backend simplification delivery
 
+**Historical evidence navigation, 2026-11-09.** Original PR/run/artifact records from `zhenkun26/BusinessAgent` are not publicly accessible. Unlinked repository-qualified IDs below preserve the original events; they are not transferred PRs or replacement test results. Dates, counts, hashes, outcomes and time-of-writing limitations remain historical.
+
+**Separate current validation:** [CI run 42591561481](https://github.com/zhenkun26/Business-Agent/actions/runs/42591561481) was workflow_dispatch attempt 1 at exact head `15cd84f942ccc0ce49afcfc1513efe4c2f07f441`; all five jobs passed on 2026-11-09. Current technical regressions passed, but they do not reproduce this report's original focused baseline/final measurements or its PR merge and historical image-publication events. See the [current scope and limitations](../../../30-guides/open-source-quickstart.md#starter-verification--启动入口核验). This is not browser UI, full C10/RAG, formal UAT or release acceptance, and the run did not test this later navigation-only documentation revision.
+
 This report records the initial local delivery. The subsequently authorized CI repair
 and GitHub integration are tracked in [ci-publication-report.md](ci-publication-report.md).
 
 ## Integration completion (2026-09-29)
 
-[PR #1](https://github.com/zhenkun26/BusinessAgent/pull/1) merged as
+Historical PR `zhenkun26/BusinessAgent#1` merged as
 `2d4bfc17a34e45907404fdde38857e4cf96ad550` with the owner's one-time administrator
-exception. [Main CI](https://github.com/zhenkun26/BusinessAgent/actions/runs/36522224892)
+exception. Historical main CI run `zhenkun26/BusinessAgent/actions/runs/36522224892`
 passed 143 tests on each Python version, gitleaks, pip-audit, image build and Trivy.
 GHCR commit and `latest` tags share digest
 `sha256:9bcc1e277b43897907e2a2a341b9b42631909d58c9614fe63e55a42bda8302c8`.
