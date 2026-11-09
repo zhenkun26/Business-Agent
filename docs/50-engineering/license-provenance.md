@@ -1,5 +1,7 @@
 # License and data provenance inventory
 
+**Link maintenance — 2026-11-09:** Links in the phase-one assessment below use corresponding commits in this repository's [rewritten history](../40-process/business-agent-migration.md). The recorded candidate ID, file hashes, attribution and rights conclusions remain unchanged.
+
 ## Phase-one source assessment — 2026-11-08
 
 This additive assessment is bound to candidate `69b59e24b446ed1cdef451355b9f701044643bd4`.
@@ -29,11 +31,11 @@ The 465 controlled records are assessed in three disjoint groups:
   candidate. Their repository classification and license declaration support their inclusion
   in source-only phase one; they are not independent proof of original authorship.
 
-The [initial snapshot](https://github.com/zhenkun26/BusinessAgent/commit/b4cca93b762724c4070276b0bddb098811632ecd)
-contains all four; [the move](https://github.com/zhenkun26/BusinessAgent/commit/cb560d5ecd5df3259f95f85c112102fa3aafcd4e)
-is R100, and the same-day [MIT declaration](https://github.com/zhenkun26/BusinessAgent/commit/945e6a6105beab718eefc278f24b53e4e46a1809)
+The [initial snapshot](https://github.com/zhenkun26/Business-Agent/commit/624d10720a5e7c74132a0dc7c693401f010993d1)
+contains all four; [the move](https://github.com/zhenkun26/Business-Agent/commit/6b6f9dc88c579263159845414a65d3702c5c7ebb)
+is R100, and the same-day [MIT declaration](https://github.com/zhenkun26/Business-Agent/commit/91183e3a1b638d662c3a016f547812e53d5ae159)
 explicitly covers associated documentation files. The
-[product index](https://github.com/zhenkun26/BusinessAgent/blob/f7d684be1a46758bddddc2d13e2a13a33896ba51/docs/10-product-plan/README.md)
+[product index](https://github.com/zhenkun26/Business-Agent/blob/ab4cba3a49468e3378c77d09078c2d4b89e713d8/docs/10-product-plan/README.md)
 identifies three reports and an executive-summary PDF as selection research. The PDF has
 ChatGPT markings. No specific republication source or contrary license was identified;
 absence of contrary evidence is not independent authorship verification. GitHub author
@@ -42,10 +44,10 @@ and external factual/numerical claims were not independently checked. These limi
 remain recorded. No specific unresolved source-permission conflict was identified
 within this phase-one scope.
 
-- [deep-research-report (1).md](https://github.com/zhenkun26/BusinessAgent/blob/69b59e24b446ed1cdef451355b9f701044643bd4/docs/10-product-plan/research/deep-research-report%20%281%29.md): SHA-256 `086694bfcb524c831a8854f842b8a1d7c723fe75a2acd11d46c01b1734447e8c`.
-- [deep-research-report (2).md](https://github.com/zhenkun26/BusinessAgent/blob/69b59e24b446ed1cdef451355b9f701044643bd4/docs/10-product-plan/research/deep-research-report%20%282%29.md): SHA-256 `e8efa36c76da427a5c51e2f65707d3dc880fb44626580e8d8a2552820b24830e`.
-- [deep-research-report.md](https://github.com/zhenkun26/BusinessAgent/blob/69b59e24b446ed1cdef451355b9f701044643bd4/docs/10-product-plan/research/deep-research-report.md): SHA-256 `6a9328ba96eb437e47fd4addd66b2f391afcde671809bb9d434ac08de7748508`.
-- [执行摘要.pdf](https://github.com/zhenkun26/BusinessAgent/blob/69b59e24b446ed1cdef451355b9f701044643bd4/docs/10-product-plan/research/%E6%89%A7%E8%A1%8C%E6%91%98%E8%A6%81.pdf): SHA-256 `908eedeaf8e67ce44a2fdc7bf9c41f959a382f46b98e66cbf24f79295aede197`.
+- [deep-research-report (1).md](https://github.com/zhenkun26/Business-Agent/blob/abdc0112224dd2003f3f1aa586a1037e952597b2/docs/10-product-plan/research/deep-research-report%20%281%29.md): SHA-256 `086694bfcb524c831a8854f842b8a1d7c723fe75a2acd11d46c01b1734447e8c`.
+- [deep-research-report (2).md](https://github.com/zhenkun26/Business-Agent/blob/abdc0112224dd2003f3f1aa586a1037e952597b2/docs/10-product-plan/research/deep-research-report%20%282%29.md): SHA-256 `e8efa36c76da427a5c51e2f65707d3dc880fb44626580e8d8a2552820b24830e`.
+- [deep-research-report.md](https://github.com/zhenkun26/Business-Agent/blob/abdc0112224dd2003f3f1aa586a1037e952597b2/docs/10-product-plan/research/deep-research-report.md): SHA-256 `6a9328ba96eb437e47fd4addd66b2f391afcde671809bb9d434ac08de7748508`.
+- [执行摘要.pdf](https://github.com/zhenkun26/Business-Agent/blob/abdc0112224dd2003f3f1aa586a1037e952597b2/docs/10-product-plan/research/%E6%89%A7%E8%A1%8C%E6%91%98%E8%A6%81.pdf): SHA-256 `908eedeaf8e67ce44a2fdc7bf9c41f959a382f46b98e66cbf24f79295aede197`.
 
 This assessment does not clear third-party works outside its evidence, privacy in retained
 screenshots, downstream font exports, model/provider terms, or all wheel/native/OS license

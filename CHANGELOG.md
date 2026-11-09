@@ -10,6 +10,10 @@
 
 ## 未发布（Unreleased）
 
+### 文档维护（2026-11-09；未发布）
+
+- Update eight phase-one provenance object links to verified corresponding objects; retain the historical candidate ID, content hashes, attribution and rights conclusions. No software version or acceptance-gate change.
+
 ### 当前工程候选（2026-10-20；未发布）
 
 - F2-10 prerequisite: add one reviewed current-candidate entry and retained full-pytest helper, align Python/Node/integrity/control coverage with CI, and preserve historical C24 source gates. 35 new counterexamples; full 1218 tests + 484 subtests PASS with zero skips/xfails/deselections/guard denials; Node 69/14 and seven assets PASS. [Contract and limits](docs/50-engineering/offline-verification.md). CI-mode success is scoped offline execution; runtime/full RAG remain BLOCKED, F2-05 privacy/F2-09 sources pending, C10 OPEN. Local commit only; no push/upload/dispatch.
