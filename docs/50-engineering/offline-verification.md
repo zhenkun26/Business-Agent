@@ -1,11 +1,15 @@
 # Current-candidate offline verification and CI coverage (F2-10 prerequisite)
 
+**Historical evidence navigation, 2026-11-09.** Original PR/run/artifact records from `zhenkun26/BusinessAgent` are not publicly accessible. Unlinked repository-qualified IDs below preserve the original events; they are not transferred PRs or replacement test results. Dates, counts, hashes, outcomes and time-of-writing limitations remain historical.
+
+**Separate current validation:** [CI run 42591561481](https://github.com/zhenkun26/Business-Agent/actions/runs/42591561481) was workflow_dispatch attempt 1 at exact head `15cd84f942ccc0ce49afcfc1513efe4c2f07f441`; all five jobs passed on 2026-11-09. All eight current offline checks and both Python suites (2170 tests + 640 subtests each), current history/tree scanning, pip-audit and image/Trivy checks passed. Earlier admission, child-startup, dependency and image failures remain historical failures. See the [current scope and limitations](../30-guides/open-source-quickstart.md#starter-verification--启动入口核验). This is not browser UI, full C10/RAG, formal UAT or release acceptance, and the run did not test this later navigation-only documentation revision.
+
 
 <a id="review-ci-repair-20261107"></a>
 ## Draft PR #8 CI repair — 2026-11-07
 
 The owner authorized continuing PR/CI fixes and pushes; final merge remains their decision.
-[Initial CI run](https://github.com/zhenkun26/BusinessAgent/actions/runs/42360437018)
+Historical initial CI run `zhenkun26/BusinessAgent/actions/runs/42360437018`
 failed before tests because matrix record IDs contained dots rejected by the existing
 safe-ID validator. The matrix now supplies ci-3-11 and ci-3-13 without relaxing validation.
 
@@ -43,7 +47,7 @@ Its clean local eight-check receipt passed (2118 tests + 640 subtests), and its
 committed full-history/exact-tree scans passed after retaining and classifying
 44/42 raw findings respectively; neither result implied remote CI success.
 
-[The next CI run](https://github.com/zhenkun26/BusinessAgent/actions/runs/42362838030)
+The next historical CI run `zhenkun26/BusinessAgent/actions/runs/42362838030`
 passed record admission but failed the Python child on both versions; the other
 seven offline checks passed. Security/audit/image steps were not reached. The run
 tested merge d48559032d80f05f3d4f63d85ea4822bece8d8d8. No child traceback was
@@ -71,7 +75,7 @@ A fresh retained clean worktree and subsequent remote CI must verify the final c
 Commit 1dcd3d9dcffff7d7ac60e1b2cf168b6f93a0a26a passed all eight checks
 in a new retained local checkout with no initial results directory (2120 tests plus
 640 subtests, clean/stable binding). Its committed full-history/tree scans passed.
-[Remote run 42363479117](https://github.com/zhenkun26/BusinessAgent/actions/runs/42363479117)
+Historical remote run `zhenkun26/BusinessAgent/actions/runs/42363479117`
 then passed both Python 3.11/3.13 offline checks, coverage uploads, all 39 scanner
 regressions and actual PR history/tree scans. Actual merge checkout was
 0e8ec6f520fcaac2cc870a96106b7726d974f9a4. History retained 86 raw findings
@@ -113,7 +117,7 @@ pip-audit, both supported Python versions or the final Linux image.
 
 Fixed-Python-dependency commit ac385a9f0f3ed486ddad75f2d8c2c213ac12ab0c
 passed the exact clean local eight-check suite and full-history/tree secret scans.
-[Remote run 42364507658](https://github.com/zhenkun26/BusinessAgent/actions/runs/42364507658)
+Historical remote run `zhenkun26/BusinessAgent/actions/runs/42364507658`
 passed both complete Python jobs, including pip-audit (no known vulnerabilities).
 The production image built and passed installed-package/identity/import checks, but
 Trivy failed on four Debian HIGH findings and no CRITICAL findings:

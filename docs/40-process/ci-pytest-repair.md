@@ -1,5 +1,9 @@
 # CI pytest collection and regression repair
 
+**Historical evidence navigation, 2026-11-09.** Original PR/run/artifact records from `zhenkun26/BusinessAgent` are not publicly accessible. Unlinked repository-qualified IDs below preserve the original events; they are not transferred PRs or replacement test results. Dates, counts, hashes, outcomes and time-of-writing limitations remain historical.
+
+**Separate current validation:** [CI run 42591561481](https://github.com/zhenkun26/Business-Agent/actions/runs/42591561481) was workflow_dispatch attempt 1 at exact head `15cd84f942ccc0ce49afcfc1513efe4c2f07f441`; all five jobs passed on 2026-11-09. Both current Python suites (2170 tests + 640 subtests each), all eight offline checks and current scanner/audit/image gates passed. The old collection, scanner and Docker COPY failures below remain failures. See the [current scope and limitations](../30-guides/open-source-quickstart.md#starter-verification--启动入口核验). This is not browser UI, full C10/RAG, formal UAT or release acceptance, and the run did not test this later navigation-only documentation revision.
+
 Date: 2026-10-19. Change: `engineering-delivery-closeout`, task 7.2.3.
 Status: remote follow-up complete; `0d1a7ce` CI PASS. NOT_ACCEPTED_FOR_RELEASE.
 
@@ -11,7 +15,7 @@ explicitly authorized fixing `_redact_url` collection and subsequent failures wi
 skipping tests. This repair ends at a reviewed local commit; its push awaits confirmation.
 No merge, release, deployment, tag, spec synchronization or archive was performed.
 
-[C25 CI run 39205591288](https://github.com/zhenkun26/BusinessAgent/actions/runs/39205591288)
+Historical C25 CI run `zhenkun26/BusinessAgent/actions/runs/39205591288`
 failed collection in Python 3.11 and 3.13 at the stale import. C24/C23 failures remain
 historical FAIL, not relabelled by this local result. A new remote run is required after
 separate push authorization; image build and vulnerability scans remain unverified.
@@ -96,7 +100,7 @@ and the independent enterprise integration/UAT changes stay open. Wait for confi
 
 The user subsequently authorized pushing `b8c4457542781029333de8c3c930437fb28ef51a`,
 following remote CI and repairing exposed failures. The same-name remote hash was verified.
-[Run 39208343449](https://github.com/zhenkun26/BusinessAgent/actions/runs/39208343449)
+Historical run `zhenkun26/BusinessAgent/actions/runs/39208343449`
 passed **871 tests and 225 subtests, zero skips**, on both Linux Python 3.11 and 3.13.
 Reported line coverage was 75% (5934/7944 and 5933/7944 respectively). Both jobs then failed
 Gitleaks; pip-audit and Docker/Trivy did not execute. This run remains FAIL.
@@ -137,7 +141,7 @@ check BLOCKED; no failed entry. Dirty pre-commit candidate binding is explicitly
 
 ### Follow-up image build failure
 
-[Run 39208901960](https://github.com/zhenkun26/BusinessAgent/actions/runs/39208901960)
+Historical run `zhenkun26/BusinessAgent/actions/runs/39208901960`
 on pushed `16c882b` passed both Python jobs, both secret-scan steps and pip-audit.
 The production image build then failed: `.dockerignore` excluded the `scripts/` directory,
 so Dockerfile COPY could not read `verify_frontend_assets.py` or `recovery_archive.py`.
@@ -157,7 +161,7 @@ Image-context validation: all four image contract cases PASS; fixed offline inve
 
 ### Verified remote outcome
 
-[Run 39209313444](https://github.com/zhenkun26/BusinessAgent/actions/runs/39209313444)
+Historical run `zhenkun26/BusinessAgent/actions/runs/39209313444`
 for head `0d1a7ce2c26bedc4894c957c875648f131eb2993` is **PASS** across all three jobs:
 
 - Linux Python 3.11 and 3.13: **872 tests + 225 subtests each, zero skips/xfails**;

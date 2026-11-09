@@ -1,5 +1,9 @@
 # C24 offline final-candidate verification
 
+**Historical evidence navigation, 2026-11-09.** Original PR/run/artifact records from `zhenkun26/BusinessAgent` are not publicly accessible. Unlinked repository-qualified IDs below preserve the original events; they are not transferred PRs or replacement test results. Dates, counts, hashes, outcomes and time-of-writing limitations remain historical.
+
+**Separate current validation:** [CI run 42591561481](https://github.com/zhenkun26/Business-Agent/actions/runs/42591561481) was workflow_dispatch attempt 1 at exact head `15cd84f942ccc0ce49afcfc1513efe4c2f07f441`; all five jobs passed on 2026-11-09. Current Python/offline, scanner/audit/image, isolated persistence and 15 synthetic HTTP checks passed. Official Gitleaks 8.24.3 was checksum-verified; that does not prove a transient HTTP 504 or retry occurred in the new run. See the [current scope and limitations](../30-guides/open-source-quickstart.md#starter-verification--启动入口核验). This is not browser UI, full C10/RAG, formal UAT or release acceptance, and the run did not test this later navigation-only documentation revision.
+
 Date: 2026-10-19. Scope: E0/E1 only. **C24 remains open; overall acceptance is BLOCKED.**
 The [ISSUES acceptance criteria](../40-process/ISSUES.md#c24) remain authoritative.
 C23 `6de94c6` was pushed to `origin/codex/delivery-ci-gates` and verified before this increment.
@@ -258,7 +262,7 @@ incorrect. Earlier diff-check results describe only their actual inspected scope
 
 ### Verified code candidate CI — documentation follow-up
 
-[Run 42376168479](https://github.com/zhenkun26/BusinessAgent/actions/runs/42376168479)
+Historical run `zhenkun26/BusinessAgent/actions/runs/42376168479`
 passed all five jobs for code head 42644960a499cefe71c8ad21110bdd0b9cec39ce;
 actual merge checkout was 96fb4ed665f20e13d461829320bba913f6041b22.
 This section follows that verified code in documentation only. The later documentation
@@ -696,7 +700,7 @@ by these evidence and notice changes.
 ### Plan recorded before implementation
 
 Baseline: `0707b0d1e0b45559cd44a8dde3129b6d821fa17d`, PR #8.
-[CI 107](https://github.com/zhenkun26/BusinessAgent/actions/runs/42469818111)
+Historical CI #107 (`zhenkun26/BusinessAgent/actions/runs/42469818111`)
 attempts 1 and 2 failed while downloading the fixed official Gitleaks 8.24.3
 Linux archive with HTTP 504. This is an upstream download failure, not a secret
 finding or a failed Python assertion; later security/image checks did not run.

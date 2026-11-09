@@ -1,5 +1,9 @@
 # Scan before image publication
 
+**Historical evidence navigation, 2026-11-09.** Original PR/run/artifact records from `zhenkun26/BusinessAgent` are not publicly accessible. Unlinked repository-qualified IDs below preserve the original events; they are not transferred PRs or replacement test results. Dates, counts, hashes, outcomes and time-of-writing limitations remain historical.
+
+**Separate current validation:** [CI run 42591561481](https://github.com/zhenkun26/Business-Agent/actions/runs/42591561481) was workflow_dispatch attempt 1 at exact head `15cd84f942ccc0ce49afcfc1513efe4c2f07f441`; all five jobs passed on 2026-11-09. Current tests, security/image gates and nine publication-policy tests passed; GHCR login/push were skipped. This did not repeat the September image publication or grant a new merge/administrator exception. See the [current scope and limitations](../../../30-guides/open-source-quickstart.md#starter-verification--启动入口核验). This is not browser UI, full C10/RAG, formal UAT or release acceptance, and the run did not test this later navigation-only documentation revision.
+
 ## Scope and authorization
 
 Follow-up to the backend simplification commit `e8512e9`. The user authorized this CI
@@ -48,8 +52,8 @@ cannot be supplied by an agent review or bypassed with administrator privileges.
 
 ## Cloud PR validation and history repair
 
-[PR #1](https://github.com/zhenkun26/BusinessAgent/pull/1) was created with commit `7feb94a`.
-[Run 36516997345](https://github.com/zhenkun26/BusinessAgent/actions/runs/36516997345)
+Historical PR `zhenkun26/BusinessAgent#1` was created with commit `7feb94a`.
+Historical run `zhenkun26/BusinessAgent/actions/runs/36516997345`
 passed 143 tests on both Python 3.11 and 3.13. Both jobs then failed gitleaks before any
 meaningful scan: the default shallow checkout lacked the requested `e8512e9^..7feb94a`
 history (`unknown revision`). Docker and Trivy were skipped. This was a scanner setup
@@ -75,7 +79,7 @@ PR #1 merged as `2d4bfc17a34e45907404fdde38857e4cf96ad550` after the owner expli
 authorized an administrator exception for that PR only. The exception did not change
 branch protection and does not authorize bypasses on later PRs.
 
-[Main CI 36522224892](https://github.com/zhenkun26/BusinessAgent/actions/runs/36522224892)
+Historical main CI run `zhenkun26/BusinessAgent/actions/runs/36522224892`
 passed 143 tests on each Python version, gitleaks, pip-audit, image build, Trivy and
 publication. Trivy completed at 04:37:55 UTC before publication, which completed at
 04:38:14 UTC on 2026-09-29. Both Docker push logs and

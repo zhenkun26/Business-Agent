@@ -155,6 +155,7 @@ BusinessAgent/
     │   ├── release-management/         # UAT、灰度与正式放行契约
     │   └── uat-replay/                 # G0 技术彩排与证据边界
     └── changes/                        # 变更记录（propose→apply→archive 生命周期）
+        ├── clarify-historical-evidence-navigation/ # Historical navigation; candidate review and CI pending
         ├── engineering-delivery-closeout/ # S0/C24/C01 配置已交付；C01/C02/C03/C04/C05/C06/C07/C08/C09/C10 运行验收阻塞
         ├── crm-mail-sso-integration/       # CRM/邮件/SSO 真实接入（实施中 9/19）
         ├── uat-and-ga-rollout/             # UAT、灰度、上线门槛（实施中 8/15）
