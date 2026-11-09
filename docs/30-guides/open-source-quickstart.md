@@ -19,8 +19,42 @@ Stage one targets reproducible isolated startup with synthetic examples and hone
 
 ## Starter verification / 启动入口核验
 
-Scoped macOS arm64 checks passed with Python 3.13.15 and a previously approved binary-driver
-test adapter. Run-05 passed 15 real HTTP checks and 14 focused demo tests after a startup-log correction; owned services were stopped with data retained. Run-04 browser checks passed login, both greeting shortcuts, unsupported-operation rejection, current-session history, refresh/login isolation, relogin and logout. The log-only follow-up did not change UI bytes. The Mac adapter is not native libpq proof. Separately, [CI run 42376168479](https://github.com/zhenkun26/BusinessAgent/actions/runs/42376168479) passed all five jobs for code head 42644960a499cefe71c8ad21110bdd0b9cec39ce (actual merge checkout 96fb4ed665f20e13d461829320bba913f6041b22), including native-driver startup and 15/15 checks on its Ubuntu runner. That historical run did not assess source rights; see the current phase-one assessment above.
+[Fresh CI run 42591561481](https://github.com/zhenkun26/Business-Agent/actions/runs/42591561481)
+was workflow_dispatch attempt 1 at exact head
+`15cd84f942ccc0ce49afcfc1513efe4c2f07f441`, created 2026-11-09 09:12:08 UTC
+and completed 09:19:42 UTC. All five jobs succeeded. With publish=false, GHCR login
+and image push were both skipped.
+
+- Python 3.11 and 3.13 each passed 2170 tests + 640 subtests and all eight current
+  offline checks, plus nine publication-policy tests and 39 scanner regressions.
+- Actual event-history and exact final-tree secret scans and pip-audit passed under
+  the unchanged policy. The dispatch scan selected 113 commits and reported 111
+  scanned; the final tree contained 1,019 files, with zero unclassified findings.
+  This is the selected event scope, not proof that every repository branch was scanned.
+- The isolated C10 persistence slice passed. This does not establish full C10 or RAG
+  acceptance.
+- Native-libpq startup and all 15 synthetic HTTP checks passed on the Ubuntu runner,
+  with pure Python psycopg and no binary/C wrapper. Owned demo resources were stopped.
+  This run did not perform browser UI automation.
+- Docker build, actual installed inventory and Trivy passed. Trivy retained the
+  HIGH/CRITICAL, ignore-unfixed=true policy. The [current notice evidence](../../THIRD_PARTY_NOTICES.md#candidate-bound-linux-notice-evidence--2026-11-09)
+  binds the newly inspected artifact and image; it is not blanket distribution clearance.
+
+This is technical verification of the named head, not a fresh test of this subsequent
+documentation diff or acceptance of real enterprise use, formal UAT, production release,
+privacy, complete C10/RAG or source rights.
+
+**Historical Mac/browser observations, 2026-11-07:** macOS arm64 Python 3.13.15 used
+an approved binary-driver test adapter. Run-05 passed 15 actual HTTP checks and 14
+focused demo tests after a startup-log correction; owned services stopped with data
+retained. Run-04 browser checks passed login, both greeting shortcuts, unsupported-
+operation rejection, current-session history, refresh/login isolation, relogin and
+logout. Run-05 changed logging only, not UI bytes. These observations were not rerun
+by the new CI, and the Mac adapter is not native-libpq proof. The unchanged
+[dated record](../50-engineering/final-candidate-verification.md#stage-one-technical-candidate-progress--2026-11-07)
+and [older Linux CI record](../50-engineering/final-candidate-verification.md#verified-code-candidate-ci--documentation-follow-up)
+retain their original candidate IDs, counts and limitations. Neither establishes source
+rights; see the current phase-one assessment above.
 
 The verified Linux path assumes an Ubuntu CI-style environment with Python 3.13 already installed, a running accessible Docker daemon, and configured Ubuntu/PGDG APT sources. It is not a verified native-libpq setup for macOS or every bare Linux host. Complete the isolated setup and import preflight below before startup.
 
@@ -42,7 +76,7 @@ Optional tracked acceptance (creates synthetic users/sessions and a redacted rep
     python -I -B enterprise-agent/scripts/check_synthetic_demo.py --execute --require-python-driver --run-dir enterprise-agent/eval/results/my-synthetic-demo-01
 
 The pure-driver option deliberately rejects binary/C implementations, including the
-historical Mac test adapter. The Ubuntu CI run passed this native-driver check; the historical Mac adapter remains a separate result.
+historical Mac test adapter. The fresh run named above passed this native-driver check; the historical Mac adapter remains a separate result.
 
 Stop after use, or after partial startup with a retained receipt:
 
@@ -59,7 +93,7 @@ The planned starter uses Python 3.11 or later, the existing production Python de
 Docker for isolated PostgreSQL/Redis, and native **libpq** on the host. The project's pure
 psycopg package needs libpq available to the operating system's dynamic loader; pip
 installation alone is insufficient. No new psycopg binary dependency is added for the
-demo. For Debian/Ubuntu, the system runtime package is libpq5. In an isolated environment with package-install permission, install it before the Python requirements. The successful Ubuntu CI explicitly installed libpq5 18.6-1.pgdg24.04+2, observed libpq version 180006 and pure Python driver implementation, and verified binary/C wrappers absent. This result depends on that runner's existing base tools and configured APT sources, not a universal bare-machine proof.
+demo. For Debian/Ubuntu, the system runtime package is libpq5. In an isolated environment with package-install permission, install it before the Python requirements. The fresh Ubuntu CI named above explicitly provisioned libpq5 and verified pure Python driver implementation with binary/C wrappers absent. The exact package version 18.6-1.pgdg24.04+2 and libpq 180006 belong to the older Linux CI record linked above, not a newly asserted package-version result. The verified path depends on the runner's existing base tools and configured APT sources, not a universal bare-machine proof.
 
 计划入口需要 Python 3.11+、现有生产依赖、运行隔离 PostgreSQL/Redis 的 Docker，以及
 宿主机原生 libpq。仅安装 Python requirements 不代表环境已经完整可用；本演示不会另加
@@ -93,9 +127,9 @@ A full page refresh returns to login. After relogin there is no visible entry to
 
 Historical synthetic-example evidence (not superseding the current source-only assessment):
 
-The source inventory now contains 465 records: the historical 457 baseline plus eight new engineering fixtures. Registration does not clear unknown rights. The maintainer stated that three C17 documents (two departmental documents and after-sales policy) and eight CRM examples were fictional from creation; this is scoped author testimony, not external permission or clearance of other C17 material. The completed separate CRM increment labels eight fictional customers and uses NOT-A-PHONE telephone placeholders and example.invalid customer email addresses. The internal-mail seed deliberately retains fictional-demo-manager@company.internal with a synthetic-data comment: this private demo domain is required by the unchanged internal-mail safety classifier. It is not a customer address or a relaxed mail policy. Three focused tests passed; order and non-contact fields were unchanged. The expected full Python count is 2137 (2120 baseline + 14 demo + 3 CRM). Both supported Python CI jobs passed 2137 tests plus 640 subtests; the recorded CI also verified candidate binding and the native starter.
+The source inventory now contains 465 records: the historical 457 baseline plus eight new engineering fixtures. Registration does not clear unknown rights. The maintainer stated that three C17 documents (two departmental documents and after-sales policy) and eight CRM examples were fictional from creation; this is scoped author testimony, not external permission or clearance of other C17 material. The completed separate CRM increment labels eight fictional customers and uses NOT-A-PHONE telephone placeholders and example.invalid customer email addresses. The internal-mail seed deliberately retains fictional-demo-manager@company.internal with a synthetic-data comment: this private demo domain is required by the unchanged internal-mail safety classifier. It is not a customer address or a relaxed mail policy. Three focused tests passed; order and non-contact fields were unchanged. The historical expected full Python count was 2137 (2120 baseline + 14 demo + 3 CRM). Both supported Python jobs in the older Linux CI record passed 2137 tests plus 640 subtests and verified candidate binding and the native starter. Those counts belong to that earlier code candidate, not the fresh run above.
 
-This document is a documentation-only follow-up to the verified code head named above. Any later documentation commit and its own CI result are recorded separately in the PR; no self-referential commit hash is invented here. Existing successful CI evidence does not by itself prove a new starter works. See [source provenance](../50-engineering/license-provenance.md) and [third-party notices](../../THIRD_PARTY_NOTICES.md); unknown rights are not permission to redistribute.
+This document is a documentation-only follow-up to the fresh verified head named above. Any later documentation commit needs its own candidate checks; the cited run must not be presented as executing that later diff. Existing successful CI evidence does not by itself prove a different starter works. See [source provenance](../50-engineering/license-provenance.md) and [third-party notices](../../THIRD_PARTY_NOTICES.md); unknown rights are not permission to redistribute.
 
 ## Later stages / 后续三个阶段
 

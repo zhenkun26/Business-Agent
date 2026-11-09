@@ -10,6 +10,22 @@ A multi-agent platform for enterprise knowledge and business workflows, bringing
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue)](enterprise-agent/pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
+## Current technical verification
+
+The [2026-11-09 CI verification](https://github.com/zhenkun26/Business-Agent/actions/runs/42591561481)
+is workflow_dispatch attempt 1 at exact head `15cd84f942ccc0ce49afcfc1513efe4c2f07f441`.
+All five jobs passed: Python 3.11/3.13 each ran 2170 tests + 640 subtests, eight offline
+checks, scanner/dependency checks, the isolated C10 persistence slice, 15 synthetic HTTP
+checks with native libpq on Ubuntu, and image/installed-inventory/Trivy checks.
+With publish=false, GHCR login and push were skipped. This is not fresh browser testing,
+full C10/RAG, formal UAT or release acceptance. See the [quickstart](docs/30-guides/open-source-quickstart.md#starter-verification--启动入口核验)
+for scan scope and policy limits. This later documentation diff was not executed by that run.
+
+The [2026-11-07 Mac/browser observations](docs/50-engineering/final-candidate-verification.md#stage-one-technical-candidate-progress--2026-11-07)
+are historical: Mac used a binary-driver adapter; current-session history was visible,
+refresh returned to login, and relogin had no visible old-session recovery entry. These
+results do not prove every bare machine/OS works or clear source rights or enterprise acceptance.
+
 ## Phase-one source scope
 
 The [candidate-bound source assessment](docs/50-engineering/license-provenance.md#phase-one-source-assessment--2026-11-08) covers 465 records: 229 supported by
