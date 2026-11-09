@@ -17,7 +17,7 @@
 
 - [x] 3.1 Run strict OpenSpec, whitespace, local-link/fragment, privacy-pattern and exact scope checks; report actual results without a fresh local full-suite claim.
 - [x] 3.2 Run applicable unchanged inventory/build/frontend and focused regression checks; distinguish failures or unavailable checks from passes.
-- [ ] 3.3 Complete independent diff/evidence review and resolve any blocking findings before marking the candidate ready.
+- [x] 3.3 Complete independent diff/evidence review and resolve any blocking findings before marking the candidate ready.
 
 ## Verification record — 2026-11-09
 
@@ -74,8 +74,8 @@ new base or the post-merge candidate.
 - [x] 4.1 Merge the verified new main normally and verify every resulting file is the exact union of the two reviewed batches; retain both CHANGELOG entries and no unrelated changes.
 - [x] 4.2 Add only “已” to the GATE-01 technical-regression label; run all nine existing UAT/release/grey-plan tests unchanged and retain the overall BLOCKED verdict.
 - [x] 4.3 Record the failed candidate CI, exact old/new bases and counting conventions while preserving the original initial-preparation record.
-- [ ] 4.4 Verify the complete new-base diff, isolated one-character correction, merge resolution and strict validation; obtain independent review of the corrected candidate.
-- [ ] 4.5 After separately authorized publication, require fresh final-candidate CI and artifact/privacy review; do not reuse the prior successful run as this candidate's result.
+- [x] 4.4 Verify the complete new-base diff, isolated one-character correction, merge resolution and strict validation; obtain independent review of the corrected candidate.
+- [x] 4.5 After separately authorized publication, require fresh final-candidate CI and artifact/privacy review; do not reuse the prior successful run as this candidate's result.
 
 Post-merge local checks passed on the working repair candidate: all nine unchanged
 UAT/release/grey-plan tests, with zero skips or audit-guard denials; nine publication-
@@ -92,9 +92,49 @@ does not change tests, code, gates, dependencies, manifests, licenses or attribu
 No further push, PR-state change, archive, main merge or image publication is included
 in the local repair preparation.
 
-## Workflow follow-up
+## Initial workflow follow-up (retained)
 
 - After review and verification, archive only this lifecycle; skip_specs means no main-spec changes.
 - Verify the archived artifact paths and update the scoped contents.md entry.
 - Commit only a complete reviewed candidate if requested, using the approved owner noreply identity; record its own verification separately from the cited run.
 - No push, PR, merge, image publication, deployment or history rewriting is part of this private preparation.
+
+
+## 5. Verified candidate and archive scope — 2026-11-09
+
+The repaired documentation candidate received independent review with no blocking
+findings, and [CI run 42600959895](https://github.com/zhenkun26/Business-Agent/actions/runs/42600959895)
+completed successfully (pull_request, attempt 1). Its source head is
+94d0a9b31af17ea544dffbd89f324e486abe72ab, tested merge is
+83e9cfa7613428653f12165e9d978e7db8a9b469, and their shared tree is
+2ed8a9587573c3e2db30a16b9c1d54a5faec8167. This evidence completes tasks 3.3,
+4.4 and 4.5 for that exact candidate; the earlier failure record remains unchanged.
+
+All five jobs passed. Python 3.11 and 3.13 each passed 2,170 tests plus 640 subtests
+and all eight offline checks. Nine publication-policy tests, 39 scanner regressions,
+the actual scoped secret scans and pip-audit passed. The isolated C10 persistence
+checks, 15 synthetic native-libpq HTTP checks and Docker/image/inventory/Trivy checks
+passed. GHCR login and image publication were skipped. The existing HIGH/CRITICAL,
+ignore-unfixed Trivy policy and all other gates remained unchanged.
+
+Independent privacy review covered five job logs, nine artifacts and 18 newly public
+objects, including nested Docker protobuf and concatenated-JSON contents. All 18
+positive controls passed; no tested private-data pattern was found in that scope.
+This bounded review is not exhaustive privacy certification or distribution-rights
+clearance. Full C10/RAG, formal UAT, release and rights acceptance remain unestablished;
+no fresh browser automation or deployment is claimed.
+
+Only this completed docs-only lifecycle is approved for local archive preparation,
+with skip_specs and no main-spec sync. Move its four existing artifacts together and
+update only its contents.md location; retain the existing changelog entry without a
+duplicate. Other active/archived changes, code, tests, workflows, gates, manifests,
+licenses and attribution remain unchanged. The earlier private-preparation and
+post-failure blocks retain the status at those stages, not the present archive scope.
+
+The subsequent archive/index candidate is a different revision and has not been
+executed by run 42600959895. After separate review and authorized publication, its own
+complete CI and artifact/privacy review are still required. Record that later result
+in the PR discussion rather than adding a self-referential source receipt. Local full
+pytest remains unavailable because 14 production pins differ, and pinned Gitleaks
+8.24.3 remains unavailable. No full local rerun, new push, ready transition, main
+merge, image publication or deployment is included in this local archive preparation.

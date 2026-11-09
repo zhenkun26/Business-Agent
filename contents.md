@@ -155,11 +155,11 @@ BusinessAgent/
     │   ├── release-management/         # UAT、灰度与正式放行契约
     │   └── uat-replay/                 # G0 技术彩排与证据边界
     └── changes/                        # 变更记录（propose→apply→archive 生命周期）
-        ├── refresh-current-ci-evidence/   # Six live evidence references; scoped validation and review
         ├── engineering-delivery-closeout/ # S0/C24/C01 配置已交付；C01/C02/C03/C04/C05/C06/C07/C08/C09/C10 运行验收阻塞
         ├── crm-mail-sso-integration/       # CRM/邮件/SSO 真实接入（实施中 9/19）
         ├── uat-and-ga-rollout/             # UAT、灰度、上线门槛（实施中 8/15）
         └── archive/                        # 已归档变更（全部完成）
+            ├── 2026-11-09-refresh-current-ci-evidence/ # Six live references; candidate CI verified, archive revision pending
             ├── 2026-11-09-update-mapped-provenance-links/ # Eight links and unchanged historical evidence
             ├── 2026-08-04-documentation-baseline/        # 文档基线（归档）
             ├── 2026-08-04-complete-business-processes/   # 业务闭环补齐 41/41（归档）
