@@ -12,6 +12,8 @@
 
 ### 文档维护（2026-11-09；未发布）
 
+- Link the bilingual README source paragraphs to the labeled migration explanation; preserve original contributor and maintenance credit, license statements and historical evidence. No acceptance-gate change.
+
 - Update eight phase-one provenance object links to verified corresponding objects; retain the historical candidate ID, content hashes, attribution and rights conclusions. No software version or acceptance-gate change.
 
 ### 当前工程候选（2026-10-20；未发布）
