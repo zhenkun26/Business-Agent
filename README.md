@@ -15,10 +15,16 @@
 本轮目标是隔离启动、合成示例和清楚的许可证/来源说明，后续依次是**企业试点评估、
 真实环境试点、生产使用**，不宣称已有企业落地或正式 UAT。
 [开源快速开始与验证状态](docs/30-guides/open-source-quickstart.md)说明专用演示入口、
-原生 libpq 前置、私密测试凭证与保留数据的停止方法。当前 Mac 检查使用二进制驱动适配器，
-真实浏览器检查通过；[原仓库的历史CI证据](https://github.com/zhenkun26/BusinessAgent/actions/runs/42376168479)五项作业通过，包含 Ubuntu runner 的原生 libpq、15项演示检查及候选绑定。
-这不等于所有裸机/操作系统可复现，也不解除未知来源或完整企业/RAG验收限制。
-当前会话历史可查看，刷新会回登录，重登后没有恢复旧会话的可见入口。
+原生 libpq 前置、私密测试凭证与保留数据的停止方法。
+2026-11-09 的[新 CI 验证](https://github.com/zhenkun26/Business-Agent/actions/runs/42591561481)
+为 `workflow_dispatch` attempt 1，精确提交 `15cd84f942ccc0ce49afcfc1513efe4c2f07f441`，五项作业通过：
+Python 3.11/3.13 各 2170 tests + 640 subtests、八项离线检查、扫描/依赖检查、
+C10 隔离持久化切片、Ubuntu 原生 libpq 的 15 项合成 HTTP 检查及镜像/安装清单/Trivy。
+`publish=false`，GHCR 登录与推送跳过；不代表浏览器重验、完整 C10/RAG、正式 UAT 或发布验收。
+扫描范围与策略限制见快速开始；本次后续文档修改不属于该 CI 执行的提交。
+[2026-11-07 的 Mac/浏览器观察](docs/50-engineering/final-candidate-verification.md#stage-one-technical-candidate-progress--2026-11-07)
+仅为历史证据，Mac 使用二进制驱动适配器；当时当前会话历史可查看，刷新会回登录，重登后无恢复旧会话的可见入口。
+这些结果不证明所有裸机/操作系统可复现，也不解除来源权利或完整企业验收限制。
 来源清单共465项：[候选绑定评估](docs/50-engineering/license-provenance.md#phase-one-source-assessment--2026-11-08)分为229项上游证据支持、232项共同项目贡献（维护者转述共同贡献者同意MIT许可）及4项仓库声明MIT的随附研究文档。历史PENDING清单不改，不代表465项现时阻塞。此结论仅针对源码第一阶段，不是独立原创证明、版权转让或第三方全面清权。后续二进制发行和三个企业阶段仍需分别审查；最终文档审核和候选验证完成前不宣称可合并。
 
 ## 审批安全边界

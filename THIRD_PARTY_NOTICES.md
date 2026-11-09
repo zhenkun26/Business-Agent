@@ -5,20 +5,27 @@ clearance. The project's [MIT license](LICENSE) does not relicense third-party
 components, fonts, media or datasets. The [F2-09 inventory and review procedure](docs/50-engineering/license-provenance.md)
 records exact inputs, evidence limits and unresolved rights.
 
-## Candidate-bound Linux notice evidence — 2026-11-08
+## Candidate-bound Linux notice evidence — 2026-11-09
 
-[CI #106](https://github.com/zhenkun26/BusinessAgent/actions/runs/42450124426)
-verified head `69b59e24b446ed1cdef451355b9f701044643bd4` through actual PR merge ref
-`9ed7f55adf7b62e93bbd52a46753916a2f15fa25`, with base
-`f7d684be1a46758bddddc2d13e2a13a33896ba51`. All five jobs succeeded; Trivy succeeded,
-and GHCR login/push completed as skipped. This was verification, not publication or deployment.
-The [production-build-inventory artifact](https://github.com/zhenkun26/BusinessAgent/actions/runs/42450124426/artifacts/13605366825)
-ZIP SHA-256 is `70ca8d0522fb11e304a20303afdae0135a24aa1a475495956962bbaa70779319`.
-Its receipt reports `SCOPED_NOTICE_BYTES_VERIFIED` for exactly eight notice files and
-binds their SHA-256 values at `/app/deploy/third-party-notices` in image
-`sha256:f880389b3f041b210edddc5dfa4f0d640c85b56dbac2da4abed60f4fec118e19`.
-This is actual scoped final-image retention evidence, not a complete image license audit.
-It does not bind this subsequent documentation diff to a newly successful CI run.
+[CI run 42591561481](https://github.com/zhenkun26/Business-Agent/actions/runs/42591561481),
+workflow_dispatch attempt 1, verified exact head
+`15cd84f942ccc0ce49afcfc1513efe4c2f07f441` on 2026-11-09
+(created 09:12:08 UTC; completed 09:19:42 UTC). All five jobs succeeded.
+Docker build, actual installed inventory and Trivy passed under the existing
+HIGH/CRITICAL, ignore-unfixed=true policy. With publish=false, GHCR login and push
+were skipped. This was verification, not publication or deployment.
+
+The [run's production-build-inventory artifact](https://github.com/zhenkun26/Business-Agent/actions/runs/42591561481)
+has ID `13661334195` and ZIP SHA-256
+`74dbfde9f052b3ae3ad8c759a1ad3c25943f969edbe9bae5c98d70400ec1cc17`.
+Its independently inspected receipt reports `SCOPED_NOTICE_BYTES_VERIFIED` for exactly
+eight notice files and binds their SHA-256 values at `/app/deploy/third-party-notices`
+in image `sha256:e5fabe6178718b0db5bea2111ec26f0d6a53a21fa93dacda98cec6d36d6c1d39`,
+checked with network disabled and a read-only filesystem. This is actual scoped
+final-image retention evidence, not a complete image license or redistribution audit.
+The artifact's recorded expiry is 2027-02-07 09:12:09 UTC; authenticated download was
+verified, but anonymous download was not tested and permanent access is not promised.
+This subsequent documentation diff is not the source revision executed by that run.
 
 The [phase-one source assessment](docs/50-engineering/license-provenance.md#phase-one-source-assessment--2026-11-08) distinguishes 229 upstream-supported records, 232 common-project contributions with maintainer-reported MIT consent, and four repository-declared MIT associated research documents. Historical PENDING labels remain unchanged, not 465 unresolved present-day blockers. BusinessAgent derives from the [hello-xiao-a](https://github.com/kingoftaro/hello-xiao-a/tree/8a9544594d129de0dc3b4738b988d36372091d5b) jointly developed with kingoftaro; this attribution does not transfer copyright or relicense third-party material.
 
