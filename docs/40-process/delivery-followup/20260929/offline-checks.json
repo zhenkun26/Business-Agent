@@ -198,7 +198,7 @@
           {
             "gate_id": "GATE-01",
             "gate": "核心场景自动化回归全绿",
-            "evidence": "[CI 36522224892](https://github.com/zhenkun26/BusinessAgent/actions/runs/36522224892)、`docs/40-process/交付与离线推进记录-2026-09-29.md`",
+            "evidence": "历史 CI `zhenkun26/BusinessAgent/actions/runs/36522224892`（原始 CI 证据目前不公开可访问）；导航规范化衍生副本（2026-11-09）：本文件不是原始执行输出，仅本 evidence 字段经过编辑，其他数据保持不变，未重新执行历史任务。[原始回执](https://github.com/zhenkun26/Business-Agent/blob/54a3954fd8eda56099f3efa33af370b1eb0bf4cd/docs/40-process/delivery-followup/20260929/offline-checks.json)（SHA-256: `2812b7b2cbeb3961744785e777d404ca62314ef60646a2e270b02f08c426c5f9`）；`docs/40-process/交付与离线推进记录-2026-09-29.md`",
             "current_status": "已通过：应用提交 2d4bfc1，Python 3.11/3.13 各 143 项；适用该自动化范围",
             "ready": true,
             "referenced_paths": [
