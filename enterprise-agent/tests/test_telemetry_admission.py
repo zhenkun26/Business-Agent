@@ -4,14 +4,15 @@ from __future__ import annotations
 import ast
 import asyncio
 import builtins
+import io
 import os
 from pathlib import Path
 import runpy
-import subprocess
 import sys
 from types import ModuleType, SimpleNamespace
 from unittest.mock import AsyncMock, Mock, patch
 
+import dotenv
 import pytest
 
 from app.config import Settings, get_settings
@@ -368,24 +369,17 @@ def test_requested_sdk_failure_stops_before_model_probe_or_database(file, functi
     database.assert_not_awaited()
 
 
-def test_package_import_blocks_third_party_dotenv_reload_of_telemetry_keys(tmp_path):
+def test_package_bootstrap_blocks_third_party_dotenv_reload_of_telemetry_keys():
     # pymilvus.settings calls load_dotenv() at import time, after the telemetry signature is
     # taken; a local .env with inert LANGCHAIN_/OTEL_ keys then crashed startup.
-    env_file = tmp_path / '.env'
-    env_file.write_text('LANGCHAIN_TRACING_V2=false\nOTEL_ENABLED=false\n')
-    code = (
-        'import os, sys, dotenv\n'
-        'import app\n'
-        'from app.config import get_settings\n'
-        'from app.observability.telemetry_policy import admit_telemetry\n'
-        'settings = get_settings()\n'
-        'dotenv.load_dotenv(sys.argv[1])\n'
-        'assert "LANGCHAIN_TRACING_V2" not in os.environ\n'
-        'assert "OTEL_ENABLED" not in os.environ\n'
-        'admit_telemetry(settings)\n'
-    )
-    env = {k: v for k, v in os.environ.items()
-           if not k.upper().startswith(policy._PREFIXES) and k != 'PYTHON_DOTENV_DISABLED'}
-    result = subprocess.run([sys.executable, '-c', code, str(env_file)], cwd=ROOT, env=env,
-                            capture_output=True, text=True, timeout=120)
-    assert result.returncode == 0, result.stderr[-2000:]
+    clean = {k: v for k, v in os.environ.items()
+             if not k.upper().startswith(policy._PREFIXES) and k != 'PYTHON_DOTENV_DISABLED'}
+    with patch.dict(os.environ, clean, clear=True):
+        exec(compile((ROOT / 'app/__init__.py').read_bytes(), 'synthetic_package', 'exec'), {})
+        signature = policy.process_telemetry_signature()
+        loaded = dotenv.load_dotenv(stream=io.StringIO(
+            'LANGCHAIN_TRACING_V2=false\nOTEL_ENABLED=false\n'))
+        assert loaded is False
+        assert 'LANGCHAIN_TRACING_V2' not in os.environ
+        assert 'OTEL_ENABLED' not in os.environ
+        assert policy.process_telemetry_signature() == signature
