@@ -160,6 +160,7 @@ BusinessAgent/
         ├── crm-mail-sso-integration/       # CRM/邮件/SSO 真实接入（实施中 9/19）
         ├── uat-and-ga-rollout/             # UAT、灰度、上线门槛（实施中 8/15）
         └── archive/                        # 已归档变更（全部完成）
+            ├── 2026-11-10-clarify-readme-compensation/ # 双语 README 当前执行与历史补偿证据边界
             ├── 2026-11-09-align-public-migration-facts/ # English-default bilingual README and migration facts
             ├── 2026-11-09-normalize-final-historical-references/ # Historical navigation derivative and errata
             ├── 2026-11-09-clarify-historical-evidence-navigation/ # Implementation CI verified; archive revision pending
