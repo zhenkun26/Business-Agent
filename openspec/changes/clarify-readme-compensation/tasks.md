@@ -9,7 +9,7 @@
 ## 2. Review and publication
 
 - [x] 2.1 Review the complete diff and verify application, workflow, schema, dependency and historical evidence files are unchanged.
-- [ ] 2.2 Open a draft PR, verify its head and changed-file scope, and record the corresponding CI state without reusing older evidence.
+- [x] 2.2 Open a draft PR, verify its head and changed-file scope, and record the corresponding CI state without reusing older evidence.
 
 ## Workflow follow-up
 
@@ -26,3 +26,12 @@
 - The full offline pytest entry reported `BLOCKED: DEPENDENCIES_UNAVAILABLE`;
   it did not run the full suite. Safe preflight execution passed, with UAT and
   release gates still BLOCKED. No application or real provider was started.
+
+## PR verification
+
+[Draft PR #7](https://github.com/zhenkun26/Business-Agent/pull/7) was opened with
+implementation head `84234dfd688783f8acc94c1fb5527bd3ae619152` and seven documentation
+files. Its tree exactly matched the locally reviewed tree
+`10e9351d7a8096cb363ed4211909e93e2abd0748`. CI run `42760956826` was in progress when
+this record was written, not passed. This record creates a later documentation
+revision; check that revision's own CI before any merge. No acceptance gate is closed.
