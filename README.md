@@ -318,7 +318,10 @@ and candidate checks remain required before merge.
 
 ## Current status and limitations
 
-Core agent workflows, RAG, permission checks, approvals, compensation, and the Web interface are implemented.
+Core agent workflows, RAG, permission checks, approvals, and the Web interface are implemented.
+Failed or uncertain actions stop for human review; current execution does not automatically
+compensate. Historical Saga and compensation records remain available as evidence, not
+authorization to issue inverse actions. See the [approval safety boundary](#approval-safety-boundary).
 The repository also contains automated tests, technical verification, and delivery records.
 
 Current boundaries:
