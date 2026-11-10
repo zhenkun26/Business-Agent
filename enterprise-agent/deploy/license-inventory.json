@@ -2885,7 +2885,7 @@
     "enterprise-agent/tests/test_telemetry_admission.py": {
       "category": "test-fixtures",
       "status": "PENDING_SOURCE_REVIEW",
-      "sha256": "d7bdbcf4db454a2bda8a5dc7fe4285d15024b9811c7d0a9309ec3d2b3b0ad22c"
+      "sha256": "cbd53c2930570ab67a35999ba0ffab9be2ab7fdbb96be107f346988e2091c2bb"
     },
     "enterprise-agent/tests/test_ticket_external.py": {
       "category": "test-fixtures",

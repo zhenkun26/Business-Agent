@@ -7,6 +7,7 @@ import builtins
 import os
 from pathlib import Path
 import runpy
+import subprocess
 import sys
 from types import ModuleType, SimpleNamespace
 from unittest.mock import AsyncMock, Mock, patch
@@ -365,3 +366,26 @@ def test_requested_sdk_failure_stops_before_model_probe_or_database(file, functi
                         else values[function]())
     model.assert_not_awaited()
     database.assert_not_awaited()
+
+
+def test_package_import_blocks_third_party_dotenv_reload_of_telemetry_keys(tmp_path):
+    # pymilvus.settings calls load_dotenv() at import time, after the telemetry signature is
+    # taken; a local .env with inert LANGCHAIN_/OTEL_ keys then crashed startup.
+    env_file = tmp_path / '.env'
+    env_file.write_text('LANGCHAIN_TRACING_V2=false\nOTEL_ENABLED=false\n')
+    code = (
+        'import os, sys, dotenv\n'
+        'import app\n'
+        'from app.config import get_settings\n'
+        'from app.observability.telemetry_policy import admit_telemetry\n'
+        'settings = get_settings()\n'
+        'dotenv.load_dotenv(sys.argv[1])\n'
+        'assert "LANGCHAIN_TRACING_V2" not in os.environ\n'
+        'assert "OTEL_ENABLED" not in os.environ\n'
+        'admit_telemetry(settings)\n'
+    )
+    env = {k: v for k, v in os.environ.items()
+           if not k.upper().startswith(policy._PREFIXES) and k != 'PYTHON_DOTENV_DISABLED'}
+    result = subprocess.run([sys.executable, '-c', code, str(env_file)], cwd=ROOT, env=env,
+                            capture_output=True, text=True, timeout=120)
+    assert result.returncode == 0, result.stderr[-2000:]
