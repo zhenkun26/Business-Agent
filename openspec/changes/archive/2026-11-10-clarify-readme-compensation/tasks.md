@@ -35,3 +35,23 @@ files. Its tree exactly matched the locally reviewed tree
 `10e9351d7a8096cb363ed4211909e93e2abd0748`. CI run `42760956826` was in progress when
 this record was written, not passed. This record creates a later documentation
 revision; check that revision's own CI before any merge. No acceptance gate is closed.
+
+## Pre-archive verification
+
+[CI run 42761059636](https://github.com/zhenkun26/Business-Agent/actions/runs/42761059636),
+attempt 1, passed all five jobs for head `d57dfd95b3aba54c31bc04fa7c8afd5537a38fc5`.
+It tested GitHub's PR merge revision `6a26e8ded903fdb2c8de479553033147a23bf1f6`.
+Python 3.11 and 3.13 each passed 2170 tests plus 640 subtests and eight offline checks.
+The existing isolated C10 persistence slice, synthetic demo and image/security checks
+also passed. Image publication was not enabled. These checks do not establish full
+C10, full RAG, real-enterprise UAT or production acceptance.
+
+All five implementation/review tasks are complete. This documentation-only change
+has no delta specifications to sync. Its archive move and navigation update create
+a later revision, which must pass its own checks and CI before merge; a merge must
+also be verified separately. The older pending-CI record above remains historical.
+
+Scoped strict validation and archived-task validation passed for this change.
+The repository-wide archived-task check still reports one incomplete task in the
+unchanged `2026-08-04-documentation-baseline` archive; this correction does not
+alter or claim to resolve that historical finding.
