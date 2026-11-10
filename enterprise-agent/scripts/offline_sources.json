@@ -60,7 +60,7 @@
     ]
   },
   "expected": {
-    "python": 2170,
+    "python": 2171,
     "node-page": 80,
     "node-credentials": 14,
     "frontend-assets": 8,
