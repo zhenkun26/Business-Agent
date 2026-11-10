@@ -1,7 +1,15 @@
 """Hello，智多星——企业知识工作流 Agent - 主应用入口"""
 
+import os
+
+# Settings reads .env itself (pydantic-settings dotenv_values, unaffected by this switch).
+# Stop third-party import-time load_dotenv() calls (e.g. pymilvus.settings) from copying
+# .env into os.environ after the process telemetry signature is taken, which otherwise
+# rejects startup as TELEMETRY_CONFIGURATION_CHANGED. Requires python-dotenv>=1.2.0.
+os.environ['PYTHON_DOTENV_DISABLED'] = '1'
+
 # Standard-library gate precedes SDK imports in normal app.* entry points.
-from app.observability.telemetry_policy import check_process_telemetry
+from app.observability.telemetry_policy import check_process_telemetry  # noqa: E402
 
 check_process_telemetry()
 

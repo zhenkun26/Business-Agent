@@ -4,6 +4,7 @@ from __future__ import annotations
 import ast
 import asyncio
 import builtins
+import io
 import os
 from pathlib import Path
 import runpy
@@ -11,6 +12,7 @@ import sys
 from types import ModuleType, SimpleNamespace
 from unittest.mock import AsyncMock, Mock, patch
 
+import dotenv
 import pytest
 
 from app.config import Settings, get_settings
@@ -365,3 +367,19 @@ def test_requested_sdk_failure_stops_before_model_probe_or_database(file, functi
                         else values[function]())
     model.assert_not_awaited()
     database.assert_not_awaited()
+
+
+def test_package_bootstrap_blocks_third_party_dotenv_reload_of_telemetry_keys():
+    # pymilvus.settings calls load_dotenv() at import time, after the telemetry signature is
+    # taken; a local .env with inert LANGCHAIN_/OTEL_ keys then crashed startup.
+    clean = {k: v for k, v in os.environ.items()
+             if not k.upper().startswith(policy._PREFIXES) and k != 'PYTHON_DOTENV_DISABLED'}
+    with patch.dict(os.environ, clean, clear=True):
+        exec(compile((ROOT / 'app/__init__.py').read_bytes(), 'synthetic_package', 'exec'), {})
+        signature = policy.process_telemetry_signature()
+        loaded = dotenv.load_dotenv(stream=io.StringIO(
+            'LANGCHAIN_TRACING_V2=false\nOTEL_ENABLED=false\n'))
+        assert loaded is False
+        assert 'LANGCHAIN_TRACING_V2' not in os.environ
+        assert 'OTEL_ENABLED' not in os.environ
+        assert policy.process_telemetry_signature() == signature
