@@ -340,6 +340,82 @@ class AnalysisTests(BASE['RequestContextFixture']):
             'current_subtask':BASE['Task'](task_type=self.kind.ANALYSIS,task_id='a',description='all orders')})
         agent.run.assert_awaited_once_with('2026-01-01至2026-02-01')
 
+    async def test_english_metrics_and_negation_never_become_totals(self):
+        for query in ('Rank customers by their total order value.', 'Show average order value',
+                      'Show orders not completed', 'Show orders without pending',
+                      '统计未完成订单', '统计非已完成订单', 'Show median order value',
+                      'Show orders greater than 100', 'Show orders sorted descending'):
+            with self.subTest(query=query):
+                result = await self.run_agent(query)
+                self.assertFalse(result.success)
+                self.assertNotIn('data', result.output)
+                self.assertEqual(result.error, 'ANALYSIS_METRIC_UNSUPPORTED')
+        self.primary.assert_not_called()
+
+    async def test_lowercase_customer_is_a_selection_not_all(self):
+        self.settings.crm_tool_provider = 'http'
+        self.orders.append({**self.order('O3', 99), 'customer_id': 'C002'})
+        self.customers.append(dict(customer_id='C002', name='Other', level='A', version=1))
+        for query in ('Show orders for customer c001', '统计客户 c001 的订单',
+                      'Show completed orders for CUSTOMER:C001', '统计 C001 订单'):
+            with self.subTest(query=query):
+                result = await self.run_agent(query)
+                self.assertTrue(result.success, result.error)
+                data = result.output['data']
+                self.assertEqual(data['selected_customer_ids'], ['C001'])
+                self.assertEqual(data['totals_by_currency']['CNY']['order_amount_minor'], 30)
+
+    async def test_unresolved_customer_scope_never_becomes_all(self):
+        for query in ('Show orders for customer c999', 'Show orders for customer Alice',
+                      '统计客户张三的订单', 'Show orders for customer', '统计客户=的订单',
+                      'Show orders for customer all', 'Show orders for customer:的订单',
+                      'Show orders for customer:C001 and unknown-id'):
+            with self.subTest(query=query):
+                result = await self.run_agent(query)
+                self.assertFalse(result.success)
+                self.assertNotIn('data', result.output)
+                self.assertEqual(result.error, 'ANALYSIS_ENTITY_UNAVAILABLE')
+
+    async def test_explicit_dates_cannot_hide_relative_english_period(self):
+        self.settings.crm_tool_provider = 'http'
+        for period in ('last month', 'THIS YEAR', 'next quarter', 'yesterday', 'recent'):
+            with self.subTest(period=period):
+                result = await self.run_agent(period + ', 2026-01-01 to 2026-01-31 orders')
+                self.assertEqual(result.error, 'ANALYSIS_RANGE_UNSUPPORTED')
+        self.assertFalse(self.requests)
+
+    async def test_supported_bilingual_totals_and_union_statuses(self):
+        self.settings.crm_tool_provider = 'http'
+        self.orders[1]['status'] = 'pending'
+        for query in ('Show total order amount by customer.', '统计各客户的订单总额。',
+                      'Show completed or pending orders', '从2026-01-01至2026-01-31统计订单'):
+            with self.subTest(query=query):
+                result = await self.run_agent(query)
+                self.assertTrue(result.success, result.error)
+                self.assertEqual(result.output['data']['totals_by_currency']['CNY']['order_count'], 2)
+
+    async def test_opaque_ids_require_explicit_selector_and_case_collision_rejects(self):
+        self.settings.crm_tool_provider = 'http'
+        self.orders[0]['customer_id'] = self.orders[1]['customer_id'] = 'opaque-id'
+        self.customers[0]['customer_id'] = 'opaque-id'
+        result = await self.run_agent('Show orders for customer:OPAQUE-ID')
+        self.assertTrue(result.success, result.error)
+        self.assertEqual(result.output['data']['selected_customer_ids'], ['opaque-id'])
+        self.orders[1]['customer_id'] = 'OPAQUE-ID'
+        self.customers.append(dict(customer_id='OPAQUE-ID', name='Other', level='A', version=1))
+        result = await self.run_agent('Show orders for customer:opaque-id')
+        self.assertEqual(result.error, 'ANALYSIS_ENTITY_UNAVAILABLE')
+
+    async def test_unsupported_grouping_ranges_and_boolean_composition_fail_closed(self):
+        for query in ('Show total amount by order', 'Show amount per order', '按订单汇总金额',
+                      'Show orders from C001 to C002', '统计从C001到C002的订单',
+                      'Show orders for customer C001 or completed orders',
+                      '统计客户C001或已完成订单', 'Compare completed and pending orders'):
+            with self.subTest(query=query):
+                result = await self.run_agent(query)
+                self.assertFalse(result.success)
+                self.assertNotIn('data', result.output)
+
 
 def load_tests(loader, tests, pattern):
     return unittest.TestSuite(AnalysisTests(name) for name in AnalysisTests.__dict__

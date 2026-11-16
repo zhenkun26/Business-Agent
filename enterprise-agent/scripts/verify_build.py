@@ -28,6 +28,7 @@ INPUT_FILES = {
 } | {NOTICE_DIRECTORY + '/' + name for name in NOTICE_FILES}
 PIN = re.compile(r'([A-Za-z0-9_.-]+)(?:\[([a-z,]+)\])?==([A-Za-z0-9_.+!-]+)')
 SHA = re.compile(r'[a-f0-9]{64}')
+OS_SECURITY_PACKAGES = {'apt', 'libapt-pkg6.0', 'libpq5', 'libssl3', 'openssl'}
 
 
 class InvalidBuild(ValueError):
@@ -140,6 +141,18 @@ def verify_inputs(root: Path) -> dict[str, Any]:
             or sources.count('Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg') != 2
             or sources.count(manifest['snapshot']) != 2):
         raise InvalidBuild('BUILD_OS_SOURCE_INVALID')
+    security = manifest.get('os_security_updates', {})
+    if set(security) != OS_SECURITY_PACKAGES:
+        raise InvalidBuild('BUILD_OS_SECURITY_SET_DRIFT')
+    archive = f"https://snapshot.debian.org/archive/debian-security/{manifest['snapshot']}/"
+    for name, record in security.items():
+        version = record.get('version', '')
+        if (not re.fullmatch(r'[0-9][A-Za-z0-9.+:~\-]*', version)
+                or record.get('architecture') != 'amd64'
+                or not SHA.fullmatch(record.get('sha256', ''))
+                or not record.get('source', '').startswith(archive + 'pool/updates/main/')
+                or not re.search(r'(?<![\w.-])' + re.escape(f'{name}={version}') + r'(?=\s|$)', recipe)):
+            raise InvalidBuild('BUILD_OS_SECURITY_INPUT_INVALID')
     expected = pins((root / 'deploy/requirements-prod.txt').read_text())
     locked = pins((root / 'deploy/requirements-prod.lock').read_text(), hashes=True)
     packages = manifest['packages']
@@ -194,6 +207,11 @@ def inventory(root: Path, manifest: dict[str, Any], installed: Iterable[tuple[st
         debs[name] = {'version': version, 'architecture': architecture}
     if not {'ca-certificates', 'tzdata', 'libpq5:amd64'}.issubset(debs):
         raise InvalidBuild('BUILD_OS_INVENTORY_MISSING')
+    for name, expected in manifest['os_security_updates'].items():
+        matches = [record for package, record in debs.items()
+                   if package.split(':', 1)[0] == name]
+        if matches != [{'version': expected['version'], 'architecture': expected['architecture']}]:
+            raise InvalidBuild('BUILD_OS_SECURITY_VERSION_DRIFT')
     notices = verify_notice_directory(notice_root, manifest)
     return {
         'schema': 1, 'profile': profile,

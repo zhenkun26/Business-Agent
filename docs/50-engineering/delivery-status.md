@@ -7,7 +7,156 @@ grey release or production approval are established. C10 now has an offline impl
 publication. Real two-process race acceptance remains BLOCKED; C10 is not closed.
 
 <a id="current-handover"></a>
-## Current technical validation — 2026-11-09
+## Debian and libpq5 security update — 2026-11-16
+
+The user authorized refreshing the frozen Debian snapshot and existing libpq5 package,
+verifying, pushing to the current draft PR #9, and rerunning CI without merge, image
+publication, deployment, or paid models. Parent `33ca97a03ebcfac11c4a33dac865bfaa47853e96`;
+branch `fix/analysis-approval-reliability`, still stacked on unchanged PR #8.
+
+[Previous hosted run 43866292423](https://github.com/zhenkun26/Business-Agent/actions/runs/43866292423)
+passed both Python jobs (including pip-audit), the synthetic HTTP demo, and isolated
+PG/Redis persistence. Image construction/inventory passed, but Trivy reported 32 HIGH
+findings against libpq5 15.19-0+deb12u1. That is a package-level scan result, not proof
+that every reported PostgreSQL server issue is exploitable through this client library.
+The earlier OpenTelemetry repair is retained unchanged.
+
+Refresh both signed archive sources from `20261107T000000Z` to `20261116T000000Z` and
+pin/assert libpq5 `15.20-0+deb12u1`, also listed by the
+[Debian security tracker](https://security-tracker.debian.org/tracker/source-package/postgresql-15).
+The other four exact OS security versions and archive hashes are unchanged. Both Release
+lookups were retrieved over verified HTTPS. The security Packages.xz digest and size
+match Release SHA256 metadata; all five downloaded security-package archives match the
+index's SHA256 and size. Raw metadata/archives remain in the local task work directory.
+Release provenance and input hashes are synchronized in build-inputs.json, followed by
+license/declaration and canonical offline source inventories. Base/frontend images, all
+98 Python packages/wheel locks, signature policy, scan gates, and exemptions are unchanged.
+
+The build verifier now checks the five security-package declarations against the frozen
+archive and exact recipe pins. Final installed inventory rejects missing, duplicate,
+wrong-version, or wrong-architecture security packages; other OS packages remain observed,
+not fully locked. Eight negative regressions cover these failures and resealed input drift.
+
+Precommit receipt `enterprise-agent/eval/results/offline/debian-security-precommit-20261116-r1.json`
+passed all eight guarded checks: 2,205 Python tests + 705 subtests, 82.0010% coverage,
+85 Node UI cases, 14 credential cases, and eight assets. No skips/xfails/deselections or
+guard denials; sources stable. Candidate binding is intentionally BLOCKED before commit;
+exit 2 also retains the full runtime/UAT/release blockers. Clean-commit receipt location:
+`enterprise-agent/eval/results/offline/debian-security-clean-20261116-r1.json`.
+
+Docker is unavailable locally, so actual signed apt installation, installed inventory,
+imports, and Trivy must pass in the authorized hosted run. Compare its OS/Python package
+maps with the retained previous image inventory to identify any snapshot-driven changes.
+Hosted results and the final commit are recorded on
+[PR #9](https://github.com/zhenkun26/Business-Agent/pull/9) after push. No image publication
+or deployment is authorized. This increment does not establish two clean reproducible
+builds, full C10/RAG, browser or real-provider acceptance, enterprise UAT, or release approval.
+
+## OpenTelemetry security update — 2026-11-16
+
+The user authorized the compatible dependency update, local validation, push to draft
+PR #9, and hosted CI without merge, publication, deployment, or paid models. Parent:
+`1e786c8f402d7ca6400d5746fc517a8d35ba861a`; branch remains
+`fix/analysis-approval-reliability`, stacked on the unchanged PR #8 branch.
+
+[CVE-2026-126360 / upstream advisory](https://github.com/open-telemetry/opentelemetry-python/security/advisories/GHSA-mf5v-w3w3-f6cg)
+is addressed by upgrading API/SDK 1.45.1 to 1.45.2 and the five existing instrumentation,
+ASGI, FastAPI, semantic-conventions, and util-http packages from 0.66b1 to 0.66b2.
+The package set remains 98; no optional exporter or file-configuration extra was added.
+Development lower bounds, exact production pins, wheel lock hashes, build metadata,
+license/declaration inventory, and canonical offline source hashes are synchronized.
+Base images, Debian snapshot, unrelated packages, scan rules, and exemptions are unchanged.
+
+All seven release JSON responses and universal wheels were retrieved from official PyPI
+and files.pythonhosted.org. Downloaded wheel SHA-256 values match release metadata, and
+wheel dependency declarations match those recorded in the manifest. Raw metadata and
+wheels are retained locally under the task's work directory; release URLs and metadata
+hashes are recorded in `deploy/build-inputs.json`. Their current PyPI vulnerability arrays
+are empty, which is a point-in-time observation rather than a permanent safety claim.
+
+Receipt `enterprise-agent/eval/results/offline/otel-security-precommit-20261116-r1.json`
+passed all eight offline checks on the updated dependencies: 2,197 tests + 705 subtests,
+82.0010% coverage, Node 85/14, and eight browser assets. No skips/xfails/deselections or
+guard denials; source stable. Ten new cases verify oversized input is rejected before
+regex evaluation, boundary and malformed input handling, normal context roundtrips, and
+actual SDK/FastAPI instrumentation with in-memory ASGI transport and span export only.
+Existing metadata-closure tests cover Python 3.11 and 3.13 Linux targets. A fresh retained
+verification environment uses the seven hash-verified wheels and unchanged dependencies;
+the previous environment was not modified or deleted.
+
+Precommit candidate binding is BLOCKED for the intentional dirty tree; runtime/release
+gates remain BLOCKED and exit 2 is expected. Clean-candidate verification record location:
+`enterprise-agent/eval/results/offline/otel-security-clean-20261116-r1.json`.
+Hosted results are recorded on [PR #9](https://github.com/zhenkun26/Business-Agent/pull/9)
+after the authorized push. Offline checks and in-memory tracing are not full application
+RAG/model/provider, real browser, enterprise UAT, or production acceptance. The earlier
+TLS outage was retried successfully; no TLS or hash verification was disabled.
+
+## Hosted review and manifest-format correction — 2026-11-15
+
+The user subsequently authorized pushing the repair and running hosted CI without merging
+or paid models. Commit `621d770b557650c162ad89b2b784eb3111a1449f` was pushed, and
+[draft PR #9](https://github.com/zhenkun26/Business-Agent/pull/9) targets the still-open
+PR #8 branch so review initially contains only the new repair commit. Main and PR #8
+remain unchanged. CI runs via workflow dispatch on the repair branch with `publish=false`.
+
+[Initial run 43808246350](https://github.com/zhenkun26/Business-Agent/actions/runs/43808246350)
+passed the full offline checks on Python 3.11 and 3.13 but failed the exact-tree secret
+scan. Both sanitized summaries reported clean history and 25 remaining tree findings.
+Local reproduction using the same Gitleaks 8.24.3 confirmed all 25 are source-digest
+entries in `offline_sources.json`: its Unicode serialization violated the scanner's
+existing canonical-layout check. This correction restores canonical JSON escaping with
+identical parsed data, leaving scanner rules, exclusions, and all product source unchanged.
+Precommit validation checks canonical encoding and every source hash. A new commit and
+fresh cloud run retain the failed run as evidence; no published history is rewritten.
+Current cloud completion is recorded on PR #9 rather than inferred from this precommit note.
+
+## Local analysis and approval reliability — 2026-11-15
+
+Branch: `fix/analysis-approval-reliability`, based on PR #8 head
+`1645e012170b30f9ff3022082602f9cd56b10212`. Main remains
+`998bb52e8049d07f592ca763b51372faca8ff9c5`.
+[PR #8](https://github.com/zhenkun26/Business-Agent/pull/8) was verified open/unmerged;
+its existing [CI run 42813205674](https://github.com/zhenkun26/Business-Agent/actions/runs/42813205674)
+succeeded at that head. This repair does not change the published branch or PR.
+
+Scope: align development dotenv declarations to >=1.2.0 (production stays pinned to
+1.2.2); reject unsupported analysis metrics, incomplete/unknown selectors, negation,
+conflicting periods, alternate grouping and ambiguous Boolean combinations; resolve
+unique case-insensitive customer IDs; preserve integer/currency calculations and
+identity checks. Both README examples now use supported totals instead of ranking.
+All three approval list APIs and UI views have bounded pagination, statement-consistent
+true totals, timestamp/ID ordering, and stale-response/identity guards.
+See [analysis contract](analysis-data.md) and [approval contract](approval-execution.md).
+
+Verification: `analysis-approval-precommit-20261115-r3` passed all eight existing offline
+checks: 2,187 Python tests + 705 subtests, 82.0010% coverage, Node UI 85 and credential
+14 cases, eight frontend assets, build inputs, provenance, RAG controls, and safe
+preflight. No skips/xfails/deselections or guard denials; 98 production dependencies
+match the existing environment. The source inventory now registers 466 files, including
+one new pagination test; prior records and acceptance gates remain intact. The final
+page-empty wording and distinct pager group labels were additionally checked by the
+85-case Node suite. Precommit binding is BLOCKED because the tree is intentionally dirty;
+exit 2 denotes retained runtime/release blockers, not failed tests.
+
+Clean-candidate verification record location (local/ignored):
+`enterprise-agent/eval/results/offline/analysis-approval-clean-20261115-r1.json`.
+The precommit receipt remains bound to its own candidate; consult the clean receipt for
+exact committed identity and source binding. Earlier diagnostics are retained: a direct
+legacy analysis invocation could not import `app` under isolated Python; the supported
+full runner exposed a missing-selector case and then an inventory count assertion, both
+fixed without skipping tests or weakening gates.
+
+Delivery is local commits only. No push, merge, remote CI trigger, deployment, new
+package installation, paid model, private environment read, or filesystem deletion.
+The existing dotenv bootstrap regression remains exercised. Pagination SQL tests use
+in-memory SQLite with only PostgreSQL JSON membership adapted; Node uses the actual
+page code and Vue template compiler with synthetic HTTP. These are not live PostgreSQL,
+browser, model/semantic end-to-end, full C10/RAG, formal UAT, or release acceptance.
+Offset pages are live rather than frozen across concurrent changes; refreshing restarts
+at page one. OpenSpec artifacts are retained for local review; strict CLI is unavailable.
+
+## Previous technical validation — 2026-11-09
 
 [CI run 42591561481](https://github.com/zhenkun26/Business-Agent/actions/runs/42591561481) was workflow_dispatch attempt 1 at exact main `15cd84f942ccc0ce49afcfc1513efe4c2f07f441`, from 09:12:08 to 09:19:42 UTC. All five jobs passed. Python 3.11 and 3.13 each passed 2170 tests + 640 subtests; all eight current offline checks, nine publication-policy tests and 39 scanner regressions passed. Current event-history/tree scans, pip-audit, the isolated persistence slice, 15 synthetic HTTP checks and the image/Trivy gate passed within the [documented scope](../30-guides/open-source-quickstart.md#starter-verification--启动入口核验).
 

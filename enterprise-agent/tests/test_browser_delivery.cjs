@@ -18,6 +18,10 @@ function storage(initial = {}) {
 function reply(data, status = 200) {
   return { status, ok: status >= 200 && status < 300, text: async () => JSON.stringify(data) };
 }
+function approvalPage(items = [], offset = 0, total = items.length) {
+  return { items, offset, total, limit: 50, returned_count: items.length,
+    has_more: offset + items.length < total };
+}
 function deferred() { let resolve; const promise = new Promise(r => { resolve = r; }); return { promise, resolve }; }
 function setup(extra = {}) {
   let app, options, timerId = 0;
@@ -119,15 +123,15 @@ test('cancelled approval prompt performs no request', async () => {
 });
 test('ordinary role approval page loads own records without a false permission error', async () => {
   const { app, context } = setup(); authenticate(app); const calls = [];
-  context.fetch = async url => { calls.push(url); return reply({ items: [] }); };
+  context.fetch = async url => { calls.push(url); return reply(approvalPage()); };
   app.openTab('approval'); await new Promise(setImmediate);
-  assert.deepEqual(calls, ['/api/v1/approvals/mine']); assert.equal(app.toast, '');
+  assert.deepEqual(calls, ['/api/v1/approvals/mine?limit=50&offset=0']); assert.equal(app.toast, '');
   assert.equal(app.loadState.myApprovals, 'ready');
 });
 test('approval duplicate guard and confirmed state are independent of message text', async () => {
   const { app, context } = setup(), wait = deferred(); authenticate(app, 'manager'); let writes = 0;
   context.fetch = async (url, opts) => { if (url.endsWith('/me')) return reply(identity('manager'));
-    if (opts.method === 'POST') { writes++; return wait.promise; } return reply({ items: [] }); };
+    if (opts.method === 'POST') { writes++; return wait.promise; } return reply(approvalPage()); };
   const row = { approval_id: 'a' }, pending = app.decide(row, 'approved'); await app.decide(row, 'rejected');
   await new Promise(setImmediate); assert.equal(writes, 1);
   wait.resolve(reply({ approval_id: 'a', status: 'execution_unknown', message: 'SUCCESS' })); await pending;
@@ -154,12 +158,12 @@ test('ledger outage clears rows without synthetic fallback', async () => {
 });
 test('latest list request wins and malformed lists stay unavailable', async () => {
   const { app, context } = setup(), wait = deferred(); authenticate(app); let count = 0;
-  context.fetch = () => ++count === 1 ? wait.promise : Promise.resolve(reply({ items: [{ approval_id: 'new' }] }));
-  const old = app.loadMine(); await app.loadMine(); wait.resolve(reply({ items: [{ approval_id: 'old' }] })); await old;
+  context.fetch = () => ++count === 1 ? wait.promise : Promise.resolve(reply(approvalPage([{ approval_id: 'new' }])));
+  const old = app.loadMine(); await app.loadMine(); wait.resolve(reply(approvalPage([{ approval_id: 'old' }]))); await old;
   assert.equal(app.myApprovals[0].approval_id, 'new'); context.fetch = async () => reply({ items: [null] }); await app.loadMine(); assert.equal(app.loadState.myApprovals, 'unavailable');
 });
 test('empty and denied lists remain distinguishable', async () => {
-  const { app, context } = setup(); authenticate(app); context.fetch = async () => reply({ items: [] });
+  const { app, context } = setup(); authenticate(app); context.fetch = async () => reply(approvalPage());
   await app.loadMine(); assert.equal(app.loadState.myApprovals, 'ready'); context.fetch = async () => reply({}, 403);
   await app.loadMine(); assert.equal(app.loadState.myApprovals, 'unavailable');
 });
@@ -361,7 +365,7 @@ test('F2-07 account/manual/scene/reference actions focus the edited field', () =
 });
 test('F2-07 navigation focus follows permitted page and approver role', () => {
   const { app, context, focused } = focusFixture(); authenticate(app);
-  context.fetch = async () => reply({ items: [] });
+  context.fetch = async () => reply(approvalPage());
   app.openTab('approval'); assert.equal(focused.at(-1), 'mineHeading');
   const prior = focused.length; app.openTab('prompt'); assert.equal(focused.length, prior);
   authenticate(app, 'manager'); app.openTab('approval'); assert.equal(focused.at(-1), 'approvalHeading');
@@ -450,7 +454,7 @@ test('F2-07 approval removal restores heading without stealing another control',
     context.fetch = async (url, opts) => {
       if (url.endsWith('/me')) return reply(identity('manager'));
       if (opts.method === 'POST') { if (moved) doc.activeElement = other; return reply({ approval_id: 'synthetic', status: 'approved_pending_reauth' }); }
-      return reply({ items: [] });
+      return reply(approvalPage());
     };
     await app.decide({ approval_id: 'synthetic' }, 'approved', trigger);
     assert.equal(doc.activeElement, moved ? other : app.$refs.approvalHeading);
@@ -458,7 +462,7 @@ test('F2-07 approval removal restores heading without stealing another control',
 });
 test('F2-07 empty unavailable and loading text stay distinct and notify errors', async () => {
   const { app, context } = setup(); authenticate(app);
-  context.fetch = async () => reply({ items: [] }); const pending = app.loadMine();
+  context.fetch = async () => reply(approvalPage()); const pending = app.loadMine();
   assert.equal(app.viewStatus('myApprovals'), '正在加载…'); await pending;
   assert.equal(app.loadState.myApprovals, 'ready'); assert.equal(app.myApprovals.length, 0);
   context.fetch = async () => reply({}, 503); await app.loadMine();
@@ -605,6 +609,56 @@ test('Malformed and stale demo rejection cannot falsely confirm an outcome', asy
   context.fetch = async () => ({ ...demoRejection(), text: async () => 'invalid json' });
   await app.sendChat(); assert.equal(app.messages[1].incomplete, true);
   assert.match(app.chatStatus, /未确认完成/);
+});
+
+test('approval pages expose the 51st row and refresh starts at the first page', async () => {
+  const { app, context } = setup(); authenticate(app);
+  const rows = Array.from({ length: 51 }, (_, i) => ({ approval_id: String(i) }));
+  const calls = [];
+  context.fetch = async url => {
+    calls.push(url); const offset = Number(url.split('offset=')[1]);
+    return reply(approvalPage(rows.slice(offset, offset + 50), offset, 51));
+  };
+  await app.loadMine(); assert.equal(app.myApprovals.length, 50);
+  assert.equal(app.approvalPages.myApprovals.total, 51); assert(app.approvalPages.myApprovals.has_more);
+  await app.loadApprovalPage('myApprovals', 50); assert.equal(app.myApprovals[0].approval_id, '50');
+  assert.equal(app.approvalPages.myApprovals.has_more, false);
+  await app.loadMine(); assert.equal(app.approvalPages.myApprovals.offset, 0);
+  assert.equal(calls[1], '/api/v1/approvals/mine?limit=50&offset=50');
+});
+test('late approval page cannot overwrite newer page metadata', async () => {
+  const { app, context } = setup(), wait = deferred(); authenticate(app);
+  context.fetch = url => url.endsWith('offset=0') ? wait.promise : Promise.resolve(reply(approvalPage([{ approval_id: 'last' }], 50, 51)));
+  const old = app.loadMine(); await app.loadApprovalPage('myApprovals', 50);
+  wait.resolve(reply(approvalPage(Array.from({ length: 50 }, () => ({ approval_id: 'old' })), 0, 500)));
+  await old; assert.equal(app.myApprovals[0].approval_id, 'last');
+  assert.equal(app.approvalPages.myApprovals.total, 51); assert.equal(app.approvalPages.myApprovals.offset, 50);
+});
+test('logout clears pagination and late pages cannot restore it', async () => {
+  const { app, context } = setup(), wait = deferred(); authenticate(app);
+  context.fetch = () => wait.promise; const pending = app.loadMine(); app.doLogout();
+  wait.resolve(reply(approvalPage([{ approval_id: 'private' }]))); await pending;
+  assert.equal(app.myApprovals.length, 0); assert.equal(app.approvalPages.myApprovals.total, null);
+});
+test('approval page errors never keep stale totals or permit next page', async () => {
+  const { app, context } = setup(); authenticate(app);
+  for (const invalid of [{ items: [] }, { ...approvalPage(), total: -1 },
+      { ...approvalPage(), has_more: true }, { ...approvalPage(), offset: 50 }]) {
+    context.fetch = async () => reply(invalid); await app.loadMine();
+    assert.equal(app.loadState.myApprovals, 'unavailable');
+    assert.equal(app.approvalPages.myApprovals.total, null); assert(!app.approvalPages.myApprovals.has_more);
+  }
+});
+test('all approval lists have bounded navigation and ordinary users cannot load role queues', async () => {
+  const { app, context } = setup(); authenticate(app); let calls = 0;
+  context.fetch = async () => { calls++; return reply(approvalPage()); };
+  await app.loadApprovalPage('approvals', 50); await app.loadApprovalPage('handledApprovals', 50);
+  await app.loadApprovalPage('unknown', 0); await app.loadApprovalPage('myApprovals', -50);
+  assert.equal(calls, 0);
+  for (const key of ['approvals', 'myApprovals', 'handledApprovals']) {
+    assert(html.includes(`loadApprovalPage('${key}', approvalPages.${key}.offset + 50)`));
+    assert(html.includes(`loadApprovalPage('${key}', approvalPages.${key}.offset - 50)`));
+  }
 });
 
 (async () => {

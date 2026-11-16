@@ -12,44 +12,89 @@ from app.agents.knowledge import AgentResult
 from app.tools.analysis_data import AnalysisDataError, AnalysisReader, authorize, iso_date
 
 
+# This is a bounded query language, not a general natural-language interpreter.
+DATE_TOKEN = r'(?<![0-9])\d{4}-\d{2}-\d{2}(?![0-9])'
+RELATIVE_PERIOD = (r'本月|上月|今年|去年|季度|最近|昨天|今天|同比|环比|'
+                   r'(?<![A-Za-z0-9_-])\d{4}(?![A-Za-z0-9_-])|\d+年|\d+月|\d+天|'
+                   r'\b(?:last|this|next|quarter|year|month|today|yesterday|recent)\b')
+STATUS_TERMS = {'pending': r'待处理|待完成|\bpending\b',
+                'completed': r'已完成|\bcompleted\b',
+                'cancelled': r'已取消|\bcancelled\b',
+                'refunded': r'已退款|\brefunded\b'}
+
+
 def parse_range(query: str) -> tuple[str | None, str | None]:
-    dates = re.findall(r'(?<![0-9])\d{4}-\d{2}-\d{2}(?![0-9])', query)
-    if dates:
-        if len(dates) != 2 or iso_date(dates[0]) > iso_date(dates[1]):
-            raise AnalysisDataError('ANALYSIS_RANGE_INVALID')
-        remainder = query
-        for value in dates:
-            remainder = remainder.replace(value, '')
-        if re.search(r'本月|上月|今年|去年|季度|最近|昨天|今天|同比|环比|\d+年|\d+月|\d+天', remainder):
-            raise AnalysisDataError('ANALYSIS_RANGE_UNSUPPORTED')
-        return dates[0], dates[1]
-    if re.search(r'本月|上月|今年|去年|季度|最近|昨天|今天|同比|环比|'
-                 r'(?<![A-Za-z0-9_-])\d{4}(?![A-Za-z0-9_-])|\d+月|\d+天|'
-                 r'last |this |quarter|year|month|today|yesterday', query, re.I):
+    dates = re.findall(DATE_TOKEN, query)
+    if dates and (len(dates) != 2 or iso_date(dates[0]) > iso_date(dates[1])):
+        raise AnalysisDataError('ANALYSIS_RANGE_INVALID')
+    if re.search(RELATIVE_PERIOD, re.sub(DATE_TOKEN, ' ', query), re.I):
         raise AnalysisDataError('ANALYSIS_RANGE_UNSUPPORTED')
-    return None, None
+    if not dates and re.search(r'\b(?:from|to|between)\b|从|至|到', query, re.I):
+        raise AnalysisDataError('ANALYSIS_RANGE_UNSUPPORTED')
+    return (dates[0], dates[1]) if dates else (None, None)
+
+
+def query_selection(query: str, known: set[str]) -> tuple[set[str], list[str]]:
+    """Consume every meaningful token; unknown scope cannot silently become all rows."""
+    parse_range(query)
+    remaining = re.sub(DATE_TOKEN, ' ', query)
+    if re.search(r'\b(?:by|per)\b(?!\s+(?:the\s+)?customers?\b)|按(?!各?客户)', remaining, re.I):
+        raise AnalysisDataError('ANALYSIS_METRIC_UNSUPPORTED')
+    # Preserve the existing explicit unsupported-metric error contract.
+    if re.search(r'营收|收入|销售额|净额|排名|前[一二三四五六七八九十\d]+|'
+                 r'行业|趋势|占比|比例|差值|增长|平均|最大|最小|中位|分布|'
+                 r'\b(?:revenue|rank\w*|top|average|mean|median|max\w*|min\w*|'
+                 r'not|except|excluding|without)\b|不含|排除|除外|未完成|非|不', remaining, re.I):
+        raise AnalysisDataError('ANALYSIS_METRIC_UNSUPPORTED')
+    requested: set[str] = set()
+    folded: dict[str, list[str]] = defaultdict(list)
+    for cid in known:
+        folded[cid.casefold()].append(cid)
+
+    def select(match: re.Match[str]) -> str:
+        value = match.group(1) if match.lastindex else match.group()
+        candidates = folded.get(value.casefold(), [])
+        if len(candidates) != 1:
+            raise AnalysisDataError('ANALYSIS_ENTITY_UNAVAILABLE')
+        requested.add(candidates[0])
+        return ' '
+
+    remaining = re.sub(r'(?:\bcustomer\b|客户)\s*[:=]\s*([A-Za-z0-9_-]+)',
+                       select, remaining, flags=re.I)
+    remaining = re.sub(r'(?:\bcustomer\b|客户)\s+(C\d[A-Za-z0-9_-]*)',
+                       select, remaining, flags=re.I)
+    remaining = re.sub(r'(?<![A-Za-z0-9_-])C\d[A-Za-z0-9_-]*',
+                       select, remaining, flags=re.I)
+    # Opaque IDs require an explicit customer: selector to avoid consuming metric words.
+    if re.search(r'\bfor\s+(?:the\s+)?customer\b|(?:\bcustomer\b|客户)\s*[:=]', remaining, re.I):
+        raise AnalysisDataError('ANALYSIS_ENTITY_UNAVAILABLE')
+    statuses = []
+    for status, pattern in STATUS_TERMS.items():
+        if re.search(pattern, remaining, re.I):
+            statuses.append(status)
+            remaining = re.sub(pattern, ' ', remaining, flags=re.I)
+    if ((requested and statuses and re.search(r'\bor\b|或', remaining, re.I))
+            or (len(statuses) > 1 and re.search(r'\bcompare\b|对比|比较', remaining, re.I))):
+        raise AnalysisDataError('ANALYSIS_METRIC_UNSUPPORTED')
+    # Only neutral report words/connectors may remain. No arbitrary suffix is ignored.
+    remaining = re.sub(r'\b(?:show|list|summarize|sum|total|count|compare|analyze|analysis|'
+                       r'order|orders|amount|amounts|value|values|customer|customers|'
+                       r'by|per|for|of|the|their|all|available|and|or|from|to|between|please)\b',
+                       ' ', remaining, flags=re.I)
+    remaining = re.sub(r'请|一下|统计|汇总|分析|对比|比较|展示|显示|查询|订单|原始金额|总额|金额|数量|'
+                       r'客户|各|所有|全部|可用|按|的|和|与|或|从|至|到|期间', ' ', remaining)
+    if re.sub(r'[\s,，。.!！?？、:：=;；]+', '', remaining):
+        code = ('ANALYSIS_ENTITY_UNAVAILABLE' if re.search(r'客户|\bcustomer\b', query, re.I)
+                else 'ANALYSIS_METRIC_UNSUPPORTED')
+        raise AnalysisDataError(code)
+    if not re.search(r'订单|统计|汇总|分析|对比|比较|\b(?:orders?|sum|total|count|compare|analy[sz]e)\b', query, re.I):
+        raise AnalysisDataError('ANALYSIS_METRIC_UNSUPPORTED')
+    return requested, statuses or list(STATUS_TERMS)
 
 
 def compute(query: str, snapshot: dict[str, Any]) -> dict[str, Any]:
-    if re.search(r'营收|收入|销售额|revenue|净额|排名|前[一二三四五六七八九十\d]+|top\s*\d|'
-                 r'行业|趋势|占比|比例|差值|增长|平均|最大|最小|中位|分布', query, re.I):
-        raise AnalysisDataError('ANALYSIS_METRIC_UNSUPPORTED')
     orders = snapshot['orders']
-    known = {o['customer_id'] for o in orders}
-    # Explicit IDs are selections; unknown IDs cannot silently become "all".
-    requested = set(re.findall(r'(?<![A-Za-z0-9_-])C\d[A-Za-z0-9_-]*', query))
-    requested.update(re.findall(r'(?:customer|客户)\s*[:=]\s*([A-Za-z0-9_-]+)', query, re.I))
-    requested.update(cid for cid in known if re.search(
-        r'(?<![A-Za-z0-9_-])' + re.escape(cid) + r'(?![A-Za-z0-9_-])', query))
-    if requested - known:
-        raise AnalysisDataError('ANALYSIS_ENTITY_UNAVAILABLE')
-    status_terms = {'pending': r'待处理|待完成|pending', 'completed': r'已完成|completed',
-                    'cancelled': r'已取消|cancelled', 'refunded': r'已退款|refunded'}
-    statuses = [status for status, pattern in status_terms.items()
-                if re.search(pattern, query, re.I)]
-    if re.search(r'不含|排除|除外|excluding|except|without', query, re.I):
-        raise AnalysisDataError('ANALYSIS_METRIC_UNSUPPORTED')
-    statuses = statuses or list(status_terms)
+    requested, statuses = query_selection(query, {o['customer_id'] for o in orders})
     selected = [o for o in orders if (not requested or o['customer_id'] in requested)
                 and o['status'] in statuses]
     customers = {c['customer_id']: c for c in snapshot['customers']}
@@ -143,7 +188,7 @@ class AnalysisAgent:
         except Exception as exc:
             code = str(exc) if isinstance(exc, AnalysisDataError) else 'ANALYSIS_SOURCE_UNAVAILABLE'
             return AgentResult(agent_name='analysis', success=False, confidence=0,
-                output={'answer': '分析未完成：' + code + '。请检查权限、数据源或明确日期与客户 ID。',
+                output={'answer': '分析未完成：' + code + '。请检查权限与数据源。支持订单原始金额与数量汇总，例如“统计客户 C001 的已完成订单”；日期需明确起止日期。排名、平均值、排除条件及姓名查询暂不支持。',
                         'deterministic': True, 'coverage': 'none', 'stage': 'analysis_blocked'},
                 error=code, sources=[], needs_replan=False,
                 latency_ms=int((time.monotonic() - start_time) * 1000))

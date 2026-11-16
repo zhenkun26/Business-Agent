@@ -10,7 +10,7 @@
   },
   "build_manifest": {
     "path": "enterprise-agent/deploy/build-inputs.json",
-    "sha256": "31672a41650b4e901a6da7cd15bdca0b133ae3ce6e0971bb4f69fcd008842ef1"
+    "sha256": "97249f2f2880cfaa6d6c2f267561c46dcf66ced2c1c979c7042a4b7fce868ac7"
   },
   "vendor_manifest": {
     "path": "enterprise-agent/app/static/vendor/manifest.json",
@@ -815,9 +815,9 @@
       "wheel_license_review": "PENDING"
     },
     "opentelemetry-api": {
-      "version": "1.45.1",
-      "source": "https://pypi.org/pypi/opentelemetry-api/1.45.1/json",
-      "metadata_sha256": "8f8e7481c7bd41f5f33387baf18b6960994aee806f4f4fadb7a40c6370c06e87",
+      "version": "1.45.2",
+      "source": "https://pypi.org/pypi/opentelemetry-api/1.45.2/json",
+      "metadata_sha256": "0b58654ba1b29b21bbbb90f03286d24425e752c219e556b80dae93f839b7e33f",
       "role": "direct",
       "status": "PUBLISHER_METADATA_ONLY",
       "license_expression": "Apache-2.0",
@@ -830,9 +830,9 @@
       "wheel_license_review": "PENDING"
     },
     "opentelemetry-instrumentation": {
-      "version": "0.66b1",
-      "source": "https://pypi.org/pypi/opentelemetry-instrumentation/0.66b1/json",
-      "metadata_sha256": "790d7907366399de7461da7af4110e5a75a966aa90c04132ad36e4aa89e38b5c",
+      "version": "0.66b2",
+      "source": "https://pypi.org/pypi/opentelemetry-instrumentation/0.66b2/json",
+      "metadata_sha256": "263555c8da9de4b1b616d8a4e09d02a3772cbb227ffc75e7cb3938cbba275925",
       "role": "transitive-or-build",
       "status": "PUBLISHER_METADATA_ONLY",
       "license_expression": "Apache-2.0",
@@ -847,9 +847,9 @@
       "wheel_license_review": "PENDING"
     },
     "opentelemetry-instrumentation-asgi": {
-      "version": "0.66b1",
-      "source": "https://pypi.org/pypi/opentelemetry-instrumentation-asgi/0.66b1/json",
-      "metadata_sha256": "d04d54664d8f60f9453522f3d6d0e5e9ab3e9381982940f893a9b75a10e5a289",
+      "version": "0.66b2",
+      "source": "https://pypi.org/pypi/opentelemetry-instrumentation-asgi/0.66b2/json",
+      "metadata_sha256": "a4eaefdf9329a3981d4e8e6cb31205c9ca77b8a50aac68195f51c289a806f7ed",
       "role": "transitive-or-build",
       "status": "PUBLISHER_METADATA_ONLY",
       "license_expression": "Apache-2.0",
@@ -864,9 +864,9 @@
       "wheel_license_review": "PENDING"
     },
     "opentelemetry-instrumentation-fastapi": {
-      "version": "0.66b1",
-      "source": "https://pypi.org/pypi/opentelemetry-instrumentation-fastapi/0.66b1/json",
-      "metadata_sha256": "f21380dc024fd8b99d0c19c93235732175cd20aca27d6c027448b33750c4e13b",
+      "version": "0.66b2",
+      "source": "https://pypi.org/pypi/opentelemetry-instrumentation-fastapi/0.66b2/json",
+      "metadata_sha256": "9ce98bf05aae2c46c96845941e5aecce96b8ae7f1c8ed5e00fcb28709b4d11c8",
       "role": "direct",
       "status": "PUBLISHER_METADATA_ONLY",
       "license_expression": "Apache-2.0",
@@ -881,9 +881,9 @@
       "wheel_license_review": "PENDING"
     },
     "opentelemetry-sdk": {
-      "version": "1.45.1",
-      "source": "https://pypi.org/pypi/opentelemetry-sdk/1.45.1/json",
-      "metadata_sha256": "250515b469c31b07bdf59defb9ff646696add881ead10167d2b17f0c89e28b64",
+      "version": "1.45.2",
+      "source": "https://pypi.org/pypi/opentelemetry-sdk/1.45.2/json",
+      "metadata_sha256": "a165a5b746740812bb581795835f3852671bad316603f7d4b434f599a7ba9b3a",
       "role": "direct",
       "status": "PUBLISHER_METADATA_ONLY",
       "license_expression": "Apache-2.0",
@@ -896,9 +896,9 @@
       "wheel_license_review": "PENDING"
     },
     "opentelemetry-semantic-conventions": {
-      "version": "0.66b1",
-      "source": "https://pypi.org/pypi/opentelemetry-semantic-conventions/0.66b1/json",
-      "metadata_sha256": "75a6fb7054ba1b267d4ecd6c0c87571c767be24bc5272ae5046b9706da064c09",
+      "version": "0.66b2",
+      "source": "https://pypi.org/pypi/opentelemetry-semantic-conventions/0.66b2/json",
+      "metadata_sha256": "68cda769016b122e1907b1dfacefc7af3018bba195df6f92ce955cc247e33b77",
       "role": "transitive-or-build",
       "status": "PUBLISHER_METADATA_ONLY",
       "license_expression": "Apache-2.0",
@@ -911,9 +911,9 @@
       "wheel_license_review": "PENDING"
     },
     "opentelemetry-util-http": {
-      "version": "0.66b1",
-      "source": "https://pypi.org/pypi/opentelemetry-util-http/0.66b1/json",
-      "metadata_sha256": "d05c160a029959d3eca78187874da6a8cf439d5541a66d1d8c31ae3763e470a6",
+      "version": "0.66b2",
+      "source": "https://pypi.org/pypi/opentelemetry-util-http/0.66b2/json",
+      "metadata_sha256": "e81ccaf980345d818776f0abfc73264ecb4085e52c97d75bbd7b551a5525e35c",
       "role": "transitive-or-build",
       "status": "PUBLISHER_METADATA_ONLY",
       "license_expression": "Apache-2.0",
@@ -1905,7 +1905,7 @@
     "enterprise-agent/app/static/index.html": {
       "category": "application-ui",
       "status": "PENDING_SOURCE_REVIEW",
-      "sha256": "d087c8e75a30a6b6732a2128c555ad7991c3e73dff41e4e59c9a441e338a4b2e"
+      "sha256": "9a64a4b619f7ab03e2047c5c75fb24505321fab6bfd42163188b44b436fcae2d"
     },
     "enterprise-agent/app/tools/__init__.py": {
       "category": "embedded-tool-fixtures",
@@ -2515,7 +2515,7 @@
     "enterprise-agent/tests/test_analysis_data.py": {
       "category": "test-fixtures",
       "status": "PENDING_SOURCE_REVIEW",
-      "sha256": "d5b8b6780665f46f39cb266ea10f542c0446a934b5f9a33982c24ef7effbc76f"
+      "sha256": "7c6285d130c90e8ad2932886bfb81dfd41395d5f7182cb889787a286988a580e"
     },
     "enterprise-agent/tests/test_app_entry.py": {
       "category": "test-fixtures",
@@ -2575,12 +2575,12 @@
     "enterprise-agent/tests/test_browser_delivery.cjs": {
       "category": "test-fixtures",
       "status": "PENDING_SOURCE_REVIEW",
-      "sha256": "fa8c68fa83d5ed90bab705c5f0016195ac62717b920d9fc7fa6d8db9d5e42d54"
+      "sha256": "d34635c5b5e36a7cce4523ccf92e05fe1530146d48ef980a73dce803424789a3"
     },
     "enterprise-agent/tests/test_build_reproducibility.py": {
       "category": "test-fixtures",
       "status": "PENDING_SOURCE_REVIEW",
-      "sha256": "512e01e2fb2890c8a56669d30d4948667793614bef54e5830f2a2f4d8c9230f2"
+      "sha256": "d4ba6584ac49fc0f2ff9092d3f97e9aae87390337729c9776f3adfe7772653ac"
     },
     "enterprise-agent/tests/test_capacity_evidence.py": {
       "category": "test-fixtures",
@@ -2700,7 +2700,7 @@
     "enterprise-agent/tests/test_license_inventory.py": {
       "category": "test-fixtures",
       "status": "PENDING_SOURCE_REVIEW",
-      "sha256": "696939afe94fb4b44a28115716cc564c64b4adaea3a8f982c3f6470614649b9a"
+      "sha256": "1b3d37c6e1171603605f6d6a1f57409b9caa072510802070b32471476b1895c3"
     },
     "enterprise-agent/tests/test_llm_rerank_boundary.py": {
       "category": "test-fixtures",
@@ -2885,7 +2885,7 @@
     "enterprise-agent/tests/test_telemetry_admission.py": {
       "category": "test-fixtures",
       "status": "PENDING_SOURCE_REVIEW",
-      "sha256": "7af177c988857c0194bb255b47340bfcce8a25ebd6f5ed27219a7fc081921b0a"
+      "sha256": "866e88ff98ee0a403ac4c8fbc230e5567a89bc73a0721616c5d4737becdcf5d8"
     },
     "enterprise-agent/tests/test_ticket_external.py": {
       "category": "test-fixtures",
@@ -4131,6 +4131,11 @@
       "category": "presentation",
       "status": "PENDING_SOURCE_REVIEW",
       "sha256": "f2e7970814769d99c5a979123063afadd23983c3ca6280afa398bcc06137697c"
+    },
+    "enterprise-agent/tests/test_approval_pagination.py": {
+      "category": "test-fixtures",
+      "status": "PENDING_SOURCE_REVIEW",
+      "sha256": "2e3cfaf4b848505d373baadb4ae1cfab70fb3a819e367cd0658484258e1b8976"
     }
   },
   "declarations": {
@@ -4196,7 +4201,7 @@
         "&& /opt/venv/bin/pip install -c requirements-prod.txt -r requirements-ml.txt; \\",
         "FROM python:3.13.16-slim-bookworm@sha256:f040863673aea2570c3ff6a5c3fb4c673a016cbc5375005ad145915922b6b78a AS runner"
       ],
-      "sha256": "74b2c096940c032ef95cf7ac2c15e9993c3b86cce6a4fd5f2dcb81c5f650d849",
+      "sha256": "4a8990f86d5fdfa9f37b03a7392af2d7bbbcf34945361d37ce44036b5882e143",
       "status": "CLOSURE_AND_LICENSE_REVIEW_PENDING"
     },
     "enterprise-agent/deploy/Dockerfile.capacity": {
@@ -4438,20 +4443,20 @@
         "--hash=sha256:3ad7daab28e5a973445c36a73882a3ef698c2ebb00e21e308652741577509f7d",
         "openai==2.53.0 \\",
         "--hash=sha256:c694ffc747a3c4d1663ef2b07b811315a476164ee5efa3a993967349ebca7618",
-        "opentelemetry-api==1.45.1 \\",
-        "--hash=sha256:b31553efa588ae44bc306f863c785c5333a9ecc091248c6ee68b4b6c87fdedfb",
-        "opentelemetry-instrumentation==0.66b1 \\",
-        "--hash=sha256:4c4aa14dc9a24a02325a9d4c42c4d0208dbb1374c2b1b8fe6c9392d59f3e1008",
-        "opentelemetry-instrumentation-asgi==0.66b1 \\",
-        "--hash=sha256:78b3f9bdf0fa38c65935a2ab46d59e0f9de873a51e0c95b0329f106e2ccb5274",
-        "opentelemetry-instrumentation-fastapi==0.66b1 \\",
-        "--hash=sha256:97f8ac8fd7537517f9e6988bd0aca04bfa5aad564bcd46c245530739e2be72d1",
-        "opentelemetry-sdk==1.45.1 \\",
-        "--hash=sha256:c604c11dc429810812348989115fa44bd558772a3d7442afc43d024f2c250ca4",
-        "opentelemetry-semantic-conventions==0.66b1 \\",
-        "--hash=sha256:d4cddeb4315490b35213f55e2bdc9ac54bb1e4d318927475bed62b35545e581b",
-        "opentelemetry-util-http==0.66b1 \\",
-        "--hash=sha256:8f443d7abcaf29c4a07b373bbd31b5b39132c0ed3c27d015a59dc0323d5b1c58",
+        "opentelemetry-api==1.45.2 \\",
+        "--hash=sha256:2cbd737377e710ee740d261c94e93fa0f08e6d037c18f17513cc0a2d94479a34",
+        "opentelemetry-instrumentation==0.66b2 \\",
+        "--hash=sha256:fa9ccfdab147a14af8107d19ef0a7b5015675273c5adced7a1fc38f28b42ec4c",
+        "opentelemetry-instrumentation-asgi==0.66b2 \\",
+        "--hash=sha256:9c5ec36e6b898f18e6b07b5077c2a3bafa9abf69de98e729797b9efa465f8aa3",
+        "opentelemetry-instrumentation-fastapi==0.66b2 \\",
+        "--hash=sha256:401eb9fe58cc86015ac0a6682dcaf1b4bcea32c428969853d02171d6650d1774",
+        "opentelemetry-sdk==1.45.2 \\",
+        "--hash=sha256:ff974ea70ee4f1d51e2ec152db37c2b626c7bf82bb3f7d86114fd8704e7199c6",
+        "opentelemetry-semantic-conventions==0.66b2 \\",
+        "--hash=sha256:4cbe61e5f9275d57ab31708446e7938ef4291ebbe6a7fca6f7a629c5acae87d8",
+        "opentelemetry-util-http==0.66b2 \\",
+        "--hash=sha256:c4bb5d6744e60353bcaa3e325bc529a1515346b51cb4d9c8e5b730579337e06d",
         "orjson==3.11.9 \\",
         "--hash=sha256:4e39364e726a8fff737309aff059ff67d8a8c8d5b677be7bb49a8b3e84b7e218",
         "ormsgpack==1.12.2 \\",
@@ -4549,7 +4554,7 @@
         "zstandard==0.25.0 \\",
         "--hash=sha256:8e735494da3db08694d26480f1493ad2cf86e99bdd53e8e9771b2752a5c0246a"
       ],
-      "sha256": "fb368dd69c38b5f2f9c54d0a8595c0c44f82222c67dba392e01d42469df09e9d",
+      "sha256": "48e58c6861e3873e67c0e2ea67185d6791bdd0404c1ff60e102065e58be134bf",
       "status": "CLOSURE_AND_LICENSE_REVIEW_PENDING"
     },
     "enterprise-agent/deploy/requirements-prod.txt": {
@@ -4599,13 +4604,13 @@
         "numpy==2.4.6",
         "ollama==0.6.2",
         "openai==2.53.0",
-        "opentelemetry-api==1.45.1",
-        "opentelemetry-instrumentation==0.66b1",
-        "opentelemetry-instrumentation-asgi==0.66b1",
-        "opentelemetry-instrumentation-fastapi==0.66b1",
-        "opentelemetry-sdk==1.45.1",
-        "opentelemetry-semantic-conventions==0.66b1",
-        "opentelemetry-util-http==0.66b1",
+        "opentelemetry-api==1.45.2",
+        "opentelemetry-instrumentation==0.66b2",
+        "opentelemetry-instrumentation-asgi==0.66b2",
+        "opentelemetry-instrumentation-fastapi==0.66b2",
+        "opentelemetry-sdk==1.45.2",
+        "opentelemetry-semantic-conventions==0.66b2",
+        "opentelemetry-util-http==0.66b2",
         "orjson==3.11.9",
         "ormsgpack==1.12.2",
         "packaging==26.2",
@@ -4653,7 +4658,7 @@
         "xxhash==3.8.1",
         "zstandard==0.25.0"
       ],
-      "sha256": "726303cb73fedff01a1308708a4819f938bd08cdfae126eec7739ff95b6fa710",
+      "sha256": "0f36d22372a39b943c7c7ce9160c3d7373ed5d2c123a778d1622d30b2593ac60",
       "status": "CLOSURE_AND_LICENSE_REVIEW_PENDING"
     },
     "enterprise-agent/docker-compose.prod.yml": {
@@ -4731,11 +4736,11 @@
         "pypdf>=6.21.4",
         "python-docx>=1.1",
         "unstructured>=0.15",
-        "opentelemetry-api>=1.45.1",
-        "opentelemetry-sdk>=1.45.1",
-        "opentelemetry-instrumentation-fastapi>=0.66b1",
+        "opentelemetry-api>=1.45.2",
+        "opentelemetry-sdk>=1.45.2",
+        "opentelemetry-instrumentation-fastapi>=0.66b2",
         "prometheus-client>=0.20",
-        "python-dotenv>=1.0",
+        "python-dotenv>=1.2.0",
         "tenacity>=8.2",
         "loguru>=0.7",
         "dev: pytest>=8.0",
@@ -4750,7 +4755,7 @@
         "eval: datasets>=2.20",
         "build: hatchling"
       ],
-      "sha256": "b4621f6046fdd61290910ae728af7e9f789f8d6cecf798439439b9997e136410",
+      "sha256": "d61ecd84ec2497b4cad0947d1103182b4a859c2903e645056c3b89b52a54b131",
       "status": "CLOSURE_AND_LICENSE_REVIEW_PENDING"
     },
     "enterprise-agent/requirements.txt": {
@@ -4758,7 +4763,7 @@
         "loguru>=0.7",
         "pydantic>=2.0",
         "pydantic-settings>=2.0",
-        "python-dotenv>=1.0",
+        "python-dotenv>=1.2.0",
         "numpy>=1.26",
         "langchain>=1.0",
         "langchain-core>=1.0",
@@ -4792,15 +4797,15 @@
         "pypdf>=6.21.4",
         "python-docx>=1.1",
         "unstructured>=0.15",
-        "opentelemetry-api>=1.45.1",
-        "opentelemetry-sdk>=1.45.1",
-        "opentelemetry-instrumentation-fastapi>=0.66b1",
+        "opentelemetry-api>=1.45.2",
+        "opentelemetry-sdk>=1.45.2",
+        "opentelemetry-instrumentation-fastapi>=0.66b2",
         "prometheus-client>=0.20",
         "tenacity>=8.2",
         "psycopg>=3.3.4",
         "psycopg-pool>=3.3.1"
       ],
-      "sha256": "1c4c90768dafe406d62326c4d4cf9949f8f89e52eed1bb3b60a810cf483f7246",
+      "sha256": "0e2d90064391d7c5bb6054b2efb3282387fd19fa683edc1b2f10b050db3855f5",
       "status": "CLOSURE_AND_LICENSE_REVIEW_PENDING"
     }
   },

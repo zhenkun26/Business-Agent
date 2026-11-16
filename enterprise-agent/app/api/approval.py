@@ -331,28 +331,52 @@ async def approval_evidence(approval_id: str, actor: User = Depends(get_current_
             "automatic_release": False, "automatic_retry": False}
 
 
+async def _approval_page(
+    db: Any, scope: str, actor: User, limit: int, offset: int,
+) -> tuple[list[Any], dict[str, int | bool]]:
+    """A statement-consistent total and page, including an empty page sentinel."""
+    if (type(limit) is not int or not 1 <= limit <= 100
+            or type(offset) is not int or not 0 <= offset <= 1_000_000):
+        raise HTTPException(422, "APPROVAL_PAGE_INVALID")
+    filters = {
+        "pending": ("status = 'pending' AND approver_roles ? :actor", actor.role, "created_at"),
+        "mine": ("requester_id = :actor", actor.user_id, "created_at"),
+        "handled": ("approver_id = :actor", actor.user_id, "decided_at"),
+    }
+    predicate, identity, timestamp = filters[scope]
+    # SQL fragments come only from the fixed mapping; all request values are bound.
+    result = await db.execute(text(
+        "WITH filtered AS (SELECT approval_id, session_id, operation_type, risk_level, "
+        "summary, created_at, batch_id, status, requester_id, prefill_payload, "
+        "approver_roles, expires_at, approval_contract, approver_id, comment, decided_at "
+        f"FROM approval_requests WHERE {predicate}), "
+        f"page AS (SELECT * FROM filtered ORDER BY {timestamp} DESC NULLS LAST, "
+        "approval_id DESC LIMIT :limit OFFSET :offset) "
+        "SELECT page.*, counts.total_count FROM (SELECT COUNT(*) AS total_count "
+        "FROM filtered) counts LEFT JOIN page ON TRUE "
+        f"ORDER BY page.{timestamp} DESC NULLS LAST, page.approval_id DESC"
+    ), {"actor": identity, "limit": limit, "offset": offset})
+    records = result.fetchall()
+    total = records[0].total_count
+    rows = [row for row in records if row.approval_id is not None]
+    return rows, {"total": total, "limit": limit, "offset": offset,
+                  "returned_count": len(rows),
+                  "has_more": offset + len(rows) < total}
+
+
 @router.get("/approvals/pending")
 async def list_pending_approvals(
     approver: User = Depends(get_current_user),
     db=Depends(get_db),
+    limit: int = 50,
+    offset: int = 0,
 ):
     """查询待我审批的请求"""
-    from sqlalchemy import text
-
-    result = await db.execute(
-        text(
-            "SELECT approval_id, session_id, operation_type, risk_level, "
-            "summary, created_at, batch_id, status, requester_id, prefill_payload, "
-            "approver_roles, expires_at, approval_contract FROM approval_requests "
-            "WHERE status = 'pending' AND approver_roles ? :role "
-            "ORDER BY created_at DESC LIMIT 50"
-        ),
-        {"role": approver.role},
-    )
-    rows = result.fetchall()
+    rows, page = await _approval_page(db, "pending", approver, limit, offset)
 
     return {
-        "pending_count": len(rows),
+        **page,
+        "pending_count": page["total"],
         "items": [
             {
                 **deadline.review_fields(r),
@@ -373,28 +397,18 @@ async def list_pending_approvals(
 async def list_my_approvals(
     requester: User = Depends(get_current_user),
     db=Depends(get_db),
+    limit: int = 50,
+    offset: int = 0,
 ):
     """查询我发起的审批请求(发起人视角的进度跟踪)
 
     与 /approvals/pending(审批人视角)互补:让发起人能看到自己单子的
     状态流转(pending → executed / rejected / approved_pending_reauth)。
     """
-    from sqlalchemy import text
-
-    result = await db.execute(
-        text(
-            "SELECT approval_id, operation_type, risk_level, summary, status, "
-            "approver_id, comment, batch_id, created_at, decided_at, requester_id, "
-            "session_id, prefill_payload, approver_roles, expires_at, approval_contract "
-            "FROM approval_requests WHERE requester_id = :uid "
-            "ORDER BY created_at DESC LIMIT 50"
-        ),
-        {"uid": requester.user_id},
-    )
-    rows = result.fetchall()
+    rows, page = await _approval_page(db, "mine", requester, limit, offset)
 
     return {
-        "total": len(rows),
+        **page,
         "items": [
             {
                 **deadline.review_fields(r),
@@ -418,28 +432,18 @@ async def list_my_approvals(
 async def list_handled_approvals(
     requester: User = Depends(get_current_user),
     db=Depends(get_db),
+    limit: int = 50,
+    offset: int = 0,
 ):
     """查询我经手审批过的请求(审批人视角的历史记录)
 
     与 /approvals/mine(发起人视角)互补:审批人批准/拒绝后,单子从
     /approvals/pending 队列消失,这里按 approver_id 留痕,便于追溯"我批过什么"。
     """
-    from sqlalchemy import text
-
-    result = await db.execute(
-        text(
-            "SELECT approval_id, operation_type, risk_level, summary, status, "
-            "requester_id, comment, batch_id, created_at, decided_at, session_id, "
-            "prefill_payload, approver_roles, expires_at, approval_contract "
-            "FROM approval_requests WHERE approver_id = :uid "
-            "ORDER BY decided_at DESC LIMIT 50"
-        ),
-        {"uid": requester.user_id},
-    )
-    rows = result.fetchall()
+    rows, page = await _approval_page(db, "handled", requester, limit, offset)
 
     return {
-        "total": len(rows),
+        **page,
         "items": [
             {
                 **deadline.review_fields(r),

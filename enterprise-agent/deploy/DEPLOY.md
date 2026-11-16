@@ -520,8 +520,8 @@ an explicit dependency-input change whose real model/RAG effects remain unaccept
 | Production target | INSTALL_ML=0, Linux amd64, CPython 3.13.16, Debian bookworm; CI explicitly requests linux/amd64 |
 | Python base | Both stages use `python:3.13.16-slim-bookworm@sha256:f040863673aea2570c3ff6a5c3fb4c673a016cbc5375005ad145915922b6b78a` |
 | Dockerfile frontend | `docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e` |
-| Debian sources | `debian.sources`: bookworm/main and bookworm-security/main snapshots at 20261107T000000Z; inherited sources disabled by apt options; archive keyring signature checks retained |
-| Fixed OS security inputs | apt/libapt-pkg6.0 2.6.2 and openssl/libssl3 3.0.22-1~deb12u2; exact install requests and dpkg version assertions; compare final inventory for other snapshot-driven updates |
+| Debian sources | `debian.sources`: bookworm/main and bookworm-security/main snapshots at 20261116T000000Z; inherited sources disabled by apt options; archive keyring signature checks retained |
+| Fixed OS security inputs | apt/libapt-pkg6.0 2.6.2, openssl/libssl3 3.0.22-1~deb12u2, and libpq5 15.20-0+deb12u1; exact install requests, dpkg version assertions, and final version/architecture checks; compare final inventory for other snapshot-driven updates |
 | Python packages | 98 exact pins in `requirements-prod.txt`; 114 compatible official wheel hashes in `requirements-prod.lock`; binary-only, hash-required, no resolver-added dependencies in production |
 | Reviewed range resolutions | msgpack 1.2.3, setuptools 84.1.0, uvloop 0.22.1; numpy 2.4.6 for current 3.11/3.13 compatibility |
 | Input manifest | `build-inputs.json`: registry/platform identities, PyPI metadata provenance and dependency markers, wheel hashes, Debian Release lookup hashes and six input-file hashes |
@@ -555,8 +555,8 @@ executes a fixed `dpkg-query -W` command with a 15-second timeout. It requires t
 production Python/platform and emits JSON to stdout without modifying files, importing the
 application, connecting to services or reading .env. Missing/extra/duplicate/wrong-version
 Python packages fail verification. Optional `--profile experimental-ml` permits additional
-packages but always emits EXPERIMENTAL_NOT_ACCEPTED; base pins still must match. OS package
-versions are observations, not an already accepted expected OS package list.
+packages but always emits EXPERIMENTAL_NOT_ACCEPTED; base pins still must match. The five
+declared OS security packages must match their reviewed versions and amd64 architecture. Other OS package versions remain observations, not a fully locked OS set.
 
 Controlled update and rebuild workflow (commands below are for a separately authorized
 isolated Linux environment, **not executed in this increment**):

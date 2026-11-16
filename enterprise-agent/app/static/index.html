@@ -420,9 +420,16 @@
         <template v-if="isApprover">
         <h2 ref="approvalHeading" tabindex="-1">待我审批
           <button type="button" class="btn-sm btn-ghost" aria-label="刷新待我审批" @click="loadApprovals">刷新</button>
-          <span style="font-size:12px;color:#888;margin-left:auto">共 {{ approvals.length }} 条</span>
+          <span style="font-size:12px;color:#888;margin-left:auto">共 {{ approvalPages.approvals.total ?? '—' }} 条</span>
         </h2>
-        <p class="view-state" role="status" aria-atomic="true">{{ viewStatus('approvals') || (approvals.length ? '' : '暂无待审批请求') }}</p>
+        <p class="view-state" role="status" aria-atomic="true">{{ viewStatus('approvals') || (approvals.length ? '' : '当前页暂无待审批请求') }}</p>
+        <div class="row" role="group" aria-label="待我审批分页">
+          <button type="button" class="btn-sm btn-ghost" @click="loadApprovalPage('approvals', approvalPages.approvals.offset - 50)"
+                  :disabled="loadState.approvals==='loading' || approvalPages.approvals.offset===0">上一页</button>
+          <span>第 {{ Math.floor(approvalPages.approvals.offset / 50) + 1 }} 页 · 每页最多 50 条</span>
+          <button type="button" class="btn-sm btn-ghost" @click="loadApprovalPage('approvals', approvalPages.approvals.offset + 50)"
+                  :disabled="loadState.approvals!=='ready' || !approvalPages.approvals.has_more">下一页</button>
+        </div>
         <div v-for="a in approvals" :key="a.approval_id" class="card">
           <div class="row">
             <span class="title">{{ a.summary || a.operation_type }}</span>
@@ -444,9 +451,16 @@
         <template v-if="isApprover">
         <h2 style="margin-top:24px">我经手的
           <button type="button" class="btn-sm btn-ghost" aria-label="刷新我经手的审批" @click="loadHandled">刷新</button>
-          <span style="font-size:12px;color:#888;margin-left:auto">共 {{ handledApprovals.length }} 条</span>
+          <span style="font-size:12px;color:#888;margin-left:auto">共 {{ approvalPages.handledApprovals.total ?? '—' }} 条</span>
         </h2>
-        <p class="view-state" role="status" aria-atomic="true">{{ viewStatus('handledApprovals') || (handledApprovals.length ? '' : '暂无经手记录') }}</p>
+        <p class="view-state" role="status" aria-atomic="true">{{ viewStatus('handledApprovals') || (handledApprovals.length ? '' : '当前页暂无经手记录') }}</p>
+        <div class="row" role="group" aria-label="我经手的审批分页">
+          <button type="button" class="btn-sm btn-ghost" @click="loadApprovalPage('handledApprovals', approvalPages.handledApprovals.offset - 50)"
+                  :disabled="loadState.handledApprovals==='loading' || approvalPages.handledApprovals.offset===0">上一页</button>
+          <span>第 {{ Math.floor(approvalPages.handledApprovals.offset / 50) + 1 }} 页 · 每页最多 50 条</span>
+          <button type="button" class="btn-sm btn-ghost" @click="loadApprovalPage('handledApprovals', approvalPages.handledApprovals.offset + 50)"
+                  :disabled="loadState.handledApprovals!=='ready' || !approvalPages.handledApprovals.has_more">下一页</button>
+        </div>
         <div v-for="h in handledApprovals" :key="h.approval_id" class="card">
           <div class="row">
             <span class="title">{{ h.summary || h.operation_type }}</span>
@@ -467,9 +481,16 @@
 
         <h2 ref="mineHeading" tabindex="-1" style="margin-top:24px">我的审批
           <button type="button" class="btn-sm btn-ghost" aria-label="刷新我的审批" @click="loadMine">刷新</button>
-          <span style="font-size:12px;color:#888;margin-left:auto">共 {{ myApprovals.length }} 条</span>
+          <span style="font-size:12px;color:#888;margin-left:auto">共 {{ approvalPages.myApprovals.total ?? '—' }} 条</span>
         </h2>
-        <p class="view-state" role="status" aria-atomic="true">{{ viewStatus('myApprovals') || (myApprovals.length ? '' : '暂无我发起的审批') }}</p>
+        <p class="view-state" role="status" aria-atomic="true">{{ viewStatus('myApprovals') || (myApprovals.length ? '' : '当前页暂无我发起的审批') }}</p>
+        <div class="row" role="group" aria-label="我的审批分页">
+          <button type="button" class="btn-sm btn-ghost" @click="loadApprovalPage('myApprovals', approvalPages.myApprovals.offset - 50)"
+                  :disabled="loadState.myApprovals==='loading' || approvalPages.myApprovals.offset===0">上一页</button>
+          <span>第 {{ Math.floor(approvalPages.myApprovals.offset / 50) + 1 }} 页 · 每页最多 50 条</span>
+          <button type="button" class="btn-sm btn-ghost" @click="loadApprovalPage('myApprovals', approvalPages.myApprovals.offset + 50)"
+                  :disabled="loadState.myApprovals!=='ready' || !approvalPages.myApprovals.has_more">下一页</button>
+        </div>
         <div v-for="m in myApprovals" :key="m.approval_id" class="card">
           <div class="row">
             <span class="title">{{ m.summary || m.operation_type }}</span>
@@ -712,6 +733,9 @@ createApp({
       streamTimer: null,
       streamAbort: null,
       // approval
+      approvalPages: { approvals: { offset: 0, total: null, has_more: false },
+        myApprovals: { offset: 0, total: null, has_more: false },
+        handledApprovals: { offset: 0, total: null, has_more: false } },
       approvals: [],
       myApprovals: [],
       handledApprovals: [],
@@ -930,6 +954,12 @@ createApp({
     },
     clearProtectedViews() {
       this.closeApprovalEvidence();
+      for (const key of ['approvals', 'myApprovals', 'handledApprovals']) {
+        this.loadSequence[key] = (this.loadSequence[key] || 0) + 1;
+        this.approvalPages[key] = { offset: 0, total: null, has_more: false };
+        this[key] = [];
+        this.loadState[key] = this.loadState[key] === 'loading' ? 'unavailable' : 'idle';
+      }
       this.approvals = []; this.handledApprovals = []; this.prompts = {}; this.documents = [];
       this.promptDrafts = {}; this.activateVer = {}; this.archiveOthers = {}; this.weights = {};
       if (['prompt', 'reference'].includes(this.tab)) this.tab = 'chat';
@@ -978,8 +1008,9 @@ createApp({
       this[key] = ['prompts', 'status'].includes(key) ? {} : [];
       try {
         if (roles) await this.authorize(roles);
-        const data = select(await this.api(path));
+        const response = await this.api(path);
         if (epoch !== this.authEpoch || this.loadSequence[key] !== sequence) return;
+        const data = select(response);
         if (!data || typeof data !== 'object' ||
             (!['prompts', 'status'].includes(key) && !Array.isArray(data))) throw new Error('响应格式无效');
         if (Array.isArray(data) && data.some(row => !row || typeof row !== 'object')) throw new Error('列表响应无效');
@@ -1301,15 +1332,28 @@ createApp({
         this.approvalEvidenceStatus = status;
       }
     },
-    async loadApprovals() {
-      if (!this.isApprover) { this.approvals = []; return; }
-      return this.loadView('approvals', '/api/v1/approvals/pending', d => d.items, ['manager', 'admin']);
+    async loadApprovalPage(key, offset = 0) {
+      const routes = { approvals: 'pending', myApprovals: 'mine', handledApprovals: 'handled' };
+      if (!Object.hasOwn(routes, key) || !Number.isInteger(offset) || offset < 0 || offset > 1000000) return;
+      const roles = key === 'myApprovals' ? null : ['manager', 'admin'];
+      if (roles && !this.isApprover) { this[key] = []; return; }
+      const epoch = this.authEpoch, sequence = (this.loadSequence[key] || 0) + 1;
+      this.approvalPages[key] = { offset, total: null, has_more: false };
+      let page;
+      await this.loadView(key, '/api/v1/approvals/' + routes[key] + '?limit=50&offset=' + offset, d => {
+        if (!Array.isArray(d.items) || !Number.isInteger(d.total) || d.total < 0 ||
+            d.limit !== 50 || d.offset !== offset || d.returned_count !== d.items.length ||
+            d.items.length !== Math.min(50, Math.max(0, d.total - offset)) ||
+            d.has_more !== (offset + d.items.length < d.total)) throw new Error('分页响应无效');
+        page = { offset, total: d.total, has_more: d.has_more };
+        return d.items;
+      }, roles);
+      if (epoch === this.authEpoch && this.loadSequence[key] === sequence && this.loadState[key] === 'ready')
+        this.approvalPages[key] = page;
     },
-    async loadMine() { return this.loadView('myApprovals', '/api/v1/approvals/mine', d => d.items); },
-    async loadHandled() {
-      if (!this.isApprover) { this.handledApprovals = []; return; }
-      return this.loadView('handledApprovals', '/api/v1/approvals/handled', d => d.items, ['manager', 'admin']);
-    },
+    async loadApprovals() { return this.loadApprovalPage('approvals'); },
+    async loadMine() { return this.loadApprovalPage('myApprovals'); },
+    async loadHandled() { return this.loadApprovalPage('handledApprovals'); },
     expectResult(valid) {
       if (!valid) { const error = new Error('响应无效，请核对记录'); error.outcomeUnknown = true; throw error; }
     },

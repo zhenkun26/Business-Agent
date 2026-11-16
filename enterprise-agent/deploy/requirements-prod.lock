@@ -102,20 +102,20 @@ ollama==0.6.2 \
     --hash=sha256:3ad7daab28e5a973445c36a73882a3ef698c2ebb00e21e308652741577509f7d
 openai==2.53.0 \
     --hash=sha256:c694ffc747a3c4d1663ef2b07b811315a476164ee5efa3a993967349ebca7618
-opentelemetry-api==1.45.1 \
-    --hash=sha256:b31553efa588ae44bc306f863c785c5333a9ecc091248c6ee68b4b6c87fdedfb
-opentelemetry-instrumentation==0.66b1 \
-    --hash=sha256:4c4aa14dc9a24a02325a9d4c42c4d0208dbb1374c2b1b8fe6c9392d59f3e1008
-opentelemetry-instrumentation-asgi==0.66b1 \
-    --hash=sha256:78b3f9bdf0fa38c65935a2ab46d59e0f9de873a51e0c95b0329f106e2ccb5274
-opentelemetry-instrumentation-fastapi==0.66b1 \
-    --hash=sha256:97f8ac8fd7537517f9e6988bd0aca04bfa5aad564bcd46c245530739e2be72d1
-opentelemetry-sdk==1.45.1 \
-    --hash=sha256:c604c11dc429810812348989115fa44bd558772a3d7442afc43d024f2c250ca4
-opentelemetry-semantic-conventions==0.66b1 \
-    --hash=sha256:d4cddeb4315490b35213f55e2bdc9ac54bb1e4d318927475bed62b35545e581b
-opentelemetry-util-http==0.66b1 \
-    --hash=sha256:8f443d7abcaf29c4a07b373bbd31b5b39132c0ed3c27d015a59dc0323d5b1c58
+opentelemetry-api==1.45.2 \
+    --hash=sha256:2cbd737377e710ee740d261c94e93fa0f08e6d037c18f17513cc0a2d94479a34
+opentelemetry-instrumentation==0.66b2 \
+    --hash=sha256:fa9ccfdab147a14af8107d19ef0a7b5015675273c5adced7a1fc38f28b42ec4c
+opentelemetry-instrumentation-asgi==0.66b2 \
+    --hash=sha256:9c5ec36e6b898f18e6b07b5077c2a3bafa9abf69de98e729797b9efa465f8aa3
+opentelemetry-instrumentation-fastapi==0.66b2 \
+    --hash=sha256:401eb9fe58cc86015ac0a6682dcaf1b4bcea32c428969853d02171d6650d1774
+opentelemetry-sdk==1.45.2 \
+    --hash=sha256:ff974ea70ee4f1d51e2ec152db37c2b626c7bf82bb3f7d86114fd8704e7199c6
+opentelemetry-semantic-conventions==0.66b2 \
+    --hash=sha256:4cbe61e5f9275d57ab31708446e7938ef4291ebbe6a7fca6f7a629c5acae87d8
+opentelemetry-util-http==0.66b2 \
+    --hash=sha256:c4bb5d6744e60353bcaa3e325bc529a1515346b51cb4d9c8e5b730579337e06d
 orjson==3.11.9 \
     --hash=sha256:4e39364e726a8fff737309aff059ff67d8a8c8d5b677be7bb49a8b3e84b7e218
 ormsgpack==1.12.2 \
