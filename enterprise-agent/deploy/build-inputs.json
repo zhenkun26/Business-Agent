@@ -14,22 +14,22 @@
         "Date: Sat, 11 Jul 2026 10:16:37 UTC"
       ],
       "sha256": "abcf5882746e0f68171f41adbb4ac01b74b49d62d203379befb9265804311a4f",
-      "url": "https://snapshot.debian.org/archive/debian/20261107T000000Z/dists/bookworm/Release"
+      "url": "https://snapshot.debian.org/archive/debian/20261116T000000Z/dists/bookworm/Release"
     },
     "bookworm-security": {
       "date_lines": [
         "Suite: oldstable-security",
         "Codename: bookworm-security",
-        "Date: Fri, 06 Nov 2026 20:32:34 UTC",
-        "Valid-Until: Fri, 13 Nov 2026 20:32:34 UTC"
+        "Date: Sun, 15 Nov 2026 22:18:17 UTC",
+        "Valid-Until: Sun, 22 Nov 2026 22:18:17 UTC"
       ],
-      "sha256": "2f5d6a0a019a508506fdd76674e6b73eda976da2fe21978d33656bf68653d51d",
-      "url": "https://snapshot.debian.org/archive/debian-security/20261107T000000Z/dists/bookworm-security/Release"
+      "sha256": "e0c563b7efd1c2a522fc0cf7620ce93017dd92ff35d0139423ca040a3572e78c",
+      "url": "https://snapshot.debian.org/archive/debian-security/20261116T000000Z/dists/bookworm-security/Release"
     }
   },
   "files": {
-    "Dockerfile.prod": "74b2c096940c032ef95cf7ac2c15e9993c3b86cce6a4fd5f2dcb81c5f650d849",
-    "deploy/debian.sources": "74a7d1421a4572b640a4bcde29fa085259843fc5711f3a3a0419c237f15c1e51",
+    "Dockerfile.prod": "4a8990f86d5fdfa9f37b03a7392af2d7bbbcf34945361d37ce44036b5882e143",
+    "deploy/debian.sources": "c7ad626c8351e251acc67f64edaa4d3ab422c77084071c994297c19749abe5eb",
     "deploy/requirements-ml.txt": "d6a83665a8272c33e60638a0304e05ac50cf40a6187e4d3c168228ac2454c620",
     "deploy/requirements-prod.lock": "48e58c6861e3873e67c0e2ea67185d6791bdd0404c1ff60e102065e58be134bf",
     "deploy/requirements-prod.txt": "0f36d22372a39b943c7c7ce9160c3d7373ed5d2c123a778d1622d30b2593ac60",
@@ -41,7 +41,7 @@
     "deploy/third-party-notices/Loguru-0.7.3-MIT.txt": "b35d026cc7aca9d5859a02eb87ddf7a386a24c986838651bd1f283f94e003327",
     "deploy/third-party-notices/README.md": "fabfc5fb80aeefec244ce607cd635f6fc2968ee91e80c37ab19316f0024d7a61",
     "deploy/third-party-notices/source-map.json": "9747d7b299b961d196bbb78f39a7d66002b0412d3bc7b7508b4b8199106bc90c",
-    "scripts/verify_build.py": "85a7fbb7e77170247c205e16fc7a519f3ac1a12c80f48db0bfef8813842b1b4f"
+    "scripts/verify_build.py": "b8a6c7a21e05d67397e9c235a9011fbd178b60fcc45bd2c7647ccc9ef7954948"
   },
   "frontend": {
     "amd64_digest": "sha256:7b32114e84ca21aeb2d6f871a0b62b3a0762193f75d9afd048ee4cbe889f3148",
@@ -70,28 +70,35 @@
       "advisory": "https://security-tracker.debian.org/tracker/CVE-2026-109518",
       "architecture": "amd64",
       "sha256": "796fc7fe18866f5b1fb27a115d7339e549d71b7ddbc15b8d6fc4226c243e96d1",
-      "source": "https://snapshot.debian.org/archive/debian-security/20261107T000000Z/pool/updates/main/a/apt/apt_2.6.2_amd64.deb",
+      "source": "https://snapshot.debian.org/archive/debian-security/20261116T000000Z/pool/updates/main/a/apt/apt_2.6.2_amd64.deb",
       "version": "2.6.2"
     },
     "libapt-pkg6.0": {
       "advisory": "https://security-tracker.debian.org/tracker/CVE-2026-109518",
       "architecture": "amd64",
       "sha256": "023a7017b75295fc7037c7a4352847f9516a36a82cc5e1650d6832d238860913",
-      "source": "https://snapshot.debian.org/archive/debian-security/20261107T000000Z/pool/updates/main/a/apt/libapt-pkg6.0_2.6.2_amd64.deb",
+      "source": "https://snapshot.debian.org/archive/debian-security/20261116T000000Z/pool/updates/main/a/apt/libapt-pkg6.0_2.6.2_amd64.deb",
       "version": "2.6.2"
+    },
+    "libpq5": {
+      "advisory": "https://security-tracker.debian.org/tracker/source-package/postgresql-15",
+      "architecture": "amd64",
+      "sha256": "ac8a72cc33453f75ac605b4f6b8f9febae303b9d9a61255a042a87a7f69ac5c7",
+      "source": "https://snapshot.debian.org/archive/debian-security/20261116T000000Z/pool/updates/main/p/postgresql-15/libpq5_15.20-0+deb12u1_amd64.deb",
+      "version": "15.20-0+deb12u1"
     },
     "libssl3": {
       "advisory": "https://security-tracker.debian.org/tracker/CVE-2026-84782",
       "architecture": "amd64",
       "sha256": "cb4784740daa9b3b0eaea2b444bbefa686794afbbf3d678d238c1fd9875f2efd",
-      "source": "https://snapshot.debian.org/archive/debian-security/20261107T000000Z/pool/updates/main/o/openssl/libssl3_3.0.22-1~deb12u2_amd64.deb",
+      "source": "https://snapshot.debian.org/archive/debian-security/20261116T000000Z/pool/updates/main/o/openssl/libssl3_3.0.22-1~deb12u2_amd64.deb",
       "version": "3.0.22-1~deb12u2"
     },
     "openssl": {
       "advisory": "https://security-tracker.debian.org/tracker/CVE-2026-84782",
       "architecture": "amd64",
       "sha256": "5cdf0b735b1c8a96ae0bf83ed328c83c2170f8320dedb035e98705b60b2d0cfe",
-      "source": "https://snapshot.debian.org/archive/debian-security/20261107T000000Z/pool/updates/main/o/openssl/openssl_3.0.22-1~deb12u2_amd64.deb",
+      "source": "https://snapshot.debian.org/archive/debian-security/20261116T000000Z/pool/updates/main/o/openssl/openssl_3.0.22-1~deb12u2_amd64.deb",
       "version": "3.0.22-1~deb12u2"
     }
   },
@@ -2144,7 +2151,7 @@
   },
   "platform": "linux/amd64",
   "python": "3.13.16",
-  "reviewed_on": "2026-11-07",
+  "reviewed_on": "2026-11-16",
   "schema": 1,
-  "snapshot": "20261107T000000Z"
+  "snapshot": "20261116T000000Z"
 }

@@ -41,3 +41,20 @@ is required. Preserve production hash-only binary installation and all scan gate
 Verify release wheel hashes, Python 3.11/3.13 dependency closure, oversized traceparent
 rejection before regex work, normal propagation, and SDK/FastAPI compatibility.
 Retain offline and hosted results with their exact candidate identities.
+
+## Authorized Debian security follow-up — 2026-11-16
+
+Hosted run 43866292423 passed both Python jobs, the synthetic demo, and the isolated
+persistence slice at `33ca97a`, but Trivy reported 32 HIGH findings against Debian
+libpq5 15.19-0+deb12u1. The user authorized refreshing the signed Debian snapshot,
+upgrading the existing libpq5 package to the reviewed fixed version, synchronizing
+build provenance, verifying, and pushing to the same draft PR. No merge, image
+publication, deployment, or paid model calls are authorized.
+
+Verify Release/Packages metadata and package hashes from the frozen official archive.
+Keep the existing Python/base-image inputs and other exact OS security pins. Add an
+exact libpq5 install request and assertion, and make final inventory verification reject
+missing, wrong-version, or wrong-architecture security packages. Exercise those failures
+offline, then verify signed apt installation, final inventory, and Trivy in hosted CI.
+Preserve scan gates and exemptions; do not infer full runtime or reproducible-image
+acceptance from this scoped security update.

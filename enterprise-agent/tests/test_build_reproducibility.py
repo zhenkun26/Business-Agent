@@ -33,7 +33,47 @@ def installed(manifest: dict) -> list[tuple[str, str]]:
     return [(n, p['version']) for n, p in manifest['packages'].items()]
 
 
-OS_PACKAGES = 'ca-certificates\t1\tall\ntzdata\t2\tall\nlibpq5:amd64\t3\tamd64\n'
+OS_PACKAGES = (
+    'ca-certificates\t1\tall\ntzdata\t2\tall\n'
+    'apt\t2.6.2\tamd64\nlibapt-pkg6.0:amd64\t2.6.2\tamd64\n'
+    'libpq5:amd64\t15.20-0+deb12u1\tamd64\n'
+    'libssl3:amd64\t3.0.22-1~deb12u2\tamd64\nopenssl\t3.0.22-1~deb12u2\tamd64\n'
+)
+
+
+@pytest.mark.parametrize('mutation', ['old_version', 'wrong_arch', 'missing_apt', 'duplicate_alias'])
+def test_installed_os_security_versions_fail_closed(mutation: str) -> None:
+    records = OS_PACKAGES
+    if mutation == 'old_version':
+        records = records.replace('15.20-0+deb12u1', '15.19-0+deb12u1')
+    elif mutation == 'wrong_arch':
+        records = records.replace('libpq5:amd64\t15.20-0+deb12u1\tamd64',
+                                  'libpq5:amd64\t15.20-0+deb12u1\tarm64')
+    elif mutation == 'missing_apt':
+        records = records.replace('apt\t2.6.2\tamd64\n', '')
+    else:
+        records += 'libpq5\t15.20-0+deb12u1\tamd64\n'
+    with pytest.raises(build.InvalidBuild, match='BUILD_OS_SECURITY_VERSION_DRIFT'):
+        inventory(ROOT, build.verify_inputs(ROOT), os_packages=records)
+
+
+@pytest.mark.parametrize('mutation', ['missing_pin', 'old_snapshot', 'missing_package', 'invalid_hash'])
+def test_os_security_contract_rejects_resealed_drift(tmp_path: Path, mutation: str) -> None:
+    root, manifest = fixture(tmp_path)
+    if mutation == 'missing_pin':
+        recipe = root/'Dockerfile.prod'
+        recipe.write_text(recipe.read_text().replace('libpq5=15.20-0+deb12u1', 'libpq5'))
+    elif mutation == 'old_snapshot':
+        manifest['os_security_updates']['libpq5']['source'] = (
+            manifest['os_security_updates']['libpq5']['source'].replace(
+                manifest['snapshot'], '20261107T000000Z'))
+    elif mutation == 'missing_package':
+        del manifest['os_security_updates']['libpq5']
+    else:
+        manifest['os_security_updates']['libpq5']['sha256'] = 'invalid'
+    reseal(root, manifest, 'Dockerfile.prod')
+    with pytest.raises(build.InvalidBuild, match='BUILD_OS_SECURITY_'):
+        build.verify_inputs(root)
 
 
 def inventory(root: Path, manifest: dict, **kwargs: object) -> dict:

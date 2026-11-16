@@ -7,6 +7,51 @@ grey release or production approval are established. C10 now has an offline impl
 publication. Real two-process race acceptance remains BLOCKED; C10 is not closed.
 
 <a id="current-handover"></a>
+## Debian and libpq5 security update — 2026-11-16
+
+The user authorized refreshing the frozen Debian snapshot and existing libpq5 package,
+verifying, pushing to the current draft PR #9, and rerunning CI without merge, image
+publication, deployment, or paid models. Parent `33ca97a03ebcfac11c4a33dac865bfaa47853e96`;
+branch `fix/analysis-approval-reliability`, still stacked on unchanged PR #8.
+
+[Previous hosted run 43866292423](https://github.com/zhenkun26/Business-Agent/actions/runs/43866292423)
+passed both Python jobs (including pip-audit), the synthetic HTTP demo, and isolated
+PG/Redis persistence. Image construction/inventory passed, but Trivy reported 32 HIGH
+findings against libpq5 15.19-0+deb12u1. That is a package-level scan result, not proof
+that every reported PostgreSQL server issue is exploitable through this client library.
+The earlier OpenTelemetry repair is retained unchanged.
+
+Refresh both signed archive sources from `20261107T000000Z` to `20261116T000000Z` and
+pin/assert libpq5 `15.20-0+deb12u1`, also listed by the
+[Debian security tracker](https://security-tracker.debian.org/tracker/source-package/postgresql-15).
+The other four exact OS security versions and archive hashes are unchanged. Both Release
+lookups were retrieved over verified HTTPS. The security Packages.xz digest and size
+match Release SHA256 metadata; all five downloaded security-package archives match the
+index's SHA256 and size. Raw metadata/archives remain in the local task work directory.
+Release provenance and input hashes are synchronized in build-inputs.json, followed by
+license/declaration and canonical offline source inventories. Base/frontend images, all
+98 Python packages/wheel locks, signature policy, scan gates, and exemptions are unchanged.
+
+The build verifier now checks the five security-package declarations against the frozen
+archive and exact recipe pins. Final installed inventory rejects missing, duplicate,
+wrong-version, or wrong-architecture security packages; other OS packages remain observed,
+not fully locked. Eight negative regressions cover these failures and resealed input drift.
+
+Precommit receipt `enterprise-agent/eval/results/offline/debian-security-precommit-20261116-r1.json`
+passed all eight guarded checks: 2,205 Python tests + 705 subtests, 82.0010% coverage,
+85 Node UI cases, 14 credential cases, and eight assets. No skips/xfails/deselections or
+guard denials; sources stable. Candidate binding is intentionally BLOCKED before commit;
+exit 2 also retains the full runtime/UAT/release blockers. Clean-commit receipt location:
+`enterprise-agent/eval/results/offline/debian-security-clean-20261116-r1.json`.
+
+Docker is unavailable locally, so actual signed apt installation, installed inventory,
+imports, and Trivy must pass in the authorized hosted run. Compare its OS/Python package
+maps with the retained previous image inventory to identify any snapshot-driven changes.
+Hosted results and the final commit are recorded on
+[PR #9](https://github.com/zhenkun26/Business-Agent/pull/9) after push. No image publication
+or deployment is authorized. This increment does not establish two clean reproducible
+builds, full C10/RAG, browser or real-provider acceptance, enterprise UAT, or release approval.
+
 ## OpenTelemetry security update — 2026-11-16
 
 The user authorized the compatible dependency update, local validation, push to draft
