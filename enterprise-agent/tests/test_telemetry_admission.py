@@ -398,3 +398,99 @@ def test_dotenv_disable_guard_has_matching_dependency_floor():
                    if line.strip().startswith('python-dotenv'))
         assert not req.specifier.contains('1.1.1')
         assert req.specifier.contains('1.2.2')
+
+
+@pytest.mark.parametrize('flags', ['00', '01'])
+def test_tracecontext_patch_preserves_valid_roundtrip(flags):
+    from opentelemetry import trace
+    from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
+
+    header = '00-' + '1' * 32 + '-' + '2' * 16 + '-' + flags
+    propagator = TraceContextTextMapPropagator()
+    context = propagator.extract({'traceparent': header})
+    span = trace.get_current_span(context).get_span_context()
+    assert span.is_valid and span.is_remote
+    assert span.trace_id == int('1' * 32, 16)
+    assert span.trace_flags.sampled == (flags == '01')
+    carrier = {}
+    propagator.inject(carrier, context)
+    assert carrier['traceparent'] == header
+
+
+@pytest.mark.parametrize('size', [513, 2048])
+def test_tracecontext_oversized_input_is_rejected_before_regex(size):
+    from opentelemetry.context import Context
+    from opentelemetry.trace.propagation import tracecontext
+
+    header = '00-' + '1' * 32 + '-' + '2' * 16 + '-01'
+    header += ' ' * (size - len(header) - 2) + '\nX'
+    context = Context({'synthetic_marker': True})
+    with patch.object(tracecontext.re, 'search', side_effect=AssertionError('REGEX_REACHED')) as search:
+        result = tracecontext.TraceContextTextMapPropagator().extract(
+            {'traceparent': header}, context=context)
+    assert result is context
+    search.assert_not_called()
+
+
+def test_tracecontext_valid_input_at_length_boundary_is_not_overblocked():
+    from opentelemetry import trace
+    from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
+
+    header = '00-' + '1' * 32 + '-' + '2' * 16 + '-01'
+    context = TraceContextTextMapPropagator().extract(
+        {'traceparent': header + ' ' * (512 - len(header))})
+    assert trace.get_current_span(context).get_span_context().is_valid
+
+
+@pytest.mark.parametrize('suffix', ['\nX', ' \nX', '\r\nX', '\u2028X'])
+def test_tracecontext_malformed_embedded_line_break_is_rejected(suffix):
+    from opentelemetry import trace
+    from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
+
+    header = '00-' + '1' * 32 + '-' + '2' * 16 + '-01'
+    context = TraceContextTextMapPropagator().extract({'traceparent': header + suffix})
+    assert not trace.get_current_span(context).get_span_context().is_valid
+
+
+def test_patched_sdk_and_fastapi_instrumentation_work_without_external_exporter():
+    from fastapi import FastAPI
+    import httpx
+    from opentelemetry import trace
+    from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
+    from opentelemetry.sdk.metrics import MeterProvider
+    from opentelemetry.sdk.resources import Resource
+    from opentelemetry.sdk.trace import TracerProvider
+    from opentelemetry.sdk.trace.export import SimpleSpanProcessor
+    from opentelemetry.sdk.trace.export.in_memory_span_exporter import InMemorySpanExporter
+
+    resource = Resource({'service.name': 'synthetic-otel-compatibility'})
+    provider = TracerProvider(resource=resource, shutdown_on_exit=False)
+    meter = MeterProvider(resource=resource, shutdown_on_exit=False)
+    exporter = InMemorySpanExporter()
+    provider.add_span_processor(SimpleSpanProcessor(exporter))
+    app = FastAPI()
+
+    @app.get('/synthetic')
+    async def synthetic():
+        return {'ok': True}
+
+    FastAPIInstrumentor.instrument_app(app, tracer_provider=provider, meter_provider=meter)
+
+    async def request():
+        async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app),
+                                     base_url='http://synthetic.invalid') as client:
+            response = await client.get('/synthetic', headers={
+                'traceparent': '00-' + '1' * 32 + '-' + '2' * 16 + '-01'})
+            assert response.status_code == 200 and response.json() == {'ok': True}
+
+    try:
+        asyncio.run(request())
+        spans = [span for span in exporter.get_finished_spans() if span.kind == trace.SpanKind.SERVER]
+        assert len(spans) == 1
+        assert spans[0].context.trace_id == int('1' * 32, 16)
+        assert spans[0].parent.span_id == int('2' * 16, 16)
+        assert spans[0].attributes['http.status_code'] == 200
+    finally:
+        FastAPIInstrumentor.uninstrument_app(app)
+        provider.shutdown()
+        meter.shutdown()

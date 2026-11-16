@@ -7,6 +7,46 @@ grey release or production approval are established. C10 now has an offline impl
 publication. Real two-process race acceptance remains BLOCKED; C10 is not closed.
 
 <a id="current-handover"></a>
+## OpenTelemetry security update — 2026-11-16
+
+The user authorized the compatible dependency update, local validation, push to draft
+PR #9, and hosted CI without merge, publication, deployment, or paid models. Parent:
+`1e786c8f402d7ca6400d5746fc517a8d35ba861a`; branch remains
+`fix/analysis-approval-reliability`, stacked on the unchanged PR #8 branch.
+
+[CVE-2026-126360 / upstream advisory](https://github.com/open-telemetry/opentelemetry-python/security/advisories/GHSA-mf5v-w3w3-f6cg)
+is addressed by upgrading API/SDK 1.45.1 to 1.45.2 and the five existing instrumentation,
+ASGI, FastAPI, semantic-conventions, and util-http packages from 0.66b1 to 0.66b2.
+The package set remains 98; no optional exporter or file-configuration extra was added.
+Development lower bounds, exact production pins, wheel lock hashes, build metadata,
+license/declaration inventory, and canonical offline source hashes are synchronized.
+Base images, Debian snapshot, unrelated packages, scan rules, and exemptions are unchanged.
+
+All seven release JSON responses and universal wheels were retrieved from official PyPI
+and files.pythonhosted.org. Downloaded wheel SHA-256 values match release metadata, and
+wheel dependency declarations match those recorded in the manifest. Raw metadata and
+wheels are retained locally under the task's work directory; release URLs and metadata
+hashes are recorded in `deploy/build-inputs.json`. Their current PyPI vulnerability arrays
+are empty, which is a point-in-time observation rather than a permanent safety claim.
+
+Receipt `enterprise-agent/eval/results/offline/otel-security-precommit-20261116-r1.json`
+passed all eight offline checks on the updated dependencies: 2,197 tests + 705 subtests,
+82.0010% coverage, Node 85/14, and eight browser assets. No skips/xfails/deselections or
+guard denials; source stable. Ten new cases verify oversized input is rejected before
+regex evaluation, boundary and malformed input handling, normal context roundtrips, and
+actual SDK/FastAPI instrumentation with in-memory ASGI transport and span export only.
+Existing metadata-closure tests cover Python 3.11 and 3.13 Linux targets. A fresh retained
+verification environment uses the seven hash-verified wheels and unchanged dependencies;
+the previous environment was not modified or deleted.
+
+Precommit candidate binding is BLOCKED for the intentional dirty tree; runtime/release
+gates remain BLOCKED and exit 2 is expected. Clean-candidate verification record location:
+`enterprise-agent/eval/results/offline/otel-security-clean-20261116-r1.json`.
+Hosted results are recorded on [PR #9](https://github.com/zhenkun26/Business-Agent/pull/9)
+after the authorized push. Offline checks and in-memory tracing are not full application
+RAG/model/provider, real browser, enterprise UAT, or production acceptance. The earlier
+TLS outage was retried successfully; no TLS or hash verification was disabled.
+
 ## Hosted review and manifest-format correction — 2026-11-15
 
 The user subsequently authorized pushing the repair and running hosted CI without merging

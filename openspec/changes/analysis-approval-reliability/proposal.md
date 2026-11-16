@@ -28,3 +28,16 @@ Add regression tests for bilingual metric/filter rejection, customer casing, dat
 Run existing guarded offline checks without paid models, services, or new dependencies.
 Record scope/results in the existing engineering delivery tracker and keep local commits
 only. No push, merge, release, historical evidence rewrite, or filesystem deletion.
+
+## Authorized security follow-up — 2026-11-16
+
+PR #9 hosted verification found CVE-2026-126360 in opentelemetry-api 1.45.1.
+The user authorized upgrading the compatible dependency group, updating locks/provenance,
+verifying locally, pushing to the same PR, and rerunning CI without merge or paid models.
+Official release metadata confirms API/SDK 1.45.2 and semantic-conventions,
+instrumentation, instrumentation-asgi, instrumentation-fastapi, and util-http 0.66b2.
+These are updates to seven existing packages; no new dependency or optional exporter
+is required. Preserve production hash-only binary installation and all scan gates.
+Verify release wheel hashes, Python 3.11/3.13 dependency closure, oversized traceparent
+rejection before regex work, normal propagation, and SDK/FastAPI compatibility.
+Retain offline and hosted results with their exact candidate identities.
