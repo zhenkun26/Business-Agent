@@ -7,6 +7,25 @@ grey release or production approval are established. C10 now has an offline impl
 publication. Real two-process race acceptance remains BLOCKED; C10 is not closed.
 
 <a id="current-handover"></a>
+## Hosted review and manifest-format correction — 2026-11-15
+
+The user subsequently authorized pushing the repair and running hosted CI without merging
+or paid models. Commit `621d770b557650c162ad89b2b784eb3111a1449f` was pushed, and
+[draft PR #9](https://github.com/zhenkun26/Business-Agent/pull/9) targets the still-open
+PR #8 branch so review initially contains only the new repair commit. Main and PR #8
+remain unchanged. CI runs via workflow dispatch on the repair branch with `publish=false`.
+
+[Initial run 43808246350](https://github.com/zhenkun26/Business-Agent/actions/runs/43808246350)
+passed the full offline checks on Python 3.11 and 3.13 but failed the exact-tree secret
+scan. Both sanitized summaries reported clean history and 25 remaining tree findings.
+Local reproduction using the same Gitleaks 8.24.3 confirmed all 25 are source-digest
+entries in `offline_sources.json`: its Unicode serialization violated the scanner's
+existing canonical-layout check. This correction restores canonical JSON escaping with
+identical parsed data, leaving scanner rules, exclusions, and all product source unchanged.
+Precommit validation checks canonical encoding and every source hash. A new commit and
+fresh cloud run retain the failed run as evidence; no published history is rewritten.
+Current cloud completion is recorded on PR #9 rather than inferred from this precommit note.
+
 ## Local analysis and approval reliability — 2026-11-15
 
 Branch: `fix/analysis-approval-reliability`, based on PR #8 head
