@@ -7,7 +7,52 @@ grey release or production approval are established. C10 now has an offline impl
 publication. Real two-process race acceptance remains BLOCKED; C10 is not closed.
 
 <a id="current-handover"></a>
-## Current technical validation — 2026-11-09
+## Local analysis and approval reliability — 2026-11-15
+
+Branch: `fix/analysis-approval-reliability`, based on PR #8 head
+`1645e012170b30f9ff3022082602f9cd56b10212`. Main remains
+`998bb52e8049d07f592ca763b51372faca8ff9c5`.
+[PR #8](https://github.com/zhenkun26/Business-Agent/pull/8) was verified open/unmerged;
+its existing [CI run 42813205674](https://github.com/zhenkun26/Business-Agent/actions/runs/42813205674)
+succeeded at that head. This repair does not change the published branch or PR.
+
+Scope: align development dotenv declarations to >=1.2.0 (production stays pinned to
+1.2.2); reject unsupported analysis metrics, incomplete/unknown selectors, negation,
+conflicting periods, alternate grouping and ambiguous Boolean combinations; resolve
+unique case-insensitive customer IDs; preserve integer/currency calculations and
+identity checks. Both README examples now use supported totals instead of ranking.
+All three approval list APIs and UI views have bounded pagination, statement-consistent
+true totals, timestamp/ID ordering, and stale-response/identity guards.
+See [analysis contract](analysis-data.md) and [approval contract](approval-execution.md).
+
+Verification: `analysis-approval-precommit-20261115-r3` passed all eight existing offline
+checks: 2,187 Python tests + 705 subtests, 82.0010% coverage, Node UI 85 and credential
+14 cases, eight frontend assets, build inputs, provenance, RAG controls, and safe
+preflight. No skips/xfails/deselections or guard denials; 98 production dependencies
+match the existing environment. The source inventory now registers 466 files, including
+one new pagination test; prior records and acceptance gates remain intact. The final
+page-empty wording and distinct pager group labels were additionally checked by the
+85-case Node suite. Precommit binding is BLOCKED because the tree is intentionally dirty;
+exit 2 denotes retained runtime/release blockers, not failed tests.
+
+Clean-candidate verification record location (local/ignored):
+`enterprise-agent/eval/results/offline/analysis-approval-clean-20261115-r1.json`.
+The precommit receipt remains bound to its own candidate; consult the clean receipt for
+exact committed identity and source binding. Earlier diagnostics are retained: a direct
+legacy analysis invocation could not import `app` under isolated Python; the supported
+full runner exposed a missing-selector case and then an inventory count assertion, both
+fixed without skipping tests or weakening gates.
+
+Delivery is local commits only. No push, merge, remote CI trigger, deployment, new
+package installation, paid model, private environment read, or filesystem deletion.
+The existing dotenv bootstrap regression remains exercised. Pagination SQL tests use
+in-memory SQLite with only PostgreSQL JSON membership adapted; Node uses the actual
+page code and Vue template compiler with synthetic HTTP. These are not live PostgreSQL,
+browser, model/semantic end-to-end, full C10/RAG, formal UAT, or release acceptance.
+Offset pages are live rather than frozen across concurrent changes; refreshing restarts
+at page one. OpenSpec artifacts are retained for local review; strict CLI is unavailable.
+
+## Previous technical validation — 2026-11-09
 
 [CI run 42591561481](https://github.com/zhenkun26/Business-Agent/actions/runs/42591561481) was workflow_dispatch attempt 1 at exact main `15cd84f942ccc0ce49afcfc1513efe4c2f07f441`, from 09:12:08 to 09:19:42 UTC. All five jobs passed. Python 3.11 and 3.13 each passed 2170 tests + 640 subtests; all eight current offline checks, nine publication-policy tests and 39 scanner regressions passed. Current event-history/tree scans, pip-audit, the isolated persistence slice, 15 synthetic HTTP checks and the image/Trivy gate passed within the [documented scope](../30-guides/open-source-quickstart.md#starter-verification--启动入口核验).
 

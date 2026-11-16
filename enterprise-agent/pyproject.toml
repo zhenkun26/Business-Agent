@@ -57,7 +57,7 @@ dependencies = [
     "opentelemetry-instrumentation-fastapi>=0.66b1",
     "prometheus-client>=0.20",
     # 工具
-    "python-dotenv>=1.0",
+    "python-dotenv>=1.2.0",
     "tenacity>=8.2",
     "loguru>=0.7",
 ]

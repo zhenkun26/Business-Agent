@@ -47,7 +47,7 @@ The shipped sample documents and interface are primarily in Chinese; the request
 | Scenario | Example request | Workflow |
 | --- | --- | --- |
 | Enterprise knowledge Q&A | “What are the company's travel reimbursement rules?” | Retrieve knowledge, compose an answer, and return sources |
-| Business data analysis | “Rank customers by their total order value.” | Read an authorized CRM snapshot, aggregate in Python, and render a deterministic report |
+| Business data analysis | “Show total order amount by customer.” | Read an authorized CRM snapshot, aggregate in Python, and render a deterministic report |
 | Business record lookup | “Look up customer C001.” | Check role permissions before calling a business tool |
 | Business operations | “Create a support ticket for customer C001.” | Extract parameters, check permissions, and call the ticket tool |
 | Approval collaboration | “Send a follow-up email to an external customer.” | Create an approval request according to operation rules for an authorized reviewer |

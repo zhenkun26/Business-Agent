@@ -1905,7 +1905,7 @@
     "enterprise-agent/app/static/index.html": {
       "category": "application-ui",
       "status": "PENDING_SOURCE_REVIEW",
-      "sha256": "d087c8e75a30a6b6732a2128c555ad7991c3e73dff41e4e59c9a441e338a4b2e"
+      "sha256": "9a64a4b619f7ab03e2047c5c75fb24505321fab6bfd42163188b44b436fcae2d"
     },
     "enterprise-agent/app/tools/__init__.py": {
       "category": "embedded-tool-fixtures",
@@ -2515,7 +2515,7 @@
     "enterprise-agent/tests/test_analysis_data.py": {
       "category": "test-fixtures",
       "status": "PENDING_SOURCE_REVIEW",
-      "sha256": "d5b8b6780665f46f39cb266ea10f542c0446a934b5f9a33982c24ef7effbc76f"
+      "sha256": "7c6285d130c90e8ad2932886bfb81dfd41395d5f7182cb889787a286988a580e"
     },
     "enterprise-agent/tests/test_app_entry.py": {
       "category": "test-fixtures",
@@ -2575,7 +2575,7 @@
     "enterprise-agent/tests/test_browser_delivery.cjs": {
       "category": "test-fixtures",
       "status": "PENDING_SOURCE_REVIEW",
-      "sha256": "fa8c68fa83d5ed90bab705c5f0016195ac62717b920d9fc7fa6d8db9d5e42d54"
+      "sha256": "d34635c5b5e36a7cce4523ccf92e05fe1530146d48ef980a73dce803424789a3"
     },
     "enterprise-agent/tests/test_build_reproducibility.py": {
       "category": "test-fixtures",
@@ -2700,7 +2700,7 @@
     "enterprise-agent/tests/test_license_inventory.py": {
       "category": "test-fixtures",
       "status": "PENDING_SOURCE_REVIEW",
-      "sha256": "696939afe94fb4b44a28115716cc564c64b4adaea3a8f982c3f6470614649b9a"
+      "sha256": "1b3d37c6e1171603605f6d6a1f57409b9caa072510802070b32471476b1895c3"
     },
     "enterprise-agent/tests/test_llm_rerank_boundary.py": {
       "category": "test-fixtures",
@@ -2885,7 +2885,7 @@
     "enterprise-agent/tests/test_telemetry_admission.py": {
       "category": "test-fixtures",
       "status": "PENDING_SOURCE_REVIEW",
-      "sha256": "7af177c988857c0194bb255b47340bfcce8a25ebd6f5ed27219a7fc081921b0a"
+      "sha256": "0ba8ccd31c14b3152f677f3743c567668cc32839f749f9c210ef24ddceaa2501"
     },
     "enterprise-agent/tests/test_ticket_external.py": {
       "category": "test-fixtures",
@@ -4131,6 +4131,11 @@
       "category": "presentation",
       "status": "PENDING_SOURCE_REVIEW",
       "sha256": "f2e7970814769d99c5a979123063afadd23983c3ca6280afa398bcc06137697c"
+    },
+    "enterprise-agent/tests/test_approval_pagination.py": {
+      "category": "test-fixtures",
+      "status": "PENDING_SOURCE_REVIEW",
+      "sha256": "2e3cfaf4b848505d373baadb4ae1cfab70fb3a819e367cd0658484258e1b8976"
     }
   },
   "declarations": {
@@ -4735,7 +4740,7 @@
         "opentelemetry-sdk>=1.45.1",
         "opentelemetry-instrumentation-fastapi>=0.66b1",
         "prometheus-client>=0.20",
-        "python-dotenv>=1.0",
+        "python-dotenv>=1.2.0",
         "tenacity>=8.2",
         "loguru>=0.7",
         "dev: pytest>=8.0",
@@ -4750,7 +4755,7 @@
         "eval: datasets>=2.20",
         "build: hatchling"
       ],
-      "sha256": "b4621f6046fdd61290910ae728af7e9f789f8d6cecf798439439b9997e136410",
+      "sha256": "8599cd9ac7727920f68c548ca87c1cfff3c73e0ec25628f97bde5b5e185b4da7",
       "status": "CLOSURE_AND_LICENSE_REVIEW_PENDING"
     },
     "enterprise-agent/requirements.txt": {
@@ -4758,7 +4763,7 @@
         "loguru>=0.7",
         "pydantic>=2.0",
         "pydantic-settings>=2.0",
-        "python-dotenv>=1.0",
+        "python-dotenv>=1.2.0",
         "numpy>=1.26",
         "langchain>=1.0",
         "langchain-core>=1.0",
@@ -4800,7 +4805,7 @@
         "psycopg>=3.3.4",
         "psycopg-pool>=3.3.1"
       ],
-      "sha256": "1c4c90768dafe406d62326c4d4cf9949f8f89e52eed1bb3b60a810cf483f7246",
+      "sha256": "b7bc776fa910756ab594aa8510c9dfdf44f546d41e326999db5abed089b14647",
       "status": "CLOSURE_AND_LICENSE_REVIEW_PENDING"
     }
   },

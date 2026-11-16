@@ -383,3 +383,18 @@ def test_package_bootstrap_blocks_third_party_dotenv_reload_of_telemetry_keys():
         assert 'LANGCHAIN_TRACING_V2' not in os.environ
         assert 'OTEL_ENABLED' not in os.environ
         assert policy.process_telemetry_signature() == signature
+
+
+def test_dotenv_disable_guard_has_matching_dependency_floor():
+    import tomllib
+    from packaging.requirements import Requirement
+
+    project = tomllib.loads((ROOT / 'pyproject.toml').read_text())
+    declarations = [project['project']['dependencies'],
+                    (ROOT / 'requirements.txt').read_text().splitlines(),
+                    (ROOT / 'deploy/requirements-prod.txt').read_text().splitlines()]
+    for lines in declarations:
+        req = next(Requirement(line.strip()) for line in lines
+                   if line.strip().startswith('python-dotenv'))
+        assert not req.specifier.contains('1.1.1')
+        assert req.specifier.contains('1.2.2')

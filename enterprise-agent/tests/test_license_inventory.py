@@ -218,6 +218,7 @@ def test_dompurify_babel_notice_is_required_and_hash_checked(
 
 def test_browser_notice_addition_does_not_clear_any_source_record() -> None:
     data = json.loads((ROOT/inventory.INVENTORY).read_text())
-    assert len(data['source_files']) == 465
+    # Includes the new approval pagination regression; no existing record was removed.
+    assert len(data['source_files']) == 466
     assert {entry['status'] for entry in data['source_files'].values()} == {inventory.PENDING}
     assert {entry['wheel_license_review'] for entry in data['python_packages'].values()} == {'PENDING'}

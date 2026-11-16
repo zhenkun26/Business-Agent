@@ -23,6 +23,31 @@ historical standalone main 009 script directly. No database migration, service o
 was run for this documentation alignment. Real runtime/full RAG/C10, privacy and rights
 acceptance remain BLOCKED or pending; historical synthetic results do not clear those gates.
 
+## Approval list pagination (2026-11-15 local increment)
+
+`GET /api/v1/approvals/pending`, `/mine`, and `/handled` accept `limit` (1–100,
+50 by default) and `offset` (0–1,000,000, 0 by default). Invalid values return 422.
+All return `items`, `total`, `returned_count`, `limit`, `offset`, and `has_more`.
+`pending_count` remains on pending responses and now equals the full authorized total,
+not the page length. Existing item fields and human-review protections are retained.
+
+Count and page use one SQL statement and the same authorization predicate. Pending
+filters by status and the current role; mine filters by current requester ID; handled
+filters by current approver ID. Sort by creation/decision time descending, nulls last,
+then approval ID descending to break timestamp ties. Empty and out-of-range pages
+still report the total. SQL values are bound parameters, never request interpolation.
+
+The UI offers previous/next pages for all three lists, displays the full total, and
+refreshes from page one after a decision or explicit refresh. Identity changes clear
+rows and pagination; late responses cannot restore either. Failed/malformed responses
+have no displayed total and cannot enable a next-page action.
+
+These are live lists, not frozen cross-request snapshots: concurrent inserts or state
+changes can shift offset pages. Refresh before relying on a changed queue. This repair
+adds no migration, index, dependency, approval authority, or execution capability.
+Regression SQL runs in in-memory SQLite with only PostgreSQL JSON membership adapted;
+real PostgreSQL isolation/driver and browser acceptance remain separate requirements.
+
 ## Preintegration contract and evidence (historical scope)
 
 C11 offline candidate, 2026-10-17. Real PostgreSQL/JWT/API/browser/Linux acceptance

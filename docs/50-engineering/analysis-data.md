@@ -32,10 +32,21 @@ authorization check cannot retroactively revoke already-delivered output.
 
 - Deterministic customer grouping, order count and original order amount; comparisons
   are side-by-side rows, not generated prose or inferred causal conclusions.
-- Select C-prefixed numeric IDs such as C001, or use `customer:opaque-id` /
-  `客户=opaque-id`. Known order customer IDs are also recognized literally.
-  Unknown explicit IDs fail rather than broadening to all customers. Name-only entity
-  resolution is unsupported; use IDs. No ID means all available orders.
+- Select C-prefixed numeric IDs such as C001 (including `customer c001`), or use
+  `customer:opaque-id` / `客户=opaque-id` for other IDs. Matching is case-insensitive
+  only when exactly one source ID matches; ambiguous case collisions fail closed.
+  Unknown or missing explicit IDs fail rather than broadening to all customers.
+  Name-only entity resolution is unsupported; use IDs. An unqualified supported
+  summary means all available orders. Opaque IDs without a selector are rejected.
+- The 2026-11-15 repair consumes a bounded bilingual vocabulary, explicit dates/IDs,
+  supported statuses, and neutral connectors. Unconsumed tokens fail closed instead
+  of being ignored. Examples: `统计各客户的订单总额。`, `Show total order amount by customer.`,
+  `Show orders for customer c001`, `统计客户 C001 的已完成订单`.
+  This deliberately rejects unsupported phrasing, filters, ranking, averages, negation,
+  and partial selectors; it is not general natural-language understanding. A fixed
+  error includes a supported example, with no substituted result or model call.
+  Grouping is only by customer and currency; alternate grouping, customer-ID ranges,
+  status comparisons, and disjunctions mixing customer and status filters are rejected.
 - An explicit pair of ISO dates (for example `2026-01-01 至 2026-06-30`) means an
   inclusive UTC calendar-date interval on order creation. No period means all available
   dates, explicitly labeled in the report. Relative periods, partial dates, year-only
@@ -43,7 +54,9 @@ authorization check cannot retroactively revoke already-delivered output.
   not a general natural-language date interpreter.
 - By default all pending/completed/cancelled/refunded orders are included. Explicit
   `pending` / `待处理`, `completed` / `已完成`, `cancelled` / `已取消`,
-  `refunded` / `已退款` select those statuses. Exclusion syntax is rejected.
+  `refunded` / `已退款` select those statuses (multiple statuses form a union).
+  Exclusion syntax, including English `not`, is rejected. English relative periods
+  are rejected even alongside an otherwise valid pair of explicit dates.
 - Money is nonnegative integer minor units, bounded to 100,000,000,000,000 per order.
   Sum integers; format using Decimal only at presentation. The reference schema fixes
   two decimal places for every supported currency; different currency codes never sum
